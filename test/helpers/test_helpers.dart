@@ -1,7 +1,9 @@
+import 'package:clean_air/app/app.locator.dart';
+import 'package:clean_air/services/objectbox_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:clean_air/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -10,13 +12,15 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-  // @stacked-mock-spec
+  MockSpec<ObjectBoxService>(onMissingStub: OnMissingStub.returnDefault),
+// @stacked-mock-spec
 ])
 void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  // @stacked-mock-register
+  getAndRegisterObjectBoxService();
+// @stacked-mock-register
 }
 
 MockNavigationService getAndRegisterNavigationService() {
@@ -69,6 +73,12 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
+MockObjectBoxService getAndRegisterObjectBoxService() {
+  _removeRegistrationIfExists<ObjectBoxService>();
+  final service = MockObjectBoxService();
+  locator.registerSingleton<ObjectBoxService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

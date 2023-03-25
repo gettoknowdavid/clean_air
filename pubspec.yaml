@@ -39,6 +39,7 @@ dependencies:
   stacked_services: ^1.0.0
 
   flutter_native_splash: ^2.2.19
+  flex_color_scheme: ^6.1.2
 
 
 dev_dependencies:

@@ -47,7 +47,15 @@ dependencies:
   objectbox_flutter_libs: ^2.0.0
   path_provider: ^2.0.14
   path: 
+  firebase_auth: ^4.3.0
+  firebase_core: ^2.8.0
+  cloud_firestore: ^4.4.5
+  firebase_storage: ^11.0.16
+  cloud_firestore_odm: ^1.0.0-dev.52
+  google_sign_in: ^6.0.2
 
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.0
 
 dev_dependencies:
   flutter_test:
@@ -61,8 +69,12 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   build_runner: ^2.2.0
 
+  json_serializable: ^6.6.1
+  freezed: ^2.3.2
+
   stacked_generator: ^1.0.0
   objectbox_generator: ^2.0.0
+  cloud_firestore_odm_generator: ^1.0.0-dev.52
   mockito: ^5.3.2
 
   flutter_launcher_icons: "^0.12.0"

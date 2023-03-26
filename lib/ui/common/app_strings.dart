@@ -8,3 +8,6 @@ const String kOnboardingAsset2 = 'assets/images/onboarding_2.png';
 const String kOnboardingAsset3 = 'assets/images/onboarding_3.png';
 
 const String kDBName = 'clean_air_';
+
+const emailRegex =
+    r"""^[\w!#$%&\'*+/=?^_`{|}~-]+(?:\.[\w!#$%&\'*+/=?^_`{|}~-]+)*@(?:[\w-]+\.)+[\w]{2,}$""";

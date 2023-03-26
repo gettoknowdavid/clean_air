@@ -10,6 +10,7 @@ import 'package:clean_air/ui/views/startup/startup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:clean_air/services/auth_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -28,6 +29,7 @@ import 'package:stacked_services/stacked_services.dart';
       classType: ObjectBoxService,
       presolveUsing: ObjectBoxService.create,
     ),
+    LazySingleton(classType: AuthService),
 // @stacked-service
   ],
   bottomsheets: [

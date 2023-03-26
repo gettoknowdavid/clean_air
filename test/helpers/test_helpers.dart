@@ -4,6 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import 'package:clean_air/services/auth_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -13,6 +14,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ObjectBoxService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<AuthService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -20,6 +22,7 @@ void registerServices() {
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
   getAndRegisterObjectBoxService();
+  getAndRegisterAuthService();
 // @stacked-mock-register
 }
 
@@ -77,6 +80,13 @@ MockObjectBoxService getAndRegisterObjectBoxService() {
   _removeRegistrationIfExists<ObjectBoxService>();
   final service = MockObjectBoxService();
   locator.registerSingleton<ObjectBoxService>(service);
+  return service;
+}
+
+MockAuthService getAndRegisterAuthService() {
+  _removeRegistrationIfExists<AuthService>();
+  final service = MockAuthService();
+  locator.registerSingleton<AuthService>(service);
   return service;
 }
 // @stacked-mock-create

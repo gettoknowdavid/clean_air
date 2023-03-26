@@ -6,6 +6,7 @@
 import 'dart:async' as _i4;
 import 'dart:ui' as _i5;
 
+import 'package:clean_air/services/auth_service.dart' as _i7;
 import 'package:clean_air/services/objectbox_service.dart' as _i6;
 import 'package:flutter/material.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -643,4 +644,27 @@ class MockObjectBoxService extends _i1.Mock implements _i6.ObjectBoxService {
         ),
         returnValueForMissingStub: null,
       );
+  @override
+  bool isEmpty<T>() => (super.noSuchMethod(
+        Invocation.method(
+          #isEmpty,
+          [],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  _i4.Future<bool> isInitialStartup() => (super.noSuchMethod(
+        Invocation.method(
+          #isInitialStartup,
+          [],
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
 }
+
+/// A class which mocks [AuthService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthService extends _i1.Mock implements _i7.AuthService {}

@@ -1,5 +1,9 @@
 import 'package:clean_air/app/app.router.dart';
+import 'package:clean_air/services/auth_service.dart';
+import 'package:clean_air/services/firestore_service.dart';
+import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/objectbox_service.dart';
+import 'package:clean_air/services/secure_storage_service.dart';
 import 'package:clean_air/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:clean_air/ui/common/app_theme.dart';
 import 'package:clean_air/ui/dialogs/info_alert/info_alert_dialog.dart';
@@ -10,10 +14,6 @@ import 'package:clean_air/ui/views/startup/startup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:clean_air/services/auth_service.dart';
-import 'package:clean_air/services/network_service.dart';
-import 'package:clean_air/services/firestore_service.dart';
-import 'package:clean_air/services/secure_storage_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -28,14 +28,15 @@ import 'package:clean_air/services/secure_storage_service.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
-    Presolve(
-      classType: ObjectBoxService,
-      presolveUsing: ObjectBoxService.create,
-    ),
+    LazySingleton(classType: SnackbarService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: NetworkService),
     LazySingleton(classType: FirestoreService),
     LazySingleton(classType: SecureStorageService),
+    Presolve(
+      classType: ObjectBoxService,
+      presolveUsing: ObjectBoxService.create,
+    ),
 // @stacked-service
   ],
   bottomsheets: [

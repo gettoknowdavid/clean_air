@@ -17,7 +17,7 @@ class LoginViewModel extends FormViewModel {
 
   final _authService = locator<AuthService>();
   final _dialogService = locator<DialogService>();
-  final _snackbarService = locator<SnackbarService>();
+  // final _snackbarService = locator<SnackbarService>();
   final _firestoreService = locator<FirestoreService>();
   final _navigationService = locator<NavigationService>();
   final _secureStorageService = locator<SecureStorageService>();
@@ -42,16 +42,20 @@ class LoginViewModel extends FormViewModel {
       _navigationService.clearStackAndShow(Routes.homeView);
     } on fb.FirebaseAuthException catch (e) {
       // Handle specific Firebase authentication exceptions.
+      print(e.code);
       switch (e.code) {
         case 'wrong-password':
         case 'user-not-found':
           _dialogService.showCustomDialog(
             variant: DialogType.infoAlert,
-            title: e.message,
+            title: 'e.message',
           );
           break;
         default:
-          _snackbarService.showSnackbar(message: kServerErrorMessage);
+          _dialogService.showCustomDialog(
+            variant: DialogType.infoAlert,
+            title: kServerErrorMessage,
+          );
           break;
       }
     }

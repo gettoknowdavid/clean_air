@@ -7,5 +7,9 @@ void main() {
   group('LoginViewModel Tests -', () {
     setUp(() => registerServices());
     tearDown(() => locator.reset());
+
+    group('login', () {
+      test('should show', () {});
+    });
   });
 }

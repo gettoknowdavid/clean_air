@@ -11,3 +11,4 @@ const String emailRegex =
 const String kAuthUser = '_authenticated_user__';
 
 const String kServerErrorMessage = 'There seems to be an error, try again.';
+const String kNoUserErrorMessage = '';

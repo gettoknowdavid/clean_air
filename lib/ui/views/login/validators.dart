@@ -6,8 +6,8 @@ class LoginValidators {
       return 'Email cannot be empty';
     }
 
-    if (!RegExp(emailRegex).hasMatch(input)) {
-      return input;
+    if (RegExp(emailRegex).hasMatch(input)) {
+      return null;
     }
 
     return 'Please provide a valid email';
@@ -18,6 +18,6 @@ class LoginValidators {
       return 'Password cannot be empty';
     }
 
-    return input;
+    return null;
   }
 }

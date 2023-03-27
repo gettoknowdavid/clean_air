@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:clean_air/services/auth_service.dart';
+import 'package:clean_air/services/network_service.dart';
+import 'package:clean_air/services/firestore_service.dart';
+import 'package:clean_air/services/secure_storage_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -30,6 +33,9 @@ import 'package:clean_air/services/auth_service.dart';
       presolveUsing: ObjectBoxService.create,
     ),
     LazySingleton(classType: AuthService),
+    LazySingleton(classType: NetworkService),
+    LazySingleton(classType: FirestoreService),
+    LazySingleton(classType: SecureStorageService),
 // @stacked-service
   ],
   bottomsheets: [

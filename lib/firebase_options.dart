@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '758465972044',
     projectId: 'cleanair-25eb3',
     storageBucket: 'cleanair-25eb3.appspot.com',
-    iosClientId: '758465972044-cs2m2c9cg56n5nse6lib8j45ucaoub44.apps.googleusercontent.com',
+    iosClientId:
+        '758465972044-cs2m2c9cg56n5nse6lib8j45ucaoub44.apps.googleusercontent.com',
     iosBundleId: 'com.example.cleanAir',
   );
 }

@@ -1,6 +1,10 @@
 import 'package:clean_air/ui/common/ui_helpers.dart';
 import 'package:clean_air/ui/views/login/validators.dart';
+import 'package:clean_air/ui/widgets/app_button.dart';
 import 'package:clean_air/ui/widgets/app_text_field.dart';
+import 'package:clean_air/ui/widgets/auth_redirect_button.dart';
+import 'package:clean_air/ui/widgets/login/google_button.dart';
+import 'package:clean_air/ui/widgets/login/or_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -17,10 +21,12 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
 
   @override
   Widget builder(context, viewModel, child) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
 
     return Scaffold(
-      appBar: AppBar(leading: const BackButton()),
+      appBar: AppBar(leading: const SizedBox()),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Form(
@@ -29,7 +35,7 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
             children: [
               verticalSpaceSmall,
               Text('Welcome \nback!', style: textTheme.displayMedium),
-              verticalSpaceSmall,
+              verticalSpaceTiny,
               Text("You've been missed", style: textTheme.bodyLarge),
               verticalSpaceLarge,
               AppTextField(
@@ -39,19 +45,47 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 focusNode: emailFocusNode,
+                validator: LoginValidators.validateEmail,
               ),
-              // verticalSpaceSmall,
-              // const OrDivider(),
-              const SizedBox(height: 15),
-              // const GoogleButton(),
-              // if (showRedirect) ...[
-              //   const SizedBox(height: 15),
-              //   RedirectButton(
-              //     buttonLabel: 'Register',
-              //     text: 'Don\'t have an account?',
-              //     onTap: () => AutoRouter.of(context).push(RegisterRoute()),
-              //   ),
-              // ]
+              verticalSpaceMedium,
+              AppTextField(
+                hint: 'Your passord',
+                label: 'Password',
+                // enabled: !loading,
+                controller: passwordController,
+                isPassword: true,
+                focusNode: passwordFocusNode,
+                validator: LoginValidators.validatePassword,
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text('Forgot Password?'),
+                ),
+              ),
+              verticalSpaceMedium,
+              AppButton(
+                disabled: viewModel.disabled,
+                onPressed: () async {
+                  await viewModel.login(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                },
+                // loading: loading,
+                title: 'Login',
+              ),
+              verticalSpaceSmall,
+              const OrDivider(),
+              verticalSpaceSmall,
+              const GoogleButton(),
+              verticalSpaceSmall,
+              AuthRedirectButton(
+                buttonLabel: 'Register',
+                text: 'Don\'t have an account?',
+                onTap: () {},
+              ),
             ],
           ),
         ),

@@ -5,6 +5,9 @@ import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'package:clean_air/services/auth_service.dart';
+import 'package:clean_air/services/network_service.dart';
+import 'package:clean_air/services/firestore_service.dart';
+import 'package:clean_air/services/secure_storage_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -15,6 +18,9 @@ import 'test_helpers.mocks.dart';
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<ObjectBoxService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AuthService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<NetworkService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<FirestoreService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<SecureStorageService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -23,6 +29,9 @@ void registerServices() {
   getAndRegisterDialogService();
   getAndRegisterObjectBoxService();
   getAndRegisterAuthService();
+  getAndRegisterNetworkService();
+  getAndRegisterFirestoreService();
+  getAndRegisterSecureStorageService();
 // @stacked-mock-register
 }
 
@@ -87,6 +96,27 @@ MockAuthService getAndRegisterAuthService() {
   _removeRegistrationIfExists<AuthService>();
   final service = MockAuthService();
   locator.registerSingleton<AuthService>(service);
+  return service;
+}
+
+MockNetworkService getAndRegisterNetworkService() {
+  _removeRegistrationIfExists<NetworkService>();
+  final service = MockNetworkService();
+  locator.registerSingleton<NetworkService>(service);
+  return service;
+}
+
+MockFirestoreService getAndRegisterFirestoreService() {
+  _removeRegistrationIfExists<FirestoreService>();
+  final service = MockFirestoreService();
+  locator.registerSingleton<FirestoreService>(service);
+  return service;
+}
+
+MockSecureStorageService getAndRegisterSecureStorageService() {
+  _removeRegistrationIfExists<SecureStorageService>();
+  final service = MockSecureStorageService();
+  locator.registerSingleton<SecureStorageService>(service);
   return service;
 }
 // @stacked-mock-create

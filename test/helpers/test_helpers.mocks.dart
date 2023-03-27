@@ -6,8 +6,13 @@
 import 'dart:async' as _i4;
 import 'dart:ui' as _i5;
 
+import 'package:clean_air/models/user.dart' as _i11;
 import 'package:clean_air/services/auth_service.dart' as _i7;
+import 'package:clean_air/services/firestore_service.dart' as _i10;
+import 'package:clean_air/services/network_service.dart' as _i9;
 import 'package:clean_air/services/objectbox_service.dart' as _i6;
+import 'package:clean_air/services/secure_storage_service.dart' as _i12;
+import 'package:firebase_auth/firebase_auth.dart' as _i8;
 import 'package:flutter/material.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i2;
@@ -667,4 +672,136 @@ class MockObjectBoxService extends _i1.Mock implements _i6.ObjectBoxService {
 /// A class which mocks [AuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthService extends _i1.Mock implements _i7.AuthService {}
+class MockAuthService extends _i1.Mock implements _i7.AuthService {
+  @override
+  _i4.Future<_i8.User?> login({
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #login,
+          [],
+          {
+            #email: email,
+            #password: password,
+          },
+        ),
+        returnValue: _i4.Future<_i8.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i8.User?>.value(),
+      ) as _i4.Future<_i8.User?>);
+  @override
+  _i4.Future<_i8.User?> register({
+    required String? name,
+    required String? email,
+    required String? password,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #register,
+          [],
+          {
+            #name: name,
+            #email: email,
+            #password: password,
+          },
+        ),
+        returnValue: _i4.Future<_i8.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i8.User?>.value(),
+      ) as _i4.Future<_i8.User?>);
+}
+
+/// A class which mocks [NetworkService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNetworkService extends _i1.Mock implements _i9.NetworkService {
+  @override
+  _i4.Stream<_i9.NetworkStatus> get onConnectionChange => (super.noSuchMethod(
+        Invocation.getter(#onConnectionChange),
+        returnValue: _i4.Stream<_i9.NetworkStatus>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i9.NetworkStatus>.empty(),
+      ) as _i4.Stream<_i9.NetworkStatus>);
+  @override
+  _i4.Future<_i9.NetworkStatus> get status => (super.noSuchMethod(
+        Invocation.getter(#status),
+        returnValue:
+            _i4.Future<_i9.NetworkStatus>.value(_i9.NetworkStatus.connected),
+        returnValueForMissingStub:
+            _i4.Future<_i9.NetworkStatus>.value(_i9.NetworkStatus.connected),
+      ) as _i4.Future<_i9.NetworkStatus>);
+}
+
+/// A class which mocks [FirestoreService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirestoreService extends _i1.Mock implements _i10.FirestoreService {
+  @override
+  _i4.Future<void> storeUser(_i11.User? user) => (super.noSuchMethod(
+        Invocation.method(
+          #storeUser,
+          [user],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<_i11.User?> getUser(String? uid) => (super.noSuchMethod(
+        Invocation.method(
+          #getUser,
+          [uid],
+        ),
+        returnValue: _i4.Future<_i11.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i11.User?>.value(),
+      ) as _i4.Future<_i11.User?>);
+}
+
+/// A class which mocks [SecureStorageService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSecureStorageService extends _i1.Mock
+    implements _i12.SecureStorageService {
+  @override
+  _i4.Future<void> delete(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #delete,
+          [key],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<void> deleteAll() => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAll,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+  @override
+  _i4.Future<String?> read(String? key) => (super.noSuchMethod(
+        Invocation.method(
+          #read,
+          [key],
+        ),
+        returnValue: _i4.Future<String?>.value(),
+        returnValueForMissingStub: _i4.Future<String?>.value(),
+      ) as _i4.Future<String?>);
+  @override
+  _i4.Future<void> write({
+    required String? key,
+    required String? value,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #write,
+          [],
+          {
+            #key: key,
+            #value: value,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+}

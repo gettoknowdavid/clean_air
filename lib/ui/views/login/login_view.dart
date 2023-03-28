@@ -43,7 +43,7 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
               AppTextField(
                 hint: 'Your Email Address',
                 label: 'Email',
-                // enabled: !loading,
+                enabled: !viewModel.isBusy,
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 focusNode: emailFocusNode,
@@ -53,7 +53,7 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
               AppTextField(
                 hint: 'Your password',
                 label: 'Password',
-                // enabled: !loading,
+                enabled: !viewModel.isBusy,
                 controller: passwordController,
                 isPassword: true,
                 focusNode: passwordFocusNode,
@@ -68,6 +68,8 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
               ),
               verticalSpaceMedium,
               AppButton(
+                title: 'Login',
+                loading: viewModel.isBusy,
                 disabled: viewModel.disabled,
                 onPressed: () async {
                   await viewModel.login(
@@ -75,8 +77,6 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                     password: passwordController.text,
                   );
                 },
-                // loading: loading,
-                title: 'Login',
               ),
               verticalSpaceSmall,
               const OrDivider(),

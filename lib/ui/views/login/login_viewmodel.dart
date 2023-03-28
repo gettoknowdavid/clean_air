@@ -13,7 +13,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class LoginViewModel extends FormViewModel {
-  bool get disabled => !isFormValid || !hasEmail || !hasPassword;
+  bool get disabled => !isFormValid || !hasEmail || !hasPassword || isBusy;
 
   final _authService = locator<AuthService>();
   final _snackbarService = locator<SnackbarService>();

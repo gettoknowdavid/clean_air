@@ -2,43 +2,29 @@
 // you use same or higher version, but still same major version. If
 // you use a lower version, some properties may not be supported. In
 // that case you can also remove them after copying the theme to your app.
-import 'package:clean_air/ui/common/app_colors.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 
 class AppTheme {
   static get lightTheme {
     return FlexThemeData.light(
-      colors: const FlexSchemeColor(
-        primary: kPrimaryColor,
-        primaryContainer: kPrimaryContainerColor,
-        secondary: kSecondaryColor,
-        secondaryContainer: kSecondaryContainerColor,
-        tertiary: kTertiaryColor,
-        tertiaryContainer: kTertiaryContainerColor,
-        appBarColor: kAppBarColor,
-        error: kErrorLightColor,
-      ),
+      scheme: FlexScheme.blue,
       surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-      blendLevel: 2,
+      blendLevel: 9,
+      appBarStyle: FlexAppBarStyle.scaffoldBackground,
       lightIsWhite: true,
-      surfaceTint: const Color(0xffffdcc3),
       subThemesData: const FlexSubThemesData(
-        blendOnLevel: 4,
         defaultRadius: 20.0,
         elevatedButtonSchemeColor: SchemeColor.onPrimary,
         elevatedButtonSecondarySchemeColor: SchemeColor.primary,
-        dialogRadius: 30.0,
-        timePickerDialogRadius: 30.0,
-        dialogElevation: 10.0,
-        bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.primary,
-        bottomNavigationBarUnselectedLabelSchemeColor: SchemeColor.tertiary,
-        bottomNavigationBarSelectedIconSchemeColor: SchemeColor.primary,
-        bottomNavigationBarUnselectedIconSchemeColor: SchemeColor.tertiary,
+        outlinedButtonSchemeColor: SchemeColor.onPrimaryContainer,
+        outlinedButtonOutlineSchemeColor: SchemeColor.primary,
+        bottomSheetElevation: 20.0,
+        bottomSheetModalElevation: 20.0,
       ),
-      useMaterial3ErrorColors: true,
+      keyColors: const FlexKeyColors(),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       useMaterial3: true,
+      swapLegacyOnMaterial3: true,
       appBarElevation: 0,
       // To use the playground font, add GoogleFonts package and uncomment
       // fontFamily: GoogleFonts.notoSans().fontFamily,
@@ -47,37 +33,25 @@ class AppTheme {
 
   static get darkTheme {
     return FlexThemeData.dark(
-      colors: const FlexSchemeColor(
-        primary: kPrimaryColor,
-        primaryContainer: kPrimaryContainerColor,
-        secondary: kSecondaryColor,
-        secondaryContainer: kSecondaryContainerColor,
-        tertiary: kTertiaryColor,
-        tertiaryContainer: kTertiaryContainerColor,
-        appBarColor: kAppBarColor,
-        error: kErrorDarkColor,
-      ),
+      scheme: FlexScheme.blue,
       surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
-      blendLevel: 7,
+      blendLevel: 15,
       appBarStyle: FlexAppBarStyle.scaffoldBackground,
       darkIsTrueBlack: true,
+      swapColors: true,
       subThemesData: const FlexSubThemesData(
-        blendOnLevel: 18,
         defaultRadius: 20.0,
-        elevatedButtonSchemeColor: SchemeColor.onPrimary,
-        elevatedButtonSecondarySchemeColor: SchemeColor.primary,
-        inputDecoratorSchemeColor: SchemeColor.primaryContainer,
-        dialogRadius: 30.0,
-        timePickerDialogRadius: 30.0,
-        dialogElevation: 10.0,
-        bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.primary,
-        bottomNavigationBarUnselectedLabelSchemeColor: SchemeColor.tertiary,
-        bottomNavigationBarSelectedIconSchemeColor: SchemeColor.primary,
-        bottomNavigationBarUnselectedIconSchemeColor: SchemeColor.tertiary,
+        outlinedButtonSchemeColor: SchemeColor.onPrimaryContainer,
+        outlinedButtonOutlineSchemeColor: SchemeColor.primary,
+        tabBarItemSchemeColor: SchemeColor.primary,
+        tabBarIndicatorSchemeColor: SchemeColor.primary,
+        bottomSheetElevation: 20.0,
+        bottomSheetModalElevation: 20.0,
       ),
-      useMaterial3ErrorColors: true,
+      keyColors: const FlexKeyColors(),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       useMaterial3: true,
+      swapLegacyOnMaterial3: true,
       appBarElevation: 0,
       // To use the Playground font, add GoogleFonts package and uncomment
       // fontFamily: GoogleFonts.notoSans().fontFamily,

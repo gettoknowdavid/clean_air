@@ -4,6 +4,7 @@ import 'package:clean_air/ui/views/register/register_view.form.dart';
 import 'package:clean_air/ui/widgets/app_button.dart';
 import 'package:clean_air/ui/widgets/app_text_field.dart';
 import 'package:clean_air/ui/widgets/auth_redirect_button.dart';
+import 'package:clean_air/ui/widgets/register/password_rules_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -17,14 +18,14 @@ import 'register_viewmodel.dart';
 ])
 class RegisterView extends StackedView<RegisterViewModel> with $RegisterView {
   RegisterView({super.key});
-  
+
   @override
   Widget builder(context, viewModel, child) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
     return Scaffold(
-      appBar: AppBar(leading: const SizedBox()),
+      appBar: AppBar(elevation: 0, scrolledUnderElevation: 0),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Form(
@@ -32,14 +33,17 @@ class RegisterView extends StackedView<RegisterViewModel> with $RegisterView {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               verticalSpaceSmall,
-              Text('Welcome \nback!', style: textTheme.displayMedium),
+              Text('Register', style: textTheme.displayMedium),
               verticalSpaceTiny,
-              Text("You've been missed", style: textTheme.bodyLarge),
+              Text(
+                "You can create your account with your \nemail and password",
+                style: textTheme.bodyLarge,
+              ),
               verticalSpaceLarge,
               AppTextField(
                 hint: 'Your Name',
-                label: 'Email',
-                // enabled: !loading,
+                label: 'Name',
+                enabled: !viewModel.isBusy,
                 controller: nameController,
                 focusNode: nameFocusNode,
                 validator: Validators.validateName,
@@ -48,7 +52,7 @@ class RegisterView extends StackedView<RegisterViewModel> with $RegisterView {
               AppTextField(
                 hint: 'Your Email Address',
                 label: 'Email',
-                // enabled: !loading,
+                enabled: !viewModel.isBusy,
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 focusNode: emailFocusNode,
@@ -58,14 +62,18 @@ class RegisterView extends StackedView<RegisterViewModel> with $RegisterView {
               AppTextField(
                 hint: 'Your password',
                 label: 'Password',
-                // enabled: !loading,
+                enabled: !viewModel.isBusy,
                 controller: passwordController,
                 isPassword: true,
                 focusNode: passwordFocusNode,
                 validator: Validators.validatePassword,
               ),
-              verticalSpaceMedium,
+              verticalSpaceSmall,
+              PasswordRulesWidget(),
+              verticalSpaceLarge,
               AppButton(
+                loading: viewModel.isBusy,
+                title: 'Register',
                 disabled: viewModel.disabled,
                 onPressed: () async {
                   await viewModel.register(
@@ -74,8 +82,6 @@ class RegisterView extends StackedView<RegisterViewModel> with $RegisterView {
                     password: passwordController.text,
                   );
                 },
-                // loading: loading,
-                title: 'Register',
               ),
               verticalSpaceSmall,
               AuthRedirectButton(

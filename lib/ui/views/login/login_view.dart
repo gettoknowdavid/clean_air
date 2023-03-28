@@ -33,9 +33,12 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               verticalSpaceSmall,
-              Text('Welcome \nback!', style: textTheme.displayMedium),
+              Text("You're back!", style: textTheme.displayMedium),
               verticalSpaceTiny,
-              Text("You've been missed", style: textTheme.bodyLarge),
+              Text(
+                "You've been missed. You can login with your email and password.",
+                style: textTheme.bodyLarge,
+              ),
               verticalSpaceLarge,
               AppTextField(
                 hint: 'Your Email Address',
@@ -83,7 +86,7 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
               AuthRedirectButton(
                 buttonLabel: 'Register',
                 text: 'Don\'t have an account?',
-                onTap: () {},
+                onTap: viewModel.navigateToRegisterView,
               ),
             ],
           ),

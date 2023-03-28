@@ -16,6 +16,7 @@ import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
 import '../services/network_service.dart';
 import '../services/objectbox_service.dart';
+import '../services/open_mail_app_service.dart';
 import '../services/secure_storage_service.dart';
 
 final locator = StackedLocator.instance;
@@ -37,6 +38,8 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => NetworkService());
   locator.registerLazySingleton(() => FirestoreService());
   locator.registerLazySingleton(() => SecureStorageService());
+  locator.registerLazySingleton(() => OpenMailAppService());
   final objectBoxService = await ObjectBoxService.create();
   locator.registerSingleton(objectBoxService);
+
 }

@@ -18,7 +18,8 @@ void setupSnackbarUI() {
     textColor: const Color(0xFFFFFFFF),
     mainButtonTextColor: const Color(0xFF000000),
     borderRadius: 16,
-    icon: const Icon(PhosphorIcons.infoFill),
+    icon: const Icon(PhosphorIcons.infoFill, color: Colors.white),
+    animationDuration: const Duration(seconds: 6),
   );
 
   final successConfig = SnackbarConfig(
@@ -26,7 +27,8 @@ void setupSnackbarUI() {
     textColor: const Color(0xFFFFFFFF),
     mainButtonTextColor: const Color(0xFF000000),
     borderRadius: 16,
-    icon: const Icon(PhosphorIcons.checkFill),
+    icon: const Icon(PhosphorIcons.checkFill, color: Colors.white),
+    animationDuration: const Duration(seconds: 6),
   );
 
   snackbarService.registerCustomSnackbarConfig(

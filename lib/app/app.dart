@@ -16,6 +16,9 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:clean_air/ui/views/register/register_view.dart';
 import 'package:clean_air/ui/views/verification/verification_view.dart';
+import 'package:clean_air/services/open_mail_app_service.dart';
+import 'package:clean_air/ui/dialogs/no_mail_app/no_mail_app_dialog.dart';
+import 'package:clean_air/ui/dialogs/mail_app/mail_app_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -37,6 +40,7 @@ import 'package:clean_air/ui/views/verification/verification_view.dart';
     LazySingleton(classType: NetworkService),
     LazySingleton(classType: FirestoreService),
     LazySingleton(classType: SecureStorageService),
+    LazySingleton(classType: OpenMailAppService),
     Presolve(
       classType: ObjectBoxService,
       presolveUsing: ObjectBoxService.create,
@@ -49,16 +53,18 @@ import 'package:clean_air/ui/views/verification/verification_view.dart';
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
-    // @stacked-dialog
+    StackedDialog(classType: NoMailAppDialog),
+    StackedDialog(classType: MailAppDialog),
+// @stacked-dialog
   ],
 )
 class CleanAirApp extends StatelessWidget {
-  const CleanAirApp({Key? key}) : super(key: key);
+  const CleanAirApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CleanAir',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       initialRoute: Routes.startupView,

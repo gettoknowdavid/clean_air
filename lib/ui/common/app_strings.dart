@@ -15,3 +15,4 @@ const String kAuthUser = '_authenticated_user__';
 const String kServerErrorMessage = 'There seems to be an error, try again.';
 const String kIncorrectEmailPassword = 'Incorrect email or password.';
 const String kEmailAlreadyInUseErrorMessage = 'Email already in use.';
+const String kNoUserFoundErrorMessage = 'No user found with this email.';

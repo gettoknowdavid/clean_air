@@ -21,6 +21,10 @@ class LoginViewModel extends FormViewModel {
   final _navigationService = locator<NavigationService>();
   final _secureStorageService = locator<SecureStorageService>();
 
+  void navigateToRegisterView() {
+    _navigationService.navigateTo(Routes.registerView);
+  }
+
   Future<void> login({
     required String email,
     required String password,
@@ -38,7 +42,11 @@ class LoginViewModel extends FormViewModel {
         value: jsonEncode(user?.toJson()),
       );
 
-      _navigationService.clearStackAndShow(Routes.homeView);
+      if (firebaseUser.emailVerified) {
+        _navigationService.clearStackAndShow(Routes.homeView);
+      } else {
+        _navigationService.clearStackAndShow(Routes.verificationView);
+      }
     } on fb.FirebaseAuthException catch (e) {
       // Handle specific Firebase authentication exceptions.
       switch (e.code) {

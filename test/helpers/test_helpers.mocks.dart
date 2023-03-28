@@ -6,13 +6,14 @@
 import 'dart:async' as _i4;
 import 'dart:ui' as _i5;
 
-import 'package:clean_air/models/user.dart' as _i11;
+import 'package:clean_air/models/user.dart' as _i8;
 import 'package:clean_air/services/auth_service.dart' as _i7;
-import 'package:clean_air/services/firestore_service.dart' as _i10;
-import 'package:clean_air/services/network_service.dart' as _i9;
+import 'package:clean_air/services/firestore_service.dart' as _i11;
+import 'package:clean_air/services/network_service.dart' as _i10;
 import 'package:clean_air/services/objectbox_service.dart' as _i6;
+import 'package:clean_air/services/open_mail_app_service.dart' as _i13;
 import 'package:clean_air/services/secure_storage_service.dart' as _i12;
-import 'package:firebase_auth/firebase_auth.dart' as _i8;
+import 'package:firebase_auth/firebase_auth.dart' as _i9;
 import 'package:flutter/material.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i2;
@@ -674,7 +675,43 @@ class MockObjectBoxService extends _i1.Mock implements _i6.ObjectBoxService {
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthService extends _i1.Mock implements _i7.AuthService {
   @override
-  _i4.Future<_i8.User?> login({
+  bool get isAuthenticated => (super.noSuchMethod(
+        Invocation.getter(#isAuthenticated),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  bool get isEmailVerified => (super.noSuchMethod(
+        Invocation.getter(#isEmailVerified),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+  @override
+  _i4.Future<bool?> checkEmailVerified() => (super.noSuchMethod(
+        Invocation.method(
+          #checkEmailVerified,
+          [],
+        ),
+        returnValue: _i4.Future<bool?>.value(),
+        returnValueForMissingStub: _i4.Future<bool?>.value(),
+      ) as _i4.Future<bool?>);
+  @override
+  _i4.Future<_i8.User?> currentUser() => (super.noSuchMethod(
+        Invocation.method(
+          #currentUser,
+          [],
+        ),
+        returnValue: _i4.Future<_i8.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i8.User?>.value(),
+      ) as _i4.Future<_i8.User?>);
+  @override
+  _i4.Future<_i9.User?> login({
     required String? email,
     required String? password,
   }) =>
@@ -687,11 +724,11 @@ class MockAuthService extends _i1.Mock implements _i7.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i4.Future<_i8.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i8.User?>.value(),
-      ) as _i4.Future<_i8.User?>);
+        returnValue: _i4.Future<_i9.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i9.User?>.value(),
+      ) as _i4.Future<_i9.User?>);
   @override
-  _i4.Future<_i8.User?> register({
+  _i4.Future<_i9.User?> register({
     required String? name,
     required String? email,
     required String? password,
@@ -706,9 +743,9 @@ class MockAuthService extends _i1.Mock implements _i7.AuthService {
             #password: password,
           },
         ),
-        returnValue: _i4.Future<_i8.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i8.User?>.value(),
-      ) as _i4.Future<_i8.User?>);
+        returnValue: _i4.Future<_i9.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i9.User?>.value(),
+      ) as _i4.Future<_i9.User?>);
   @override
   _i4.Future<void> sendEmailVerification() => (super.noSuchMethod(
         Invocation.method(
@@ -718,34 +755,67 @@ class MockAuthService extends _i1.Mock implements _i7.AuthService {
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [NetworkService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkService extends _i1.Mock implements _i9.NetworkService {
+class MockNetworkService extends _i1.Mock implements _i10.NetworkService {
   @override
-  _i4.Stream<_i9.NetworkStatus> get onConnectionChange => (super.noSuchMethod(
+  _i4.Stream<_i10.NetworkStatus> get onConnectionChange => (super.noSuchMethod(
         Invocation.getter(#onConnectionChange),
-        returnValue: _i4.Stream<_i9.NetworkStatus>.empty(),
-        returnValueForMissingStub: _i4.Stream<_i9.NetworkStatus>.empty(),
-      ) as _i4.Stream<_i9.NetworkStatus>);
+        returnValue: _i4.Stream<_i10.NetworkStatus>.empty(),
+        returnValueForMissingStub: _i4.Stream<_i10.NetworkStatus>.empty(),
+      ) as _i4.Stream<_i10.NetworkStatus>);
   @override
-  _i4.Future<_i9.NetworkStatus> get status => (super.noSuchMethod(
+  _i4.Future<_i10.NetworkStatus> get status => (super.noSuchMethod(
         Invocation.getter(#status),
         returnValue:
-            _i4.Future<_i9.NetworkStatus>.value(_i9.NetworkStatus.connected),
+            _i4.Future<_i10.NetworkStatus>.value(_i10.NetworkStatus.connected),
         returnValueForMissingStub:
-            _i4.Future<_i9.NetworkStatus>.value(_i9.NetworkStatus.connected),
-      ) as _i4.Future<_i9.NetworkStatus>);
+            _i4.Future<_i10.NetworkStatus>.value(_i10.NetworkStatus.connected),
+      ) as _i4.Future<_i10.NetworkStatus>);
 }
 
 /// A class which mocks [FirestoreService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFirestoreService extends _i1.Mock implements _i10.FirestoreService {
+class MockFirestoreService extends _i1.Mock implements _i11.FirestoreService {
   @override
-  _i4.Future<void> storeUser(_i11.User? user) => (super.noSuchMethod(
+  _i4.Future<void> storeUser(_i8.User? user) => (super.noSuchMethod(
         Invocation.method(
           #storeUser,
           [user],
@@ -754,14 +824,14 @@ class MockFirestoreService extends _i1.Mock implements _i10.FirestoreService {
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
   @override
-  _i4.Future<_i11.User?> getUser(String? uid) => (super.noSuchMethod(
+  _i4.Future<_i8.User?> getUser(String? uid) => (super.noSuchMethod(
         Invocation.method(
           #getUser,
           [uid],
         ),
-        returnValue: _i4.Future<_i11.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i11.User?>.value(),
-      ) as _i4.Future<_i11.User?>);
+        returnValue: _i4.Future<_i8.User?>.value(),
+        returnValueForMissingStub: _i4.Future<_i8.User?>.value(),
+      ) as _i4.Future<_i8.User?>);
 }
 
 /// A class which mocks [SecureStorageService].
@@ -809,6 +879,22 @@ class MockSecureStorageService extends _i1.Mock
             #key: key,
             #value: value,
           },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+}
+
+/// A class which mocks [OpenMailAppService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockOpenMailAppService extends _i1.Mock
+    implements _i13.OpenMailAppService {
+  @override
+  _i4.Future<void> openMailApp() => (super.noSuchMethod(
+        Invocation.method(
+          #openMailApp,
+          [],
         ),
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),

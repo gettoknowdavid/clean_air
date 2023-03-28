@@ -1,24 +1,23 @@
 import 'package:clean_air/ui/common/ui_helpers.dart';
 import 'package:clean_air/ui/common/validators.dart';
+import 'package:clean_air/ui/views/register/register_view.form.dart';
 import 'package:clean_air/ui/widgets/app_button.dart';
 import 'package:clean_air/ui/widgets/app_text_field.dart';
 import 'package:clean_air/ui/widgets/auth_redirect_button.dart';
-import 'package:clean_air/ui/widgets/login/google_button.dart';
-import 'package:clean_air/ui/widgets/login/or_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import 'login_view.form.dart';
-import 'login_viewmodel.dart';
+import 'register_viewmodel.dart';
 
 @FormView(fields: [
+  FormTextField(name: 'name', validator: Validators.validateName),
   FormTextField(name: 'email', validator: Validators.validateEmail),
-  FormTextField(name: 'password', validator: Validators.validateLoginPassword),
+  FormTextField(name: 'password', validator: Validators.validatePassword),
 ])
-class LoginView extends StackedView<LoginViewModel> with $LoginView {
-  LoginView({super.key});
-
+class RegisterView extends StackedView<RegisterViewModel> with $RegisterView {
+  RegisterView({super.key});
+  
   @override
   Widget builder(context, viewModel, child) {
     final theme = Theme.of(context);
@@ -38,6 +37,15 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
               Text("You've been missed", style: textTheme.bodyLarge),
               verticalSpaceLarge,
               AppTextField(
+                hint: 'Your Name',
+                label: 'Email',
+                // enabled: !loading,
+                controller: nameController,
+                focusNode: nameFocusNode,
+                validator: Validators.validateName,
+              ),
+              verticalSpaceMedium,
+              AppTextField(
                 hint: 'Your Email Address',
                 label: 'Email',
                 // enabled: !loading,
@@ -56,34 +64,24 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
                 focusNode: passwordFocusNode,
                 validator: Validators.validatePassword,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text('Forgot Password?'),
-                ),
-              ),
               verticalSpaceMedium,
               AppButton(
                 disabled: viewModel.disabled,
                 onPressed: () async {
-                  await viewModel.login(
+                  await viewModel.register(
+                    name: nameController.text,
                     email: emailController.text,
                     password: passwordController.text,
                   );
                 },
                 // loading: loading,
-                title: 'Login',
+                title: 'Register',
               ),
               verticalSpaceSmall,
-              const OrDivider(),
-              verticalSpaceSmall,
-              const GoogleButton(),
-              verticalSpaceSmall,
               AuthRedirectButton(
-                buttonLabel: 'Register',
-                text: 'Don\'t have an account?',
-                onTap: () {},
+                buttonLabel: 'Back to Login',
+                text: 'Already have an account?',
+                onTap: viewModel.navigateBackToLogin,
               ),
             ],
           ),
@@ -93,16 +91,16 @@ class LoginView extends StackedView<LoginViewModel> with $LoginView {
   }
 
   @override
-  void onDispose(LoginViewModel viewModel) {
+  void onDispose(RegisterViewModel viewModel) {
     super.onDispose(viewModel);
     disposeForm();
   }
 
   @override
-  void onViewModelReady(LoginViewModel viewModel) {
+  void onViewModelReady(RegisterViewModel viewModel) {
     syncFormWithViewModel(viewModel);
   }
 
   @override
-  LoginViewModel viewModelBuilder(BuildContext context) => LoginViewModel();
+  RegisterViewModel viewModelBuilder(context) => RegisterViewModel();
 }

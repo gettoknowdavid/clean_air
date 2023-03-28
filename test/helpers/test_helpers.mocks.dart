@@ -709,6 +709,15 @@ class MockAuthService extends _i1.Mock implements _i7.AuthService {
         returnValue: _i4.Future<_i8.User?>.value(),
         returnValueForMissingStub: _i4.Future<_i8.User?>.value(),
       ) as _i4.Future<_i8.User?>);
+  @override
+  _i4.Future<void> sendEmailVerification() => (super.noSuchMethod(
+        Invocation.method(
+          #sendEmailVerification,
+          [],
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 }
 
 /// A class which mocks [NetworkService].

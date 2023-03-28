@@ -2,6 +2,7 @@ import 'package:clean_air/app/app.bottomsheets.dart';
 import 'package:clean_air/app/app.dart';
 import 'package:clean_air/app/app.dialogs.dart';
 import 'package:clean_air/app/app.locator.dart';
+import 'package:clean_air/app/app.snackbars.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
 
   setupLocator();
   setupDialogUi();
+  setupSnackbarUI();
   setupBottomSheetUi();
 
   runApp(const CleanAirApp());

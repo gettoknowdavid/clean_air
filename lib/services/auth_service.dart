@@ -25,9 +25,12 @@ class AuthService {
       password: password,
     );
 
-    // Update the user's display name
     await _firebaseAuth.currentUser!.updateDisplayName(name);
 
     return result.user;
+  }
+
+  Future<void> sendEmailVerification() async {
+    return _firebaseAuth.currentUser?.sendEmailVerification();
   }
 }

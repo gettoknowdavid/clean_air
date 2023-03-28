@@ -7,8 +7,11 @@ const String kDBName = 'clean_air_';
 
 const String emailRegex =
     r"""^[\w!#$%&\'*+/=?^_`{|}~-]+(?:\.[\w!#$%&\'*+/=?^_`{|}~-]+)*@(?:[\w-]+\.)+[\w]{2,}$""";
+const String passwordRegex =
+    r"""^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=.{8,})""";
 
 const String kAuthUser = '_authenticated_user__';
 
 const String kServerErrorMessage = 'There seems to be an error, try again.';
-const String kNoUserErrorMessage = '';
+const String kIncorrectEmailPassword = 'Incorrect email or password.';
+const String kEmailAlreadyInUseErrorMessage = 'Email already in use.';

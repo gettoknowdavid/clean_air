@@ -15,6 +15,14 @@ class AuthService with ListenableServiceMixin {
   final _isEmailVerified = ReactiveValue<bool>(false);
   bool get isEmailVerified => _isEmailVerified.value;
 
+  Future<void> checkAuthenticated() async {
+    if (_firebaseAuth.currentUser == null) {
+      _isAuthenticated.value = false;
+    } else {
+      _isAuthenticated.value = true;
+    }
+  }
+
   Future<bool?> checkEmailVerified() async {
     final firebaseUser = _firebaseAuth.currentUser;
 
@@ -34,16 +42,16 @@ class AuthService with ListenableServiceMixin {
   }
 
   Future<User?> currentUser() async {
-    final fb.User? firebseUser = _firebaseAuth.currentUser;
+    final fb.User? firebaseUser = _firebaseAuth.currentUser;
 
-    if (firebseUser == null) {
+    if (firebaseUser == null) {
       _isAuthenticated.value = false;
       return null;
     }
 
     _isAuthenticated.value = true;
 
-    final user = (await userRef.doc(firebseUser.uid).get()).data;
+    final user = (await userRef.doc(firebaseUser.uid).get()).data;
 
     return user;
   }

@@ -41,5 +41,4 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => OpenMailAppService());
   final objectBoxService = await ObjectBoxService.create();
   locator.registerSingleton(objectBoxService);
-
 }

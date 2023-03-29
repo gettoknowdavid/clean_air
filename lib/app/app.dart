@@ -19,6 +19,10 @@ import 'package:clean_air/ui/views/verification/verification_view.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
 import 'package:clean_air/ui/dialogs/no_mail_app/no_mail_app_dialog.dart';
 import 'package:clean_air/ui/dialogs/mail_app/mail_app_dialog.dart';
+import 'package:clean_air/ui/layout/layout_view.dart';
+import 'package:clean_air/ui/views/search/search_view.dart';
+import 'package:clean_air/ui/views/favourites/favourites_view.dart';
+import 'package:clean_air/ui/views/profile/profile_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -29,6 +33,10 @@ import 'package:clean_air/ui/dialogs/mail_app/mail_app_dialog.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: VerificationView),
+    MaterialRoute(page: LayoutView),
+    MaterialRoute(page: SearchView),
+    MaterialRoute(page: FavouritesView),
+    MaterialRoute(page: ProfileView),
 // @stacked-route
   ],
   dependencies: [

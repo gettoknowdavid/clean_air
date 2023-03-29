@@ -44,7 +44,7 @@ class LoginViewModel extends FormViewModel {
       );
 
       if (firebaseUser.emailVerified) {
-        _navigationService.clearStackAndShow(Routes.homeView);
+        _navigationService.clearStackAndShow(Routes.layoutView);
       } else {
         _navigationService.clearStackAndShow(Routes.verificationView);
       }

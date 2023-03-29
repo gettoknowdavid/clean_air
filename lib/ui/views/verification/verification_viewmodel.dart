@@ -34,7 +34,7 @@ class VerificationViewModel extends ReactiveViewModel with Initialisable {
 
     if (result == true) {
       timer?.cancel();
-      _navigationService.clearStackAndShow(Routes.homeView);
+      _navigationService.clearStackAndShow(Routes.layoutView);
     }
   }
 

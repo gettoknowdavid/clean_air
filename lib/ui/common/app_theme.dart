@@ -38,9 +38,10 @@ class AppTheme {
       blendLevel: 15,
       appBarStyle: FlexAppBarStyle.scaffoldBackground,
       darkIsTrueBlack: true,
-      swapColors: true,
       subThemesData: const FlexSubThemesData(
         defaultRadius: 20.0,
+        elevatedButtonSchemeColor: SchemeColor.onPrimary,
+        elevatedButtonSecondarySchemeColor: SchemeColor.primary,
         outlinedButtonSchemeColor: SchemeColor.onPrimaryContainer,
         outlinedButtonOutlineSchemeColor: SchemeColor.primary,
         tabBarItemSchemeColor: SchemeColor.primary,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
@@ -10,34 +9,39 @@ enum SnackbarType {
   error,
 }
 
-void setupSnackbarUI() {
-  final snackbarService = locator<SnackbarService>();
-
-  final errorConfig = SnackbarConfig(
-    backgroundColor: const Color(0xFFF44336),
-    textColor: const Color(0xFFFFFFFF),
-    mainButtonTextColor: const Color(0xFF000000),
-    borderRadius: 16,
-    icon: const Icon(PhosphorIcons.infoFill, color: Colors.white),
-    animationDuration: const Duration(seconds: 6),
-  );
-
-  final successConfig = SnackbarConfig(
-    backgroundColor: const Color(0xFF4CAF50),
-    textColor: const Color(0xFFFFFFFF),
-    mainButtonTextColor: const Color(0xFF000000),
-    borderRadius: 16,
-    icon: const Icon(PhosphorIcons.checkFill, color: Colors.white),
-    animationDuration: const Duration(seconds: 6),
-  );
+Future<void> setupSnackbarUI() async {
+  await locator.allReady();
+  SnackbarService snackbarService = locator<SnackbarService>();
 
   snackbarService.registerCustomSnackbarConfig(
     variant: SnackbarType.error,
-    config: errorConfig,
+    config: SnackbarConfig(
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      snackPosition: SnackPosition.BOTTOM,
+      snackStyle: SnackStyle.GROUNDED,
+      borderRadius: 48,
+      icon: const Icon(
+        Icons.info,
+        color: Colors.white,
+        size: 20,
+      ),
+    ),
   );
 
   snackbarService.registerCustomSnackbarConfig(
     variant: SnackbarType.success,
-    config: successConfig,
+    config: SnackbarConfig(
+      backgroundColor: Colors.green,
+      textColor: Colors.white,
+      snackPosition: SnackPosition.TOP,
+      snackStyle: SnackStyle.GROUNDED,
+      borderRadius: 48,
+      icon: const Icon(
+        Icons.info,
+        color: Colors.white,
+        size: 20,
+      ),
+    ),
   );
 }

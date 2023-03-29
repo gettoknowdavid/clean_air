@@ -16,9 +16,9 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  setupLocator();
+  await setupLocator();
   setupDialogUi();
-  setupSnackbarUI();
+  await setupSnackbarUI();
   setupBottomSheetUi();
 
   runApp(const CleanAirApp());

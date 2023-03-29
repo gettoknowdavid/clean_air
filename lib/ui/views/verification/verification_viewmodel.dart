@@ -47,7 +47,6 @@ class VerificationViewModel extends ReactiveViewModel with Initialisable {
   @override
   Future<void> initialise() async {
     if (!isEmailVerified) {
-      await sendVerification();
       timer = Timer.periodic(const Duration(seconds: 3), (timer) {
         checkEmailVerified();
       });

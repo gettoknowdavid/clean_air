@@ -16,6 +16,7 @@ class LoginViewModel extends FormViewModel {
   bool get disabled => !isFormValid || !hasEmail || !hasPassword || isBusy;
 
   final _authService = locator<AuthService>();
+  final _dialogService = locator<DialogService>();
   final _snackbarService = locator<SnackbarService>();
   final _firestoreService = locator<FirestoreService>();
   final _navigationService = locator<NavigationService>();
@@ -49,20 +50,25 @@ class LoginViewModel extends FormViewModel {
       }
     } on fb.FirebaseAuthException catch (e) {
       // Handle specific Firebase authentication exceptions.
+
       switch (e.code) {
         case 'wrong-password':
         case 'user-not-found':
+          // _dialogService.showCustomDialog(variant: DialogType.noMailApp);
           _snackbarService.showCustomSnackBar(
             variant: SnackbarType.error,
             message: kIncorrectEmailPassword,
+            duration: const Duration(seconds: 5),
           );
-          break;
+          return;
         default:
+          // _dialogService.showCustomDialog(variant: DialogType.noMailApp);
           _snackbarService.showCustomSnackBar(
             variant: SnackbarType.error,
             message: kServerErrorMessage,
+            duration: const Duration(seconds: 5),
           );
-          break;
+          return;
       }
     }
   }

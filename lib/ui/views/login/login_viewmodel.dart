@@ -31,6 +31,7 @@ class LoginViewModel extends FormViewModel {
     required String password,
   }) async {
     try {
+      setBusy(true);
       final firebaseUser = await _authService.login(
         email: email,
         password: password,
@@ -50,7 +51,7 @@ class LoginViewModel extends FormViewModel {
       }
     } on fb.FirebaseAuthException catch (e) {
       // Handle specific Firebase authentication exceptions.
-
+      setBusy(false);
       switch (e.code) {
         case 'wrong-password':
         case 'user-not-found':

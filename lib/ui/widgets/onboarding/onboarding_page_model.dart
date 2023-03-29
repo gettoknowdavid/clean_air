@@ -22,8 +22,9 @@ class OnboardingPageModel extends StatelessWidget {
 
     final isDark = theme.brightness == Brightness.dark;
 
-    final imageContainerColor =
-        isDark ? colorScheme.primary.withOpacity(0.2) : colorScheme.primary;
+    final imageContainerColor = isDark
+        ? colorScheme.primary.withOpacity(0.2)
+        : colorScheme.primaryContainer.withOpacity(0.6);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,

@@ -63,6 +63,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   flutter_secure_storage: ^8.0.0
   open_mail_app: ^0.4.5
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:

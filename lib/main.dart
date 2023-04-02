@@ -1,4 +1,4 @@
-import 'package:clean_air/app/app.bottomsheets.dart';
+
 import 'package:clean_air/app/app.dart';
 import 'package:clean_air/app/app.dialogs.dart';
 import 'package:clean_air/app/app.locator.dart';
@@ -19,7 +19,7 @@ Future<void> main() async {
   await setupLocator();
   setupDialogUi();
   await setupSnackbarUI();
-  setupBottomSheetUi();
+  // setupBottomSheetUi();
 
   runApp(const CleanAirApp());
 }

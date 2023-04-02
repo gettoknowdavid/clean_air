@@ -1,14 +1,9 @@
-import 'package:clean_air/ui/common/ui_helpers.dart';
+import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/views/register/register_view.form.dart';
 import 'package:clean_air/ui/views/register/register_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
-
-// Sum of global padding on left and right and additional Wrap padding: 20+20+8+8
-const globalPadding = 52.0;
-
-// Width of the wrap spacing
-const passwordRulesWrapSpacing = 10.0;
 
 class PasswordRulesWidget extends StackedView<RegisterViewModel>
     with $RegisterView {
@@ -16,7 +11,7 @@ class PasswordRulesWidget extends StackedView<RegisterViewModel>
 
   @override
   Widget builder(context, viewModel, child) {
-    final width = screenWidth(context);
+    final textTheme = Theme.of(context).textTheme;
 
     final password = passwordController.text;
     List<Widget> children = [];
@@ -35,15 +30,15 @@ class PasswordRulesWidget extends StackedView<RegisterViewModel>
 
       children.add(
         SizedBox(
-          width: (width - (globalPadding + passwordRulesWrapSpacing)) / 2,
+          width: (1.sw - kGlobalPadding) / 2.r,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.check_circle, size: 18, color: ruleColor),
-              const SizedBox(width: 6),
+              Icon(Icons.check_circle, size: 18.r, color: ruleColor),
+              6.horizontalSpace,
               Text(
                 label,
-                style: TextStyle(fontSize: 12, color: ruleColor),
+                style: textTheme.bodySmall?.copyWith(color: ruleColor),
               )
             ],
           ),
@@ -51,13 +46,11 @@ class PasswordRulesWidget extends StackedView<RegisterViewModel>
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Wrap(
-        alignment: WrapAlignment.spaceEvenly,
-        runSpacing: 8,
-        children: [...children],
-      ),
+    return Wrap(
+      alignment: WrapAlignment.spaceEvenly,
+      crossAxisAlignment: WrapCrossAlignment.start,
+      runSpacing: 8.r,
+      children: [...children],
     );
   }
 

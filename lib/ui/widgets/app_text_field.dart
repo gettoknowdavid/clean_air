@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class AppTextField extends StatefulWidget {
@@ -28,7 +29,7 @@ class AppTextField extends StatefulWidget {
   final String? label;
   final TextInputType? keyboardType;
   final bool autocorrect;
-  final void Function(String)? onChanged;
+final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final bool enabled;
   final String? initialValue;
@@ -50,6 +51,7 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final padding = const EdgeInsets.all(18).r;
 
     return TextFormField(
       obscureText: widget.isPassword ? !obscure : obscure,
@@ -71,10 +73,7 @@ class _AppTextFieldState extends State<AppTextField> {
         hintText: widget.hint,
         labelText: widget.label,
         suffixIcon: !widget.isPassword ? null : _suffixIcon(),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 20,
-        ),
+        contentPadding: padding,
       ),
     );
   }

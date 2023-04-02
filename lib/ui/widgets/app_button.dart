@@ -1,6 +1,7 @@
-import 'package:clean_air/ui/common/ui_helpers.dart';
-import 'package:clean_air/ui/widgets/app_loading_asset.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'app_loading_indicator.dart';
 
 class AppButton extends StatefulWidget {
   const AppButton({
@@ -9,12 +10,16 @@ class AppButton extends StatefulWidget {
     this.loading = false,
     required this.onPressed,
     required this.title,
+    this.background,
+    this.foreground,
   });
 
   final bool disabled;
   final bool loading;
   final void Function() onPressed;
   final String title;
+  final Color? background;
+  final Color? foreground;
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -23,12 +28,14 @@ class AppButton extends StatefulWidget {
 class _AppButtonState extends State<AppButton> {
   @override
   Widget build(BuildContext context) {
-    final fixedSize = Size(screenWidth(context), 60);
-
     return ElevatedButton(
       onPressed: widget.loading || widget.disabled ? null : widget.onPressed,
-      style: ElevatedButton.styleFrom(fixedSize: fixedSize),
-      child: widget.loading ? const AppLoadingAsset() : Text(widget.title),
+      style: ElevatedButton.styleFrom(
+        fixedSize: Size(1.sw, 50.h),
+        foregroundColor: widget.foreground,
+        backgroundColor: widget.background,
+      ),
+      child: widget.loading ? const AppLoadingIndicator() : Text(widget.title),
     );
   }
 }

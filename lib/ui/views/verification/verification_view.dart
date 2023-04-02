@@ -1,6 +1,8 @@
-import 'package:clean_air/ui/common/ui_helpers.dart';
+import 'package:clean_air/ui/common/app_constants.dart';
+import 'package:clean_air/ui/common/app_strings.dart';
 import 'package:clean_air/ui/widgets/app_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 
 import 'verification_viewmodel.dart';
@@ -16,49 +18,58 @@ class VerificationView extends StackedView<VerificationViewModel> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+          padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Text('Verify your \nemail', style: textTheme.displayMedium),
-              verticalSpaceMedium,
-              Text('You have mail.', style: textTheme.bodyLarge),
-              verticalSpaceMedium,
               Text(
-                'You can open your mail application to check for the verification mail we just sent to you.',
-                style: textTheme.bodyLarge,
+                viewModel.isEmailVerified == true
+                    ? kConfirmationTitle
+                    : kVerificationViewTitle,
+                style: textTheme.headlineLarge,
               ),
-              verticalSpaceMedium,
-              AppButton(
-                title: 'Open mail app',
-                onPressed: viewModel.openMailApp,
+              10.verticalSpace,
+              Text(
+                viewModel.isEmailVerified == true
+                    ? kConfirmationMessage
+                    : kVerificationViewDesc,
+                style: textTheme.bodyMedium,
               ),
-              verticalSpaceMedium,
-              OutlinedButton(
-                onPressed: viewModel.checkEmailVerified,
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: theme.colorScheme.primary),
-                  fixedSize: Size(screenWidth(context), 53),
+              25.verticalSpace,
+              if (viewModel.isEmailVerified == true) ...[
+                AppButton(title: 'Go Home', onPressed: viewModel.goHome),
+                120.verticalSpace,
+              ] else ...[
+                AppButton(
+                  title: 'Open mail app',
+                  onPressed: viewModel.openMailApp,
                 ),
-                child: const Text('Verify'),
-              ),
-              verticalSpaceMedium,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: viewModel.sendVerification,
-                    child: const Text('Resend'),
+                25.verticalSpace,
+                OutlinedButton(
+                  onPressed: viewModel.checkEmailVerified,
+                  style: OutlinedButton.styleFrom(
+                    fixedSize: Size(1.sw, 50.h),
                   ),
-                  TextButton(
-                    onPressed: viewModel.cancel,
-                    child: const Text('Cancel'),
-                  )
-                ],
-              ),
-              verticalSpaceMedium,
+                  child: const Text('Verify'),
+                ),
+                25.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: viewModel.sendVerification,
+                      child: const Text('Resend'),
+                    ),
+                    TextButton(
+                      onPressed: viewModel.cancel,
+                      child: const Text('Cancel'),
+                    )
+                  ],
+                ),
+                60.verticalSpace,
+              ]
             ],
           ),
         ),

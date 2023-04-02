@@ -3,7 +3,7 @@ description: An app build with the stacked framework
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -30,11 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  
+
   stacked: ^3.2.0
   stacked_services: ^1.0.0
 
@@ -46,7 +45,7 @@ dependencies:
   objectbox: ^2.0.0
   objectbox_flutter_libs: ^2.0.0
   path_provider: ^2.0.14
-  path: 
+  path:
   firebase_auth: ^4.3.0
   firebase_core: ^2.8.0
   cloud_firestore: ^4.4.5
@@ -64,10 +63,12 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   open_mail_app: ^0.4.5
   google_fonts: ^4.0.3
+  flutter_screenutil: ^5.7.0
+  animations: ^2.0.7
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter 
+    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -88,10 +89,10 @@ dev_dependencies:
   flutter_launcher_icons: "^0.12.0"
 
 flutter_icons:
-    android: "launcher_icon"
-    ios: true
-    image_path: "assets/icons/launcher_icon.png"
-    min_sdk_android: 21 # android min sdk min:16, default 21
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/launcher_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 flutter_native_splash:
   image: assets/icons/splash_icon.png
@@ -112,13 +113,11 @@ flutter_native_splash:
   web: false
   fullscreen: true
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -162,4 +161,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-

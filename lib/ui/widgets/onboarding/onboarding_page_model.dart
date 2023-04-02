@@ -1,6 +1,6 @@
 import 'package:clean_air/ui/common/app_strings.dart';
-import 'package:clean_air/ui/common/ui_helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingPageModel extends StatelessWidget {
   final String title;
@@ -30,26 +30,26 @@ class OnboardingPageModel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          width: screenWidth(context),
-          height: screenHeight(context) * 0.65,
+          width: 1.sw,
+          height: 0.65.sh,
           decoration: BoxDecoration(
             color: imageContainerColor,
             borderRadius: getBorderRadius(asset),
             image: DecorationImage(image: AssetImage(asset)),
           ),
         ),
-        verticalSpaceLarge,
+        50.verticalSpace,
         Text(
           title,
           style: textTheme.headlineLarge?.copyWith(
             decoration: TextDecoration.underline,
-            decorationThickness: 5,
+            decorationThickness: 5.r,
             decorationColor: colorScheme.primary,
           ),
         ),
-        verticalSpaceSmall,
+        10.verticalSpace,
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          padding: const EdgeInsets.symmetric(horizontal: 40.0).r,
           child: Text(
             body,
             textAlign: TextAlign.center,
@@ -64,9 +64,9 @@ class OnboardingPageModel extends StatelessWidget {
   BorderRadius? getBorderRadius(String asset) {
     switch (asset) {
       case kOnboardingAsset1:
-        return const BorderRadius.only(bottomLeft: Radius.circular(50));
+        return const BorderRadius.only(bottomLeft: Radius.circular(50)).r;
       case kOnboardingAsset3:
-        return const BorderRadius.only(bottomRight: Radius.circular(50));
+        return const BorderRadius.only(bottomRight: Radius.circular(50)).r;
       default:
         return null;
     }

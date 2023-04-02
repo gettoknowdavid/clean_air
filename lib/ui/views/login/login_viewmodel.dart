@@ -1,72 +1,59 @@
-import 'dart:convert';
-
+import 'package:clean_air/app/app.dialogs.dart';
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/app/app.snackbars.dart';
 import 'package:clean_air/services/auth_service.dart';
-import 'package:clean_air/services/firestore_service.dart';
-import 'package:clean_air/services/secure_storage_service.dart';
+import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
-import 'package:clean_air/ui/views/login/login_view.form.dart';
-import 'package:firebase_auth/firebase_auth.dart' as fb;
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class LoginViewModel extends FormViewModel {
+import 'login_view.form.dart';
+
+class LoginViewModel extends FormViewModel with ListenableServiceMixin {
+  final _authService = locator<AuthService>();
+
+  final _dialogService = locator<DialogService>();
+
+  final _networkService = locator<NetworkService>();
+
+  final _snackbarService = locator<SnackbarService>();
+
+  final _navigationService = locator<NavigationService>();
+
   bool get disabled => !isFormValid || !hasEmail || !hasPassword || isBusy;
 
-  final _authService = locator<AuthService>();
-  final _snackbarService = locator<SnackbarService>();
-  final _firestoreService = locator<FirestoreService>();
-  final _navigationService = locator<NavigationService>();
-  final _secureStorageService = locator<SecureStorageService>();
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_networkService];
 
-  void navigateToRegisterView() {
-    _navigationService.navigateTo(Routes.registerView);
-  }
+  NetworkStatus get networkStatus => _networkService.status;
 
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
-    try {
+  Future<void> login({required String email, required String password}) async {
+    if (networkStatus == NetworkStatus.disconnected) {
+      _dialogService.showCustomDialog(variant: DialogType.networkError);
+    } else {
       setBusy(true);
-      final firebaseUser = await _authService.login(
-        email: email,
-        password: password,
-      );
-
-      final user = await _firestoreService.getUser(firebaseUser!.uid);
-
-      await _secureStorageService.write(
-        key: kAuthUser,
-        value: jsonEncode(user?.toJson()),
-      );
-
-      if (firebaseUser.emailVerified) {
-        _navigationService.clearStackAndShow(Routes.layoutView);
-      } else {
-        _navigationService.clearStackAndShow(Routes.verificationView);
-      }
-    } on fb.FirebaseAuthException catch (e) {
-      setBusy(false);
-      switch (e.code) {
-        case 'wrong-password':
-        case 'user-not-found':
+      final result = await _authService.login(email: email, password: password);
+      return result.fold(
+        (failure) {
+          setBusy(false);
           _snackbarService.showCustomSnackBar(
+            duration: const Duration(seconds: 6),
             variant: SnackbarType.error,
-            message: kIncorrectEmailPassword,
-            duration: const Duration(seconds: 5),
+            message: failure.maybeMap(
+              orElse: () => '',
+              serverError: (_) => kServerErrorMessage,
+              invalidEmailOrPassword: (_) => kInvalidEmailPassword,
+            ),
           );
-          return;
-        default:
-          _snackbarService.showCustomSnackBar(
-            variant: SnackbarType.error,
-            message: kServerErrorMessage,
-            duration: const Duration(seconds: 5),
-          );
-          return;
-      }
+        },
+        (success) => _navigationService.clearStackAndShow(Routes.layoutView),
+      );
     }
   }
+
+  void navigateToForgotPasswordView() =>
+      _navigationService.navigateToForgotPasswordView();
+
+  void navigateToRegisterView() => _navigationService.navigateToRegisterView();
 }

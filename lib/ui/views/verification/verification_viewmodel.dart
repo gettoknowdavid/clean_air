@@ -6,7 +6,6 @@ import 'package:clean_air/app/app.snackbars.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -16,26 +15,25 @@ class VerificationViewModel extends ReactiveViewModel with Initialisable {
   final _navigationService = locator<NavigationService>();
   final _openMailAppService = locator<OpenMailAppService>();
 
+  final isVerified = ReactiveValue<bool>(false);
+
   Timer? timer;
 
   bool get isAuthenticated => _authService.isAuthenticated;
 
-  bool get isEmailVerified => _authService.isEmailVerified;
+  bool get isEmailVerified => true;
 
   @override
   List<ListenableServiceMixin> get listenableServices => [_authService];
 
+  Future<void> cancel() => Future.wait([_authService.logout()]);
+
   Future<void> checkEmailVerified() async {
     final result = await _authService.checkEmailVerified();
-
-    if (result == null) {
-      _navigationService.clearStackAndShow(Routes.loginView);
-    }
-
-    if (result == true) {
-      timer?.cancel();
-      _navigationService.clearStackAndShow(Routes.layoutView);
-    }
+    result.fold(
+      () => _navigationService.clearStackAndShow(Routes.loginView),
+      (either) => null,
+    );
   }
 
   @override
@@ -44,11 +42,13 @@ class VerificationViewModel extends ReactiveViewModel with Initialisable {
     super.dispose();
   }
 
+  void goHome() => _navigationService.clearStackAndShow(Routes.layoutView);
+
   @override
   Future<void> initialise() async {
-    if (!isEmailVerified) {
-      timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-        checkEmailVerified();
+    if (isEmailVerified == false) {
+      timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
+        await checkEmailVerified();
       });
     }
   }
@@ -57,25 +57,28 @@ class VerificationViewModel extends ReactiveViewModel with Initialisable {
     await _openMailAppService.openMailApp();
   }
 
-  Future<void> cancel() => Future.wait([_authService.logout()]);
-
   Future<void> sendVerification() async {
-    try {
-      // Sends the verification email to the current user's email address
-      await _authService.sendEmailVerification();
-    } on FirebaseAuthException catch (e) {
-      // If the user is not logged in, return an authentication error
-      if (e.code == 'user-mismatch') {
+    final result = await _authService.sendVerificationEmail();
+
+    result.fold(
+      (failure) {
         _snackbarService.showCustomSnackBar(
+          duration: const Duration(seconds: 6),
           variant: SnackbarType.error,
-          message: kNoUserFoundErrorMessage,
+          message: failure.maybeMap(
+            orElse: () => '',
+            serverError: (_) => kServerErrorMessage,
+            userNotFound: (_) => kNoUserFoundErrorMessage,
+          ),
         );
-      } else {
+      },
+      (success) {
         _snackbarService.showCustomSnackBar(
-          variant: SnackbarType.error,
-          message: kServerErrorMessage,
+          duration: const Duration(seconds: 6),
+          variant: SnackbarType.success,
+          message: kVerificationEmailSentSuccess,
         );
-      }
-    }
+      },
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:stacked/stacked.dart';
 
@@ -20,9 +21,9 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
       isProgress: false,
       animationDuration: 250,
       rawPages: viewModel.pages,
-      controlsMargin: const EdgeInsets.only(bottom: 30),
-      back: const Icon(Icons.chevron_left, size: 26),
-      next: const Icon(Icons.chevron_right, size: 26),
+      controlsMargin: const EdgeInsets.only(bottom: 30).r,
+      back: Icon(Icons.chevron_left, size: 26.r),
+      next: Icon(Icons.chevron_right, size: 26.r),
       done: const Text('Get Started'),
       nextFlex: 0,
       skipOrBackFlex: 0,
@@ -30,7 +31,7 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
       doneStyle: FilledButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20).r,
       ),
     );
   }

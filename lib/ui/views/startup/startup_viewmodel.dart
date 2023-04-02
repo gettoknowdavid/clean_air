@@ -23,15 +23,15 @@ class StartupViewModel extends ReactiveViewModel {
     // you have custom startup logic
 
     if (!isAuthenticated) {
-      _navigationService.replaceWithLoginView();
+      _navigationService.clearStackAndShow(Routes.loginView);
     }
 
     if (isAuthenticated && isEmailVerified == false) {
-      _navigationService.replaceWithVerificationView();
+      _navigationService.clearStackAndShow(Routes.verificationView);
     }
 
     if (isAuthenticated && isEmailVerified == true) {
-      _navigationService.replaceWithLayoutView();
+      _navigationService.clearStackAndShow(Routes.layoutView);
     }
   }
 

@@ -25,3 +25,7 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
+lib/core/env/env.g.dart
+*env.g.dart
+*.freezed.dart
+*.g.dart

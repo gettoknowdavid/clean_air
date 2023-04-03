@@ -69,6 +69,7 @@ dependencies:
   liquid_progress_indicator: ^0.4.0
   syncfusion_flutter_gauges: ^21.1.37
   envied: ^0.3.0
+  retrofit: ^4.0.1
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +86,7 @@ dev_dependencies:
   json_serializable: ^6.6.1
   freezed: ^2.3.2
   envied_generator: ^0.3.0
+  retrofit_generator: ^6.0.0+1
 
   stacked_generator: ^1.0.0
   objectbox_generator: ^2.0.0

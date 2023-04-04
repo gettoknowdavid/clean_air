@@ -12,6 +12,7 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
+import '../services/aqi_service.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
 import '../services/network_service.dart';
@@ -41,4 +42,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => OpenMailAppService());
   final objectBoxService = await ObjectBoxService.create();
   locator.registerSingleton(objectBoxService);
+
+  locator.registerLazySingleton(() => AqiService());
 }

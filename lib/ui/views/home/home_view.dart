@@ -8,7 +8,10 @@ import 'package:stacked/stacked.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
+
+  @override
+  bool get fireOnViewModelReadyOnce => false;
 
   @override
   Widget builder(context, viewModel, child) {
@@ -17,6 +20,7 @@ class HomeView extends StackedView<HomeViewModel> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: kToolbarHeight * 1.2.r,
         leadingWidth: (kBottomNavigationBarHeight * 2).r,
         leading: Padding(
           padding: const EdgeInsets.only(left: kGlobalPadding).r,
@@ -34,38 +38,30 @@ class HomeView extends StackedView<HomeViewModel> {
             ],
           ),
         ),
+        bottom: viewModel.isBusy
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(1.r),
+                child: Flexible(
+                  child: LinearProgressIndicator(minHeight: 1.2.r),
+                ),
+              )
+            : null,
         actions: [
           const AppAvatar(),
           kGlobalPadding.horizontalSpace,
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
+      body: SingleChildScrollView(
         child: Center(
           child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Spacer(),
-              25.verticalSpace,
-              MaterialButton(
-                color: Colors.black,
-                onPressed: viewModel.incrementCounter,
-                child: Text(
-                  viewModel.counterLabel,
-                  style: const TextStyle(color: Colors.white),
+              Text(
+                '${viewModel.aqi}',
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              25.verticalSpace,
-              MaterialButton(
-                color: Colors.black,
-                onPressed: viewModel.logout,
-                child: const Text(
-                  'Logout',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              const Spacer(),
             ],
           ),
         ),

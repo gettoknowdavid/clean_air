@@ -1,3 +1,15 @@
+import 'package:clean_air/app/app.locator.dart';
+import 'package:clean_air/app/app.router.dart';
+import 'package:clean_air/services/auth_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-class ProfileViewModel extends BaseViewModel {}
+class ProfileViewModel extends BaseViewModel {
+  final _authService = locator<AuthService>();
+  final _navigationService = locator<NavigationService>();
+
+  Future<void> logout() async {
+    await _authService.logout();
+    _navigationService.clearStackAndShow(Routes.loginView);
+  }
+}

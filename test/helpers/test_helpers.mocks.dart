@@ -9,6 +9,7 @@ import 'dart:ui' as _i7;
 import 'package:clean_air/core/errors/auth_error.dart' as _i10;
 import 'package:clean_air/models/user.dart' as _i14;
 import 'package:clean_air/objectbox.g.dart' as _i2;
+import 'package:clean_air/services/aqi_service.dart' as _i17;
 import 'package:clean_air/services/auth_service.dart' as _i9;
 import 'package:clean_air/services/firestore_service.dart' as _i13;
 import 'package:clean_air/services/network_service.dart' as _i11;
@@ -1129,4 +1130,35 @@ class MockOpenMailAppService extends _i1.Mock
         returnValue: _i4.Future<void>.value(),
         returnValueForMissingStub: _i4.Future<void>.value(),
       ) as _i4.Future<void>);
+}
+
+/// A class which mocks [AqiService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAqiService extends _i1.Mock implements _i17.AqiService {
+  @override
+  _i4.Future<dynamic> getCurrentLocationAQI() => (super.noSuchMethod(
+        Invocation.method(
+          #getCurrentLocationAQI,
+          [],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+        returnValueForMissingStub: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> getAqiByGeo(
+    double? lat,
+    double? lon,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getAqiByGeo,
+          [
+            lat,
+            lon,
+          ],
+        ),
+        returnValue: _i4.Future<dynamic>.value(),
+        returnValueForMissingStub: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
 }

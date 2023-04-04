@@ -1,20 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'pollutant.freezed.dart';
 part 'pollutant.g.dart';
 
-@freezed
-@JsonSerializable(
-  createFactory: false,
-  includeIfNull: false,
-  explicitToJson: true,
-)
-class Pollutant with _$Pollutant {
-  const factory Pollutant({num? v}) = _Pollutant;
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@Entity()
+class Pollutant {
+  @Id()
+  int? id;
+
+  num? v;
+
+  Pollutant({this.id, this.v});
 
   factory Pollutant.fromJson(Map<String, dynamic> json) =>
       _$PollutantFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$PollutantToJson(this);
 }

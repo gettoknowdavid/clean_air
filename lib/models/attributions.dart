@@ -1,24 +1,29 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'attributions.freezed.dart';
 part 'attributions.g.dart';
 
-@freezed
-@JsonSerializable(
-  createFactory: false,
-  includeIfNull: false,
-  explicitToJson: true,
-)
-class Attributions with _$Attributions {
-  const factory Attributions({
-    String? url,
-    String? name,
-    String? logo,
-  }) = _Attributions;
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@Entity()
+class Attributions {
+  @Id()
+  int? id;
+
+  String? url;
+
+  String? name;
+
+  String? logo;
+
+  Attributions({
+    this.id,
+    this.url,
+    this.name,
+    this.logo,
+  });
 
   factory Attributions.fromJson(Map<String, dynamic> json) =>
       _$AttributionsFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$AttributionsToJson(this);
 }

@@ -1,19 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'debug.freezed.dart';
 part 'debug.g.dart';
 
-@freezed
-@JsonSerializable(
-  createFactory: false,
-  includeIfNull: false,
-  explicitToJson: true,
-)
-class Debug with _$Debug {
-  const factory Debug({@JsonKey(name: 'sync') DateTime? syncValue}) = _Debug;
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@Entity()
+class Debug {
+  @Id()
+  int? id;
+
+  @JsonKey(name: 'sync')
+  DateTime? syncValue;
+
+  Debug({this.id, this.syncValue});
 
   factory Debug.fromJson(Map<String, dynamic> json) => _$DebugFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$DebugToJson(this);
 }

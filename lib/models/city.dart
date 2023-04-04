@@ -1,24 +1,31 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'city.freezed.dart';
 part 'city.g.dart';
 
-@freezed
-@JsonSerializable(
-  createFactory: false,
-  includeIfNull: false,
-  explicitToJson: true,
-)
-class City with _$City {
-  const factory City({
-    List<double>? geo,
-    String? name,
-    String? url,
-    dynamic location,
-  }) = _City;
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@Entity()
+class City {
+  @Id()
+  int? id;
+
+  List<double>? geo;
+
+  String? name;
+
+  String? url;
+
+  dynamic location;
+
+  City({
+    this.id,
+    this.geo,
+    this.name,
+    this.url,
+    this.location,
+  });
 
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$CityToJson(this);
 }

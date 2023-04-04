@@ -14,7 +14,18 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import 'models/air_quality.dart';
+import 'models/attributions.dart';
+import 'models/city.dart';
+import 'models/daily.dart';
+import 'models/debug.dart';
+import 'models/forecast.dart';
+import 'models/forecast_data.dart';
+import 'models/iaqi.dart';
 import 'models/init_entity.dart';
+import 'models/last_aqi.dart';
+import 'models/pollutant.dart';
+import 'models/time.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -42,6 +53,250 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 6897367371554873021),
+      name: 'LastAqi',
+      lastPropertyId: const IdUid(2, 1177749685440618214),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 8778454325992771836),
+            name: 'id',
+            type: 6,
+            flags: 129),
+        ModelProperty(
+            id: const IdUid(2, 1177749685440618214),
+            name: 'aqi',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(4, 8215549538187339149),
+      name: 'Pollutant',
+      lastPropertyId: const IdUid(1, 3034288054758413896),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 3034288054758413896),
+            name: 'id',
+            type: 6,
+            flags: 1)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(8, 8154166778988206956),
+      name: 'IAqi',
+      lastPropertyId: const IdUid(1, 7292439734785303038),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 7292439734785303038),
+            name: 'id',
+            type: 6,
+            flags: 1)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(10, 220039579196531930),
+      name: 'ForecastData',
+      lastPropertyId: const IdUid(5, 3082444473991733775),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 6347544140095601431),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 7045535587640968482),
+            name: 'avg',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 1326762188622198999),
+            name: 'day',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 82494642533111246),
+            name: 'max',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 3082444473991733775),
+            name: 'min',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(11, 6407039071646311991),
+      name: 'Attributions',
+      lastPropertyId: const IdUid(4, 6533833825214880230),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 919722420798928838),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 2814503776798281855),
+            name: 'url',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 6825160510285343599),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 6533833825214880230),
+            name: 'logo',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(12, 7749816934758697867),
+      name: 'Debug',
+      lastPropertyId: const IdUid(2, 708509135485401846),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 6754921025707751930),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 708509135485401846),
+            name: 'syncValue',
+            type: 10,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(14, 3206039988076094505),
+      name: 'City',
+      lastPropertyId: const IdUid(3, 9183746128037902626),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 9034403559859069805),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 9181959514371454518),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 9183746128037902626),
+            name: 'url',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(21, 5286507030990687843),
+      name: 'Daily',
+      lastPropertyId: const IdUid(1, 2266434412569363790),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2266434412569363790),
+            name: 'id',
+            type: 6,
+            flags: 1)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(23, 556185832172950367),
+      name: 'Forecast',
+      lastPropertyId: const IdUid(1, 4176297274179046672),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 4176297274179046672),
+            name: 'id',
+            type: 6,
+            flags: 1)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(35, 2050056203871154913),
+      name: 'AirQuality',
+      lastPropertyId: const IdUid(4, 2120297800536703978),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 6162645171369834283),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 4335030737506163038),
+            name: 'aqi',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2459660266064386614),
+            name: 'idx',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 2120297800536703978),
+            name: 'dominentpol',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(36, 6120878653426116231),
+      name: 'Time',
+      lastPropertyId: const IdUid(5, 8712992503753883079),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 521971788191528624),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 7666784527522073210),
+            name: 's',
+            type: 10,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 1933977609583999892),
+            name: 'tz',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 923876073941954757),
+            name: 'v',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 8712992503753883079),
+            name: 'iso',
+            type: 10,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -65,14 +320,115 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 6689427248019125466),
+      lastEntityId: const IdUid(36, 6120878653426116231),
       lastIndexId: const IdUid(0, 0),
-      lastRelationId: const IdUid(0, 0),
+      lastRelationId: const IdUid(3, 8891701239229813035),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
+      retiredEntityUids: const [
+        158652098875100901,
+        1301454354024231106,
+        5726967213889622453,
+        1422979425459933432,
+        1209236624941819193,
+        5524792362561415052,
+        7844339848563346029,
+        1500184460694161460,
+        3203575588966195336,
+        4012028782834853776,
+        1374757395309712835,
+        4047522132208565623,
+        3244186408230428448,
+        7401468451464887308,
+        3831808509864493838,
+        6803072064116853251,
+        6231836241327052247,
+        1817411106178799502,
+        1085534019423472683,
+        3976831522547656365,
+        4733935793133108447,
+        59777728344781998,
+        3276886575641596238,
+        4876427395860303674
+      ],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
-      retiredRelationUids: const [],
+      retiredPropertyUids: const [
+        6307624794368659446,
+        5312718063717094299,
+        1247870534890844694,
+        6292685896142997600,
+        5023234642904302526,
+        9036467584422969621,
+        7347655510110171533,
+        3104629855507058764,
+        337926775799833847,
+        5396047905225781480,
+        3002525342921082128,
+        7204867787895278907,
+        448504089588516661,
+        1461197389657554019,
+        2157775152748951550,
+        3625007552627065693,
+        5882824672132096829,
+        6344453094445378107,
+        4282645577258308186,
+        7636563245772928280,
+        7761091243965857038,
+        4500551629533540598,
+        8467997223147612596,
+        2936437615106229782,
+        7650735473614439116,
+        8427265525340596435,
+        8839737367288628451,
+        4600107405897673258,
+        4183106619874916028,
+        2685932270079444297,
+        4954511629666455974,
+        8255432746934361477,
+        2474537334354818773,
+        1016021294522326625,
+        4907660365431520244,
+        6170769921898609392,
+        853323126687858034,
+        2053640571960635143,
+        9136937009028800543,
+        8835442658947037193,
+        3436459872718062750,
+        1731018189693432274,
+        5253724584766987733,
+        500060064681702910,
+        6533684630225140873,
+        323313807669670733,
+        5988987664607695745,
+        5384714797792175847,
+        5879263626747642671,
+        6337657937255015325,
+        2199717058209329508,
+        3518766091607683400,
+        8751585160620906282,
+        1970927864330212425,
+        2314725946967369707,
+        6901588761159800370,
+        1421785008515618100,
+        6551941101452729373,
+        8426498019728695797,
+        278852752655876439,
+        869999700287958336,
+        8699414968219877343,
+        756339072760985788,
+        8856170653792964333,
+        5615376803523683791,
+        5073429066869133576,
+        3098831347197835251,
+        4344424385553255893,
+        5456715972590675803,
+        2012849171653701067,
+        9102132662213999300
+      ],
+      retiredRelationUids: const [
+        7387455526508682814,
+        5737281664917734300,
+        8891701239229813035
+      ],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
@@ -112,6 +468,347 @@ ModelDefinition getObjectBoxModel() {
                   .vTableGetNullable(buffer, rootOffset, 8));
 
           return object;
+        }),
+    LastAqi: EntityDefinition<LastAqi>(
+        model: _entities[1],
+        toOneRelations: (LastAqi object) => [],
+        toManyRelations: (LastAqi object) => {},
+        getId: (LastAqi object) => object.id,
+        setId: (LastAqi object, int id) {
+          object.id = id;
+        },
+        objectToFB: (LastAqi object, fb.Builder fbb) {
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(1, object.aqi);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = LastAqi(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              aqi: const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0));
+
+          return object;
+        }),
+    Pollutant: EntityDefinition<Pollutant>(
+        model: _entities[2],
+        toOneRelations: (Pollutant object) => [],
+        toManyRelations: (Pollutant object) => {},
+        getId: (Pollutant object) => object.id,
+        setId: (Pollutant object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Pollutant object, fb.Builder fbb) {
+          fbb.startTable(2);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Pollutant(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4));
+
+          return object;
+        }),
+    IAqi: EntityDefinition<IAqi>(
+        model: _entities[3],
+        toOneRelations: (IAqi object) => [],
+        toManyRelations: (IAqi object) => {},
+        getId: (IAqi object) => object.id,
+        setId: (IAqi object, int id) {
+          object.id = id;
+        },
+        objectToFB: (IAqi object, fb.Builder fbb) {
+          fbb.startTable(2);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = IAqi(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4));
+
+          return object;
+        }),
+    ForecastData: EntityDefinition<ForecastData>(
+        model: _entities[4],
+        toOneRelations: (ForecastData object) => [],
+        toManyRelations: (ForecastData object) => {},
+        getId: (ForecastData object) => object.id,
+        setId: (ForecastData object, int id) {
+          object.id = id;
+        },
+        objectToFB: (ForecastData object, fb.Builder fbb) {
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(1, object.avg);
+          fbb.addInt64(2, object.day?.millisecondsSinceEpoch);
+          fbb.addInt64(3, object.max);
+          fbb.addInt64(4, object.min);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final dayValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8);
+          final object = ForecastData(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              avg: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              day: dayValue == null
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(dayValue),
+              max: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              min: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 12));
+
+          return object;
+        }),
+    Attributions: EntityDefinition<Attributions>(
+        model: _entities[5],
+        toOneRelations: (Attributions object) => [],
+        toManyRelations: (Attributions object) => {},
+        getId: (Attributions object) => object.id,
+        setId: (Attributions object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Attributions object, fb.Builder fbb) {
+          final urlOffset =
+              object.url == null ? null : fbb.writeString(object.url!);
+          final nameOffset =
+              object.name == null ? null : fbb.writeString(object.name!);
+          final logoOffset =
+              object.logo == null ? null : fbb.writeString(object.logo!);
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addOffset(1, urlOffset);
+          fbb.addOffset(2, nameOffset);
+          fbb.addOffset(3, logoOffset);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Attributions(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              url: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              logo: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10));
+
+          return object;
+        }),
+    Debug: EntityDefinition<Debug>(
+        model: _entities[6],
+        toOneRelations: (Debug object) => [],
+        toManyRelations: (Debug object) => {},
+        getId: (Debug object) => object.id,
+        setId: (Debug object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Debug object, fb.Builder fbb) {
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(1, object.syncValue?.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final syncValueValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 6);
+          final object = Debug(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              syncValue: syncValueValue == null
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(syncValueValue));
+
+          return object;
+        }),
+    City: EntityDefinition<City>(
+        model: _entities[7],
+        toOneRelations: (City object) => [],
+        toManyRelations: (City object) => {},
+        getId: (City object) => object.id,
+        setId: (City object, int id) {
+          object.id = id;
+        },
+        objectToFB: (City object, fb.Builder fbb) {
+          final nameOffset =
+              object.name == null ? null : fbb.writeString(object.name!);
+          final urlOffset =
+              object.url == null ? null : fbb.writeString(object.url!);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, urlOffset);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = City(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              url: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8));
+
+          return object;
+        }),
+    Daily: EntityDefinition<Daily>(
+        model: _entities[8],
+        toOneRelations: (Daily object) => [],
+        toManyRelations: (Daily object) => {},
+        getId: (Daily object) => object.id,
+        setId: (Daily object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Daily object, fb.Builder fbb) {
+          fbb.startTable(2);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Daily(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4));
+
+          return object;
+        }),
+    Forecast: EntityDefinition<Forecast>(
+        model: _entities[9],
+        toOneRelations: (Forecast object) => [],
+        toManyRelations: (Forecast object) => {},
+        getId: (Forecast object) => object.id,
+        setId: (Forecast object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Forecast object, fb.Builder fbb) {
+          fbb.startTable(2);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Forecast(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4));
+
+          return object;
+        }),
+    AirQuality: EntityDefinition<AirQuality>(
+        model: _entities[10],
+        toOneRelations: (AirQuality object) => [],
+        toManyRelations: (AirQuality object) => {},
+        getId: (AirQuality object) => object.id,
+        setId: (AirQuality object, int id) {
+          object.id = id;
+        },
+        objectToFB: (AirQuality object, fb.Builder fbb) {
+          final dominentpolOffset = object.dominentpol == null
+              ? null
+              : fbb.writeString(object.dominentpol!);
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(1, object.aqi);
+          fbb.addInt64(2, object.idx);
+          fbb.addOffset(3, dominentpolOffset);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = AirQuality(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              aqi: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              idx: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              dominentpol: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 10));
+
+          return object;
+        }),
+    Time: EntityDefinition<Time>(
+        model: _entities[11],
+        toOneRelations: (Time object) => [],
+        toManyRelations: (Time object) => {},
+        getId: (Time object) => object.id,
+        setId: (Time object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Time object, fb.Builder fbb) {
+          final tzOffset =
+              object.tz == null ? null : fbb.writeString(object.tz!);
+          fbb.startTable(6);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addInt64(1, object.s?.millisecondsSinceEpoch);
+          fbb.addOffset(2, tzOffset);
+          fbb.addInt64(3, object.v);
+          fbb.addInt64(4, object.iso?.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final sValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 6);
+          final isoValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
+          final object = Time(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              s: sValue == null
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(sValue),
+              tz: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              v: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              iso: isoValue == null
+                  ? null
+                  : DateTime.fromMillisecondsSinceEpoch(isoValue));
+
+          return object;
         })
   };
 
@@ -131,4 +828,138 @@ class InitEntity_ {
   /// see [InitEntity.isInitialLogin]
   static final isInitialLogin =
       QueryIntegerProperty<InitEntity>(_entities[0].properties[2]);
+}
+
+/// [LastAqi] entity fields to define ObjectBox queries.
+class LastAqi_ {
+  /// see [LastAqi.id]
+  static final id = QueryIntegerProperty<LastAqi>(_entities[1].properties[0]);
+
+  /// see [LastAqi.aqi]
+  static final aqi = QueryIntegerProperty<LastAqi>(_entities[1].properties[1]);
+}
+
+/// [Pollutant] entity fields to define ObjectBox queries.
+class Pollutant_ {
+  /// see [Pollutant.id]
+  static final id = QueryIntegerProperty<Pollutant>(_entities[2].properties[0]);
+}
+
+/// [IAqi] entity fields to define ObjectBox queries.
+class IAqi_ {
+  /// see [IAqi.id]
+  static final id = QueryIntegerProperty<IAqi>(_entities[3].properties[0]);
+}
+
+/// [ForecastData] entity fields to define ObjectBox queries.
+class ForecastData_ {
+  /// see [ForecastData.id]
+  static final id =
+      QueryIntegerProperty<ForecastData>(_entities[4].properties[0]);
+
+  /// see [ForecastData.avg]
+  static final avg =
+      QueryIntegerProperty<ForecastData>(_entities[4].properties[1]);
+
+  /// see [ForecastData.day]
+  static final day =
+      QueryIntegerProperty<ForecastData>(_entities[4].properties[2]);
+
+  /// see [ForecastData.max]
+  static final max =
+      QueryIntegerProperty<ForecastData>(_entities[4].properties[3]);
+
+  /// see [ForecastData.min]
+  static final min =
+      QueryIntegerProperty<ForecastData>(_entities[4].properties[4]);
+}
+
+/// [Attributions] entity fields to define ObjectBox queries.
+class Attributions_ {
+  /// see [Attributions.id]
+  static final id =
+      QueryIntegerProperty<Attributions>(_entities[5].properties[0]);
+
+  /// see [Attributions.url]
+  static final url =
+      QueryStringProperty<Attributions>(_entities[5].properties[1]);
+
+  /// see [Attributions.name]
+  static final name =
+      QueryStringProperty<Attributions>(_entities[5].properties[2]);
+
+  /// see [Attributions.logo]
+  static final logo =
+      QueryStringProperty<Attributions>(_entities[5].properties[3]);
+}
+
+/// [Debug] entity fields to define ObjectBox queries.
+class Debug_ {
+  /// see [Debug.id]
+  static final id = QueryIntegerProperty<Debug>(_entities[6].properties[0]);
+
+  /// see [Debug.syncValue]
+  static final syncValue =
+      QueryIntegerProperty<Debug>(_entities[6].properties[1]);
+}
+
+/// [City] entity fields to define ObjectBox queries.
+class City_ {
+  /// see [City.id]
+  static final id = QueryIntegerProperty<City>(_entities[7].properties[0]);
+
+  /// see [City.name]
+  static final name = QueryStringProperty<City>(_entities[7].properties[1]);
+
+  /// see [City.url]
+  static final url = QueryStringProperty<City>(_entities[7].properties[2]);
+}
+
+/// [Daily] entity fields to define ObjectBox queries.
+class Daily_ {
+  /// see [Daily.id]
+  static final id = QueryIntegerProperty<Daily>(_entities[8].properties[0]);
+}
+
+/// [Forecast] entity fields to define ObjectBox queries.
+class Forecast_ {
+  /// see [Forecast.id]
+  static final id = QueryIntegerProperty<Forecast>(_entities[9].properties[0]);
+}
+
+/// [AirQuality] entity fields to define ObjectBox queries.
+class AirQuality_ {
+  /// see [AirQuality.id]
+  static final id =
+      QueryIntegerProperty<AirQuality>(_entities[10].properties[0]);
+
+  /// see [AirQuality.aqi]
+  static final aqi =
+      QueryIntegerProperty<AirQuality>(_entities[10].properties[1]);
+
+  /// see [AirQuality.idx]
+  static final idx =
+      QueryIntegerProperty<AirQuality>(_entities[10].properties[2]);
+
+  /// see [AirQuality.dominentpol]
+  static final dominentpol =
+      QueryStringProperty<AirQuality>(_entities[10].properties[3]);
+}
+
+/// [Time] entity fields to define ObjectBox queries.
+class Time_ {
+  /// see [Time.id]
+  static final id = QueryIntegerProperty<Time>(_entities[11].properties[0]);
+
+  /// see [Time.s]
+  static final s = QueryIntegerProperty<Time>(_entities[11].properties[1]);
+
+  /// see [Time.tz]
+  static final tz = QueryStringProperty<Time>(_entities[11].properties[2]);
+
+  /// see [Time.v]
+  static final v = QueryIntegerProperty<Time>(_entities[11].properties[3]);
+
+  /// see [Time.iso]
+  static final iso = QueryIntegerProperty<Time>(_entities[11].properties[4]);
 }

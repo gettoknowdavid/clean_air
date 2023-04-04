@@ -26,6 +26,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:clean_air/ui/views/forgot_password/forgot_password_view.dart';
 import 'package:clean_air/ui/views/password_reset_confirmation/password_reset_confirmation_view.dart';
+import 'package:clean_air/services/aqi_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -58,6 +59,7 @@ import 'package:clean_air/ui/views/password_reset_confirmation/password_reset_co
       classType: ObjectBoxService,
       presolveUsing: ObjectBoxService.create,
     ),
+    LazySingleton(classType: AqiService),
 // @stacked-service
   ],
   dialogs: [

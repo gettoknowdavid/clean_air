@@ -1,24 +1,33 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'time.freezed.dart';
 part 'time.g.dart';
 
-@freezed
-@JsonSerializable(
-  createFactory: false,
-  includeIfNull: false,
-  explicitToJson: true,
-)
-class Time with _$Time {
-  const factory Time({
-    DateTime? s,
-    String? tz,
-    int? v,
-    DateTime? iso,
-  }) = _Time;
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@Entity()
+class Time {
+  @Id()
+  int? id;
+
+  @Property(type: PropertyType.date)
+  DateTime? s;
+
+  String? tz;
+
+  int? v;
+
+  @Property(type: PropertyType.date)
+  DateTime? iso;
+
+  Time({
+    this.id,
+    this.s,
+    this.tz,
+    this.v,
+    this.iso,
+  });
 
   factory Time.fromJson(Map<String, dynamic> json) => _$TimeFromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$TimeToJson(this);
 }

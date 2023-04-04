@@ -9,6 +9,7 @@ import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/firestore_service.dart';
 import 'package:clean_air/services/secure_storage_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
+import 'package:clean_air/services/aqi_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -23,6 +24,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<FirestoreService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<SecureStorageService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<OpenMailAppService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<AqiService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -35,6 +37,7 @@ void registerServices() {
   getAndRegisterFirestoreService();
   getAndRegisterSecureStorageService();
   getAndRegisterOpenMailAppService();
+  getAndRegisterAqiService();
 // @stacked-mock-register
 }
 
@@ -127,6 +130,13 @@ MockOpenMailAppService getAndRegisterOpenMailAppService() {
   _removeRegistrationIfExists<OpenMailAppService>();
   final service = MockOpenMailAppService();
   locator.registerSingleton<OpenMailAppService>(service);
+  return service;
+}
+
+MockAqiService getAndRegisterAqiService() {
+  _removeRegistrationIfExists<AqiService>();
+  final service = MockAqiService();
+  locator.registerSingleton<AqiService>(service);
   return service;
 }
 // @stacked-mock-create

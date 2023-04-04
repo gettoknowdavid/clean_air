@@ -29,7 +29,7 @@ class AppTextField extends StatefulWidget {
   final String? label;
   final TextInputType? keyboardType;
   final bool autocorrect;
-final void Function(String)? onChanged;
+  final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final bool enabled;
   final String? initialValue;

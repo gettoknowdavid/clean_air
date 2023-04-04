@@ -1,24 +1,29 @@
-import 'package:clean_air/models/aqi.dart';
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'aqi_response.freezed.dart';
 part 'aqi_response.g.dart';
 
-@freezed
 @JsonSerializable(
-  createFactory: false,
-  includeIfNull: false,
   explicitToJson: true,
+  includeIfNull: false,
+  genericArgumentFactories: true,
 )
-class AqiResponse with _$AqiResponse {
-  const factory AqiResponse({
-    String? status,
-    Aqi? data,
-  }) = _AqiResponse;
+class AqiResponse<T> extends Equatable {
+  final String? status;
+  final T? data;
+  final String? message;
 
-  factory AqiResponse.fromJson(Map<String, dynamic> json) =>
-      _$AqiResponseFromJson(json);
+  const AqiResponse({this.status, this.data, this.message});
+
+  factory AqiResponse.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object? json) fromJsonT,
+  ) =>
+      _$AqiResponseFromJson<T>(json, fromJsonT);
 
   @override
-  Map<String, dynamic> toJson() => _$AqiResponseToJson(this);
+  List<Object?> get props => [status, data, message];
+
+  Map<String, dynamic> toJson(Object Function(T) toJsonT) =>
+      _$AqiResponseToJson<T>(this, toJsonT);
 }

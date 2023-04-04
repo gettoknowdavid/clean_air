@@ -1,4 +1,3 @@
-
 import 'package:clean_air/app/app.dart';
 import 'package:clean_air/app/app.dialogs.dart';
 import 'package:clean_air/app/app.locator.dart';

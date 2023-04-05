@@ -1,7 +1,8 @@
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
-import 'package:clean_air/models/init_entity.dart';
-import 'package:clean_air/services/objectbox_service.dart';
+import 'package:clean_air/core/keys.dart';
+import 'package:clean_air/models/init.dart';
+import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
 import 'package:clean_air/ui/widgets/onboarding/onboarding_page_model.dart';
 import 'package:flutter/material.dart';
@@ -31,15 +32,15 @@ final _introKey = GlobalKey<IntroductionScreenState>();
 
 class OnboardingViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
-  final _objectBoxService = locator<ObjectBoxService>();
+  final _preferences = locator<SharedPreferencesService>();
 
   GlobalKey<IntroductionScreenState> get key => _introKey;
 
   List<OnboardingPageModel> get pages => _rawPages;
 
   void onDone() {
-    const object = InitEntity(id: 1, isInitialStartUp: 1);
-    _objectBoxService.put<InitEntity>(object);
+    final init = Init(isInitialStartUp: 1);
+    _preferences.write(key: kInitKey, value: init.toJson());
     _navigationService.replaceWithLoginView();
   }
 }

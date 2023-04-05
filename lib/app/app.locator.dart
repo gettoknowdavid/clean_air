@@ -12,13 +12,13 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
-import '../services/aqi_service.dart';
+import '../services/air_quality_service.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
 import '../services/network_service.dart';
-import '../services/objectbox_service.dart';
 import '../services/open_mail_app_service.dart';
 import '../services/secure_storage_service.dart';
+import '../services/shared_preferences_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -40,8 +40,7 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => FirestoreService());
   locator.registerLazySingleton(() => SecureStorageService());
   locator.registerLazySingleton(() => OpenMailAppService());
-  final objectBoxService = await ObjectBoxService.create();
-  locator.registerSingleton(objectBoxService);
-
   locator.registerLazySingleton(() => AqiService());
+  final sharedPreferencesService = await SharedPreferencesService.getInstance();
+  locator.registerSingleton(sharedPreferencesService);
 }

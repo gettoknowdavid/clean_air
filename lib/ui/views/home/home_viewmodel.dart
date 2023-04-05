@@ -1,67 +1,64 @@
+import 'dart:convert';
+
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
+import 'package:clean_air/core/keys.dart';
 import 'package:clean_air/models/air_quality.dart';
-import 'package:clean_air/models/last_aqi.dart';
-import 'package:clean_air/services/aqi_service.dart';
+import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
-import 'package:clean_air/services/objectbox_service.dart';
+import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends FutureViewModel with ListenableServiceMixin {
-  HomeViewModel() {
-    listenToReactiveValues([_newValue, _aqi, _currentValue]);
-  }
-
+class HomeViewModel extends FutureViewModel<AirQuality?>
+    with ListenableServiceMixin {
   final _aqiService = locator<AqiService>();
+
   final _authService = locator<AuthService>();
-  final _objectBox = locator<ObjectBoxService>();
   final _navigationService = locator<NavigationService>();
+  final _preferences = locator<SharedPreferencesService>();
+  final _airQuality = ReactiveValue<AirQuality?>(null);
 
-  final _newValue = ReactiveValue<int>(0);
-  int get newValue => _newValue.value;
+  HomeViewModel() {
+    listenToReactiveValues([_airQuality]);
+  }
+  AirQuality? get airQuality => _airQuality.value;
 
-  final _aqi = ReactiveValue<int?>(
-      locator<ObjectBoxService>().store.box<LastAqi>().get(1)?.aqi);
-  int? get aqi => _aqi.value;
+  @override
+  Future<void> onData(AirQuality? data) async {
+    final valueString = await _preferences.read(kLastAQIKey);
+    final lastAqiValue = AirQuality.fromJson(jsonDecode(valueString)).aqi;
 
-  int _currentValue = 0;
-  int get currentValue => _currentValue;
-
-  bool get isIncreasing => _newValue.value > _currentValue;
-
-  Future<Aqi?> getAqi() async {
-    final aqi = await _aqiService.getCurrentLocationAQI();
-    if (aqi?.value != null) {
-      // _newValue.value = aqi!.value!;
-      // _aqi.value = aqi.value;
-      return aqi;
+    if (data?.aqi == lastAqiValue) {
+      return;
+    } else {
+      super.onData(data);
     }
-    return null;
   }
 
   @override
-  Future<void> futureToRun() async {
-    final theNewAqi = await getAqi();
-    final theNewAqiValue = theNewAqi?.value;
-    final lastAqiValue = _objectBox.store.box<LastAqi>().get(1)?.aqi;
+  Future<AirQuality?> futureToRun() async {
+    final theNewAqiModel = await _aqiService.getCurrentLocationAQI();
+    final theNewAqiValue = theNewAqiModel?.aqi;
+
+    final valueString = await _preferences.read(kLastAQIKey);
+    final lastAqiValue = AirQuality.fromJson(jsonDecode(valueString)).aqi;
+
+    if (_airQuality.value == null) {
+      _airQuality.value = theNewAqiModel;
+      return theNewAqiModel;
+    }
+
     if (theNewAqiValue == lastAqiValue) {
-      return;
+      return _airQuality.value;
     } else {
-      _aqi.value = theNewAqiValue;
+      _airQuality.value = theNewAqiModel;
+      return theNewAqiModel;
     }
   }
 
   Future<void> logout() async {
     await _authService.logout();
     _navigationService.clearStackAndShow(Routes.loginView);
-  }
-
-  // This function updates the current value and triggers the animation
-  void updateCurrentValue(int newValue) {
-    if (newValue != _currentValue) {
-      _currentValue = newValue;
-      notifyListeners();
-    }
   }
 }

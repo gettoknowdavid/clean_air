@@ -56,7 +56,7 @@ class HomeView extends StackedView<HomeViewModel> {
           child: Column(
             children: [
               Text(
-                '${viewModel.aqi}',
+                '${viewModel.data?.aqi}',
                 style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

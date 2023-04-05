@@ -3,17 +3,17 @@ import 'package:clean_air/models/aqi_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'aqi_client.g.dart';
+part 'air_quality_client.g.dart';
 
 @RestApi()
-abstract class AqiClient {
-  factory AqiClient(Dio dio, {String baseUrl}) = _AqiClient;
+abstract class AirQualityClient {
+  factory AirQualityClient(Dio dio, {String baseUrl}) = _AirQualityClient;
 
   @GET('/here/')
-  Future<AqiResponse<Aqi?>> getCurrentLocationAQI();
+  Future<AqiResponse<AirQuality?>> getCurrentLocationAQI();
 
   @GET('/geo:{lat};{lon}/')
-  Future<AqiResponse<Aqi?>> getAqiByGeo(
+  Future<AqiResponse<AirQuality?>> getAqiByGeo(
     @Path('lat') num lat,
     @Path('lon') num lon,
   );

@@ -1,15 +1,14 @@
 import 'package:clean_air/app/app.locator.dart';
-import 'package:clean_air/services/objectbox_service.dart';
+import 'package:clean_air/services/air_quality_service.dart';
+import 'package:clean_air/services/auth_service.dart';
+import 'package:clean_air/services/firestore_service.dart';
+import 'package:clean_air/services/network_service.dart';
+import 'package:clean_air/services/open_mail_app_service.dart';
+import 'package:clean_air/services/secure_storage_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'package:clean_air/services/auth_service.dart';
-import 'package:clean_air/services/network_service.dart';
-import 'package:clean_air/services/firestore_service.dart';
-import 'package:clean_air/services/secure_storage_service.dart';
-import 'package:clean_air/services/open_mail_app_service.dart';
-import 'package:clean_air/services/aqi_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -18,7 +17,6 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-  MockSpec<ObjectBoxService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AuthService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<NetworkService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<FirestoreService>(onMissingStub: OnMissingStub.returnDefault),
@@ -31,7 +29,6 @@ void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  getAndRegisterObjectBoxService();
   getAndRegisterAuthService();
   getAndRegisterNetworkService();
   getAndRegisterFirestoreService();
@@ -88,13 +85,6 @@ MockDialogService getAndRegisterDialogService() {
   _removeRegistrationIfExists<DialogService>();
   final service = MockDialogService();
   locator.registerSingleton<DialogService>(service);
-  return service;
-}
-
-MockObjectBoxService getAndRegisterObjectBoxService() {
-  _removeRegistrationIfExists<ObjectBoxService>();
-  final service = MockObjectBoxService();
-  locator.registerSingleton<ObjectBoxService>(service);
   return service;
 }
 

@@ -13,3 +13,10 @@ const Color kErrorLightColor = Color(0xffb00020);
 const Color kErrorDarkColor = Color(0xffcf6679);
 
 const Color kAppBarColor = Color(0xff094105);
+
+const Color kGreen = Colors.green;
+const Color kYellow = Colors.yellow;
+const Color kOrange = Colors.orange;
+const Color kRed = Colors.red;
+const Color kPurple = Color(0xFF4F008A);
+const Color kMaroon = Color(0xFF67001B);

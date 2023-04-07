@@ -73,6 +73,10 @@ dependencies:
   dio: ^5.1.1
   equatable: ^2.0.5
   shared_preferences: ^2.1.0
+  flutter_neumorphic: ^3.2.0
+  geolocator: ^9.0.2
+  geocoding: ^2.1.0
+  intl:
 
 dev_dependencies:
   flutter_test:

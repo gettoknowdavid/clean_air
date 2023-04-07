@@ -22,7 +22,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<FirestoreService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<SecureStorageService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<OpenMailAppService>(onMissingStub: OnMissingStub.returnDefault),
-  MockSpec<AqiService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<AirQualityService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -123,10 +123,10 @@ MockOpenMailAppService getAndRegisterOpenMailAppService() {
   return service;
 }
 
-MockAqiService getAndRegisterAqiService() {
-  _removeRegistrationIfExists<AqiService>();
-  final service = MockAqiService();
-  locator.registerSingleton<AqiService>(service);
+MockAirQualityService getAndRegisterAqiService() {
+  _removeRegistrationIfExists<AirQualityService>();
+  final service = MockAirQualityService();
+  locator.registerSingleton<AirQualityService>(service);
   return service;
 }
 // @stacked-mock-create

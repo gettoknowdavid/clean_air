@@ -6,7 +6,7 @@ part 'pollutant.g.dart';
 @freezed
 @JsonSerializable(createFactory: false, explicitToJson: true)
 class Pollutant with _$Pollutant {
-  factory Pollutant({num? v}) = _Pollutant;
+  factory Pollutant({num? v, String? name}) = _Pollutant;
 
   factory Pollutant.fromJson(Map<String, dynamic> json) =>
       _$PollutantFromJson(json);

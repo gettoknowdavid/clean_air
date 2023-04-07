@@ -55,7 +55,7 @@ import 'package:stacked_services/stacked_services.dart';
     LazySingleton(classType: FirestoreService),
     LazySingleton(classType: SecureStorageService),
     LazySingleton(classType: OpenMailAppService),
-    LazySingleton(classType: AqiService),
+    LazySingleton(classType: AirQualityService),
     Presolve(
       classType: SharedPreferencesService,
       presolveUsing: SharedPreferencesService.getInstance,

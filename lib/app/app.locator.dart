@@ -40,7 +40,7 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => FirestoreService());
   locator.registerLazySingleton(() => SecureStorageService());
   locator.registerLazySingleton(() => OpenMailAppService());
-  locator.registerLazySingleton(() => AqiService());
+  locator.registerLazySingleton(() => AirQualityService());
   final sharedPreferencesService = await SharedPreferencesService.getInstance();
   locator.registerSingleton(sharedPreferencesService);
 }

@@ -19,7 +19,7 @@ class SharedPreferencesService {
 
   bool hasKey(String key) => _pref.containsKey(key);
 
-  Future read(String key) async {
+  dynamic read(String key) {
     return _pref.get(key);
   }
 

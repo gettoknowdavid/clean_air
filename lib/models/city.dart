@@ -11,6 +11,7 @@ class City with _$City {
     String? name,
     String? url,
     dynamic location,
+    String? formattedName,
   }) = _City;
 
   factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);

@@ -10,9 +10,6 @@ class ProfileView extends StackedView<ProfileViewModel> {
 
   @override
   Widget builder(context, viewModel, child) {
-    final textTheme = Theme.of(context).textTheme;
-    final leadingStyle = textTheme.titleMedium?.copyWith(height: 1.r);
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,

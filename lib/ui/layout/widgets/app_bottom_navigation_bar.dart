@@ -32,6 +32,7 @@ class AppBottomNavigationBar extends ViewModelWidget<LayoutViewModel> {
   @override
   Widget build(context, viewModel) {
     return BottomNavigationBar(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       currentIndex: viewModel.currentIndex,
       onTap: viewModel.setIndex,
       items: items,

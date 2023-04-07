@@ -7,9 +7,9 @@ class SharedPreferencesService {
 
   bool get isInitialStartup {
     if (_pref.containsKey(kInitKey)) {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
   }
 

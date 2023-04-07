@@ -21,6 +21,7 @@ class HomeAppBar extends SelectorViewModelWidget<HomeViewModel, User?>
     final leadingStyle = textTheme.titleMedium?.copyWith(fontSize: 14.r);
     return AppBar(
       leadingWidth: (kBottomNavigationBarHeight * 4).r,
+      scrolledUnderElevation: 0.0,
       leading: Container(
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: kGlobalPadding).r,

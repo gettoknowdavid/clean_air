@@ -1,7 +1,6 @@
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/core/keys.dart';
-import 'package:clean_air/models/init.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
 import 'package:clean_air/ui/widgets/onboarding/onboarding_page_model.dart';
@@ -39,8 +38,7 @@ class OnboardingViewModel extends BaseViewModel {
   List<OnboardingPageModel> get pages => _rawPages;
 
   void onDone() {
-    final init = Init(isInitialStartUp: 1);
-    _preferences.write(key: kInitKey, value: init.toJson());
+    _preferences.write(key: kInitKey, value: 1);
     _navigationService.replaceWithLoginView();
   }
 }

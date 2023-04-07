@@ -25,10 +25,12 @@ class AirQualityService with ListenableServiceMixin {
 
   AirQualityService() {
     listenToReactiveValues([_allPollutants, _appAQI, _indexColor]);
-    final valueString = _preferences.read(kLastAQIKey);
-    final lastAqiModel = AirQuality.fromJson(jsonDecode(valueString));
-    _appAQI.value = lastAqiModel;
-    _indexColor.value = getIndexColor(_appAQI.value!.aqi!);
+    if (_preferences.hasKey(kLastAQIKey)) {
+      final valueString = _preferences.read(kLastAQIKey);
+      final lastAqiModel = AirQuality.fromJson(jsonDecode(valueString));
+      _appAQI.value = lastAqiModel;
+      _indexColor.value = getIndexColor(_appAQI.value!.aqi!);
+    }
   }
   AirQuality? get appAQI => _appAQI.value;
 
@@ -56,6 +58,7 @@ class AirQualityService with ListenableServiceMixin {
       final valueString = jsonEncode(result.data?.toJson());
       await _preferences.write(key: kLastAQIKey, value: valueString);
       _appAQI.value = result.data;
+      _indexColor.value = getIndexColor(_appAQI.value!.aqi!);
       return result.data;
     } on DioError {
       return null;

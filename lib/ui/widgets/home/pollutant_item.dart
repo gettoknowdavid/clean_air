@@ -4,11 +4,11 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 
-class PollutantWidget extends ViewModelWidget<HomeViewModel> {
+class PollutantItem extends ViewModelWidget<HomeViewModel> {
   final String value;
   final String name;
 
-  const PollutantWidget({super.key, required this.value, required this.name});
+  const PollutantItem({super.key, required this.value, required this.name});
 
   @override
   Widget build(BuildContext context, HomeViewModel viewModel) {

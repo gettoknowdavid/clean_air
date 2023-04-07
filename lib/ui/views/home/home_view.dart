@@ -1,6 +1,8 @@
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/widgets/home/aqi_value_widget.dart';
 import 'package:clean_air/ui/widgets/home/city_name_widget.dart';
+import 'package:clean_air/ui/widgets/home/dominant_pollutant.dart';
+import 'package:clean_air/ui/widgets/home/health_condition_widget.dart';
 import 'package:clean_air/ui/widgets/home/home_app_bar.dart';
 import 'package:clean_air/ui/widgets/home/pollutants_grid_view.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -39,6 +41,11 @@ class HomeView extends StackedView<HomeViewModel> {
             ),
             30.verticalSpace,
             const PollutantsGridView(),
+            30.verticalSpace,
+            const DominantPollutant(),
+            30.verticalSpace,
+            const HealthConditionWidget(),
+            30.verticalSpace,
           ],
         ),
       ),

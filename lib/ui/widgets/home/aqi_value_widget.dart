@@ -54,24 +54,3 @@ class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
     );
   }
 }
-
-
-
-// Color getviewModel.IndexColor(int index) {
-//   Color color = kGreen;
-
-//   if (index < 51) {
-//     color = kGreen;
-//   } else if (index < 101) {
-//     color = kYellow;
-//   } else if (index < 151) {
-//     color = kOrange;
-//   } else if (index < 201) {
-//     color = kRed;
-//   } else if (index < 301) {
-//     color = kPurple;
-//   } else {
-//     color = kMaroon;
-//   }
-//   return color;
-// }

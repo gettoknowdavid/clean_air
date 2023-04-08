@@ -19,10 +19,7 @@ class AqiSection extends StatelessWidget {
 
     return Container(
       width: 1.sw,
-      padding: const EdgeInsets.symmetric(
-        horizontal: kGlobalPadding,
-        vertical: 18,
-      ).r,
+      padding: const EdgeInsets.all(18).r,
       decoration: BoxDecoration(
         borderRadius: kGlobalBorderRadius,
         color: containerColor,

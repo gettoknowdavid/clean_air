@@ -27,8 +27,8 @@ class HomeAppBar extends SelectorViewModelWidget<HomeViewModel, User?>
         padding: const EdgeInsets.only(left: kGlobalPadding).r,
         child: AutoSizeText(
           'Hi, David',
-          maxFontSize: 20,
-          minFontSize: 14,
+          maxFontSize: 22,
+          minFontSize: 18,
           style: leadingStyle?.copyWith(fontWeight: FontWeight.w500),
         ),
       ),

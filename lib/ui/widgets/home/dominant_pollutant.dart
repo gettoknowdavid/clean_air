@@ -1,4 +1,3 @@
-import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/views/home/home_viewmodel.dart';
 import 'package:clean_air/ui/widgets/home/aqi_section.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +17,12 @@ class DominantPollutant extends SelectorViewModelWidget<HomeViewModel, String> {
       child: Row(
         children: [
           Container(
-            height: 54.r,
-            width: 54.r,
+            height: 56.r,
+            width: 56.r,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: theme.colorScheme.onBackground.withOpacity(0.2),
-              borderRadius: kGlobalBorderRadius,
+              borderRadius: const BorderRadius.all(Radius.circular(12)).r,
             ),
             child: Text(
               value.toUpperCase(),

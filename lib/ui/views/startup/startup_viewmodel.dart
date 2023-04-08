@@ -26,8 +26,6 @@ class StartupViewModel extends ReactiveViewModel {
     // This is where you can make decisions on where your app should navigate when
     // you have custom startup logic
 
-    print(_preferences.isInitialStartup);
-
     if (_preferences.isInitialStartup) {
       _navigationService.clearStackAndShow(Routes.onboardingView);
     } else {

@@ -23,32 +23,40 @@ class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
       boxShape: const NeumorphicBoxShape.circle(),
     );
 
-    return Container(
-      height: 0.35.sh,
-      width: 0.35.sh,
-      margin: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
-      padding: const EdgeInsets.all(kGlobalPadding).r,
-      child: Neumorphic(
-        style: neumorphicStyle,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AutoSizeText(
-              '${viewModel.airQuality?.aqi}',
-              textAlign: TextAlign.center,
-              minFontSize: 90,
-              style: textTheme.displayLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: viewModel.indexColor,
+    return GestureDetector(
+      onTap: viewModel.navigateToDetails,
+      child: Container(
+        height: 0.35.sh,
+        width: 0.35.sh,
+        margin: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
+        padding: const EdgeInsets.all(kGlobalPadding).r,
+        child: Neumorphic(
+          style: neumorphicStyle,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              16.verticalSpace,
+              AutoSizeText(
+                '${viewModel.airQuality?.aqi}',
+                textAlign: TextAlign.center,
+                minFontSize: 90,
+                style: textTheme.displayLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: viewModel.indexColor,
+                ),
               ),
-            ),
-            Text(
-              'USAQI',
-              textAlign: TextAlign.center,
-              style: textTheme.titleMedium?.copyWith(color: Colors.grey),
-            ),
-          ],
+              4.verticalSpace,
+              Text(
+                'TAP TO LEARN MORE',
+                textAlign: TextAlign.center,
+                style: textTheme.bodySmall?.copyWith(
+                  color: Colors.grey[600],
+                  fontSize: 10.sp,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

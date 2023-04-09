@@ -27,6 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:clean_air/ui/views/details/details_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -43,6 +44,7 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: ProfileView),
     MaterialRoute(page: ForgotPasswordView),
     MaterialRoute(page: PasswordResetConfirmationView),
+    MaterialRoute(page: DetailsView),
 // @stacked-route
   ],
   dependencies: [

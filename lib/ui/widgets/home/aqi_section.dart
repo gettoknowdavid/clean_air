@@ -19,13 +19,13 @@ class AqiSection extends StatelessWidget {
 
     return Container(
       width: 1.sw,
-      padding: const EdgeInsets.all(18).r,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14).r,
       decoration: BoxDecoration(
         borderRadius: kGlobalBorderRadius,
         color: containerColor,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AqiSectionTitle(title: title),
           10.verticalSpace,

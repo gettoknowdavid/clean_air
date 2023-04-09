@@ -7,8 +7,9 @@ import 'dart:async' as _i3;
 import 'dart:ui' as _i4;
 
 import 'package:clean_air/core/errors/auth_error.dart' as _i8;
-import 'package:clean_air/models/air_quality.dart' as _i17;
+import 'package:clean_air/models/air_quality.dart' as _i18;
 import 'package:clean_air/models/pollutant.dart' as _i16;
+import 'package:clean_air/models/pollution_level.dart' as _i17;
 import 'package:clean_air/models/user.dart' as _i12;
 import 'package:clean_air/services/air_quality_service.dart' as _i15;
 import 'package:clean_air/services/auth_service.dart' as _i7;
@@ -1103,13 +1104,25 @@ class MockAirQualityService extends _i1.Mock implements _i15.AirQualityService {
         returnValueForMissingStub: <_i16.Pollutant>[],
       ) as List<_i16.Pollutant>);
   @override
+  _i17.PollutionLevel get pollutionLevel => (super.noSuchMethod(
+        Invocation.getter(#pollutionLevel),
+        returnValue: _i17.PollutionLevel.good,
+        returnValueForMissingStub: _i17.PollutionLevel.good,
+      ) as _i17.PollutionLevel);
+  @override
+  String get healthImplication => (super.noSuchMethod(
+        Invocation.getter(#healthImplication),
+        returnValue: '',
+        returnValueForMissingStub: '',
+      ) as String);
+  @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  _i3.Future<_i17.AirQuality?> getAqiByGeo(
+  _i3.Future<_i18.AirQuality?> getAqiByGeo(
     double? lat,
     double? lon,
   ) =>
@@ -1121,39 +1134,18 @@ class MockAirQualityService extends _i1.Mock implements _i15.AirQualityService {
             lon,
           ],
         ),
-        returnValue: _i3.Future<_i17.AirQuality?>.value(),
-        returnValueForMissingStub: _i3.Future<_i17.AirQuality?>.value(),
-      ) as _i3.Future<_i17.AirQuality?>);
+        returnValue: _i3.Future<_i18.AirQuality?>.value(),
+        returnValueForMissingStub: _i3.Future<_i18.AirQuality?>.value(),
+      ) as _i3.Future<_i18.AirQuality?>);
   @override
-  _i3.Future<_i17.AirQuality?> getCurrentLocationAQI() => (super.noSuchMethod(
+  _i3.Future<_i18.AirQuality?> getCurrentLocationAQI() => (super.noSuchMethod(
         Invocation.method(
           #getCurrentLocationAQI,
           [],
         ),
-        returnValue: _i3.Future<_i17.AirQuality?>.value(),
-        returnValueForMissingStub: _i3.Future<_i17.AirQuality?>.value(),
-      ) as _i3.Future<_i17.AirQuality?>);
-  @override
-  _i4.Color getIndexColor(int? index) => (super.noSuchMethod(
-        Invocation.method(
-          #getIndexColor,
-          [index],
-        ),
-        returnValue: _FakeColor_3(
-          this,
-          Invocation.method(
-            #getIndexColor,
-            [index],
-          ),
-        ),
-        returnValueForMissingStub: _FakeColor_3(
-          this,
-          Invocation.method(
-            #getIndexColor,
-            [index],
-          ),
-        ),
-      ) as _i4.Color);
+        returnValue: _i3.Future<_i18.AirQuality?>.value(),
+        returnValueForMissingStub: _i3.Future<_i18.AirQuality?>.value(),
+      ) as _i3.Future<_i18.AirQuality?>);
   @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>
       super.noSuchMethod(

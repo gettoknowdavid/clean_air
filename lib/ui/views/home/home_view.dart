@@ -1,8 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clean_air/models/pollution_level.dart';
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/widgets/home/aqi_value_widget.dart';
 import 'package:clean_air/ui/widgets/home/city_name_widget.dart';
-import 'package:clean_air/ui/widgets/home/dominant_pollutant.dart';
-import 'package:clean_air/ui/widgets/home/health_condition_widget.dart';
 import 'package:clean_air/ui/widgets/home/home_app_bar.dart';
 import 'package:clean_air/ui/widgets/home/pollutants_grid_view.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -24,27 +24,18 @@ class HomeView extends StackedView<HomeViewModel> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             10.verticalSpace,
             const CityNameWidget(),
             20.verticalSpace,
-            const Center(child: AqiValueWidget()),
-            20.verticalSpace,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0).r,
-              child: const Text(
-                'Outdoor activities should be reduced, masks should be worn '
-                'when going out, and sensitive people should stay indoors.',
-                textAlign: TextAlign.center,
-              ),
-            ),
+            const AqiValueWidget(),
+            15.verticalSpace,
+            const _PollutionLevel(),
+            10.verticalSpace,
+            const _HealthImplication(),
             30.verticalSpace,
             const PollutantsGridView(),
-            10.verticalSpace,
-            const DominantPollutant(),
-            10.verticalSpace,
-            const HealthConditionWidget(),
             30.verticalSpace,
           ],
         ),
@@ -54,4 +45,44 @@ class HomeView extends StackedView<HomeViewModel> {
 
   @override
   HomeViewModel viewModelBuilder(context) => HomeViewModel();
+}
+
+class _HealthImplication
+    extends SelectorViewModelWidget<HomeViewModel, String> {
+  const _HealthImplication();
+
+  @override
+  Widget build(BuildContext context, String value) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0).r,
+      child: AutoSizeText(
+        value,
+        textAlign: TextAlign.center,
+        maxLines: 3,
+        maxFontSize: 16,
+      ),
+    );
+  }
+
+  @override
+  String selector(HomeViewModel viewModel) => viewModel.healthImplication;
+}
+
+class _PollutionLevel
+    extends SelectorViewModelWidget<HomeViewModel, PollutionLevel> {
+  const _PollutionLevel({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, PollutionLevel value) {
+    final textTheme = Theme.of(context).textTheme;
+
+    return Text(
+      value.toName(),
+      textAlign: TextAlign.center,
+      style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+    );
+  }
+
+  @override
+  PollutionLevel selector(viewModel) => viewModel.pollutionLevel;
 }

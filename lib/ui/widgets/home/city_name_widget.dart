@@ -1,15 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:clean_air/ui/views/home/home_viewmodel.dart';
+import 'package:clean_air/models/city.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:stacked/stacked.dart';
 
-class CityNameWidget extends SelectorViewModelWidget<HomeViewModel, String> {
-  const CityNameWidget({super.key});
+class CityNameWidget extends StatelessWidget {
+  final City city;
+
+  const CityNameWidget({super.key, required this.city});
 
   @override
-  Widget build(BuildContext context, String value) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
@@ -20,7 +21,7 @@ class CityNameWidget extends SelectorViewModelWidget<HomeViewModel, String> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeText(
-          value,
+          '${city.name}',
           maxLines: 2,
           maxFontSize: 20,
           overflow: TextOverflow.ellipsis,
@@ -38,9 +39,6 @@ class CityNameWidget extends SelectorViewModelWidget<HomeViewModel, String> {
       ],
     );
   }
-
-  @override
-  String selector(viewModel) => viewModel.airQuality?.city?.name ?? '';
 }
 
 String dateFormatter(String dateTimeString) {

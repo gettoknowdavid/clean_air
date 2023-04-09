@@ -1,3 +1,3 @@
-import 'package:stacked/stacked.dart';
+import 'package:clean_air/ui/views/home/home_viewmodel.dart';
 
-class DetailsViewModel extends BaseViewModel {}
+class DetailsViewModel extends HomeViewModel {}

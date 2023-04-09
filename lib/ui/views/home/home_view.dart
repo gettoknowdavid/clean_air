@@ -27,9 +27,12 @@ class HomeView extends StackedView<HomeViewModel> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             10.verticalSpace,
-            const CityNameWidget(),
+            CityNameWidget(city: viewModel.airQuality!.city!),
             20.verticalSpace,
-            const AqiValueWidget(),
+            AqiValueWidget(
+              aqi: viewModel.airQuality!.aqi!,
+              onTap: viewModel.navigateToDetails,
+            ),
             15.verticalSpace,
             const _PollutionLevel(),
             10.verticalSpace,

@@ -1,15 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clean_air/core/helpers/get_color_legend.dart';
 import 'package:clean_air/ui/common/app_constants.dart';
-import 'package:clean_air/ui/views/home/home_viewmodel.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stacked/stacked.dart';
 
-class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
-  const AqiValueWidget({super.key});
+class AqiValueWidget extends StatelessWidget {
+  final int aqi;
+  final void Function()? onTap;
+
+  const AqiValueWidget({super.key, required this.aqi, this.onTap});
 
   @override
-  Widget build(BuildContext context, HomeViewModel viewModel) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
@@ -17,14 +19,14 @@ class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
       depth: 30,
       intensity: 0.56,
       lightSource: LightSource.top,
-      shadowLightColor: viewModel.indexColor,
-      shadowDarkColor: viewModel.indexColor,
+      shadowLightColor: getColorLegend(aqi),
+      shadowDarkColor: getColorLegend(aqi),
       color: theme.colorScheme.background,
       boxShape: const NeumorphicBoxShape.circle(),
     );
 
     return GestureDetector(
-      onTap: viewModel.navigateToDetails,
+      onTap: onTap,
       child: Container(
         height: 0.35.sh,
         width: 0.35.sh,
@@ -38,12 +40,12 @@ class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
             children: [
               16.verticalSpace,
               AutoSizeText(
-                '${viewModel.airQuality?.aqi}',
+                '$aqi',
                 textAlign: TextAlign.center,
                 minFontSize: 90,
                 style: textTheme.displayLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: viewModel.indexColor,
+                  color: getColorLegend(aqi),
                 ),
               ),
               4.verticalSpace,

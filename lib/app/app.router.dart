@@ -5,7 +5,9 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:clean_air/models/air_quality.dart' as _i16;
 import 'package:clean_air/ui/layout/layout_view.dart' as _i8;
+import 'package:clean_air/ui/views/details/details_view.dart' as _i14;
 import 'package:clean_air/ui/views/favourites/favourites_view.dart' as _i10;
 import 'package:clean_air/ui/views/forgot_password/forgot_password_view.dart'
     as _i12;
@@ -19,10 +21,10 @@ import 'package:clean_air/ui/views/register/register_view.dart' as _i6;
 import 'package:clean_air/ui/views/search/search_view.dart' as _i9;
 import 'package:clean_air/ui/views/startup/startup_view.dart' as _i4;
 import 'package:clean_air/ui/views/verification/verification_view.dart' as _i7;
-import 'package:flutter/material.dart' as _i14;
+import 'package:flutter/material.dart' as _i15;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i15;
+import 'package:stacked_services/stacked_services.dart' as _i17;
 
 class Routes {
   static const onboardingView = '/';
@@ -50,6 +52,8 @@ class Routes {
   static const passwordResetConfirmationView =
       '/password-reset-confirmation-view';
 
+  static const detailsView = '/details-view';
+
   static const all = <String>{
     onboardingView,
     homeView,
@@ -63,6 +67,7 @@ class Routes {
     profileView,
     forgotPasswordView,
     passwordResetConfirmationView,
+    detailsView,
   };
 }
 
@@ -116,74 +121,78 @@ class StackedRouter extends _i1.RouterBase {
       Routes.passwordResetConfirmationView,
       page: _i13.PasswordResetConfirmationView,
     ),
+    _i1.RouteDef(
+      Routes.detailsView,
+      page: _i14.DetailsView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.OnboardingView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.OnboardingView(),
         settings: data,
         maintainState: false,
       );
     },
     _i3.HomeView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.HomeView(),
         settings: data,
         maintainState: false,
       );
     },
     _i4.StartupView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.StartupView(),
         settings: data,
         maintainState: false,
       );
     },
     _i5.LoginView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.LoginView(),
         settings: data,
         maintainState: false,
       );
     },
     _i6.RegisterView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.RegisterView(),
         settings: data,
         maintainState: false,
       );
     },
     _i7.VerificationView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.VerificationView(),
         settings: data,
         maintainState: false,
       );
     },
     _i8.LayoutView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.LayoutView(),
         settings: data,
         maintainState: false,
       );
     },
     _i9.SearchView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.SearchView(),
         settings: data,
         maintainState: false,
       );
     },
     _i10.FavouritesView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.FavouritesView(),
         settings: data,
         maintainState: false,
       );
     },
     _i11.ProfileView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.ProfileView(),
         settings: data,
         maintainState: false,
@@ -193,15 +202,24 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<ForgotPasswordViewArguments>(
         orElse: () => const ForgotPasswordViewArguments(),
       );
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => _i12.ForgotPasswordView(key: args.key),
         settings: data,
         maintainState: false,
       );
     },
     _i13.PasswordResetConfirmationView: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
+      return _i15.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.PasswordResetConfirmationView(),
+        settings: data,
+        maintainState: false,
+      );
+    },
+    _i14.DetailsView: (data) {
+      final args = data.getArgs<DetailsViewArguments>(nullOk: false);
+      return _i15.MaterialPageRoute<dynamic>(
+        builder: (context) =>
+            _i14.DetailsView(key: args.key, airQuality: args.airQuality),
         settings: data,
         maintainState: false,
       );
@@ -217,7 +235,7 @@ class StackedRouter extends _i1.RouterBase {
 class ForgotPasswordViewArguments {
   const ForgotPasswordViewArguments({this.key});
 
-  final _i14.Key? key;
+  final _i15.Key? key;
 
   @override
   String toString() {
@@ -225,7 +243,23 @@ class ForgotPasswordViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i15.NavigationService {
+class DetailsViewArguments {
+  const DetailsViewArguments({
+    this.key,
+    required this.airQuality,
+  });
+
+  final _i15.Key? key;
+
+  final _i16.AirQuality airQuality;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "airQuality": "$airQuality"}';
+  }
+}
+
+extension NavigatorStateExtension on _i17.NavigationService {
   Future<dynamic> navigateToOnboardingView([
     int? routerId,
     bool preventDuplicates = true,
@@ -367,7 +401,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> navigateToForgotPasswordView({
-    _i14.Key? key,
+    _i15.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -390,6 +424,23 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.passwordResetConfirmationView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToDetailsView({
+    _i15.Key? key,
+    required _i16.AirQuality airQuality,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.detailsView,
+        arguments: DetailsViewArguments(key: key, airQuality: airQuality),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -537,7 +588,7 @@ extension NavigatorStateExtension on _i15.NavigationService {
   }
 
   Future<dynamic> replaceWithForgotPasswordView({
-    _i14.Key? key,
+    _i15.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -560,6 +611,23 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.passwordResetConfirmationView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithDetailsView({
+    _i15.Key? key,
+    required _i16.AirQuality airQuality,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.detailsView,
+        arguments: DetailsViewArguments(key: key, airQuality: airQuality),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

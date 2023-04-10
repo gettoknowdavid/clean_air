@@ -2,20 +2,20 @@ import 'dart:convert';
 
 import 'package:clean_air/models/daily.dart';
 import 'package:clean_air/models/forecast_data.dart';
-import 'package:clean_air/ui/views/home/home_viewmodel.dart';
-import 'package:clean_air/ui/widgets/home/aqi_section.dart';
-import 'package:clean_air/ui/widgets/home/pollutant_item.dart';
+import 'package:clean_air/ui/widgets/aqi_section.dart';
+import 'package:clean_air/ui/widgets/pollutant_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stacked/stacked.dart';
 
-class PollutantsGridView extends SelectorViewModelWidget<HomeViewModel, Daily> {
-  const PollutantsGridView({Key? key}) : super(key: key);
+class PollutantsGridView extends StatelessWidget {
+  final Daily daily;
+  final DateTime? pollutionDay;
+  const PollutantsGridView({super.key, required this.daily, this.pollutionDay});
 
   @override
-  Widget build(BuildContext context, Daily value) {
-    final forecastData = value.toJson().entries.toList();
+  Widget build(BuildContext context) {
+    final forecastData = daily.toJson().entries.toList();
 
     List<Widget> _pollutants = [];
 
@@ -25,17 +25,18 @@ class PollutantsGridView extends SelectorViewModelWidget<HomeViewModel, Daily> {
       final v = values
           .map((e) => ForecastData.fromJson(jsonDecode(jsonEncode(e))))
           .toList();
-      final currentPoll = v.firstWhere((e) => e.day!.day == DateTime.now().day);
-      _pollutants.add(
-        PollutantItem(value: '${currentPoll.avg}', name: name),
-      );
+      final currentPoll = v.firstWhere((e) =>
+          e.day!.day ==
+          (pollutionDay == null ? DateTime.now().day : pollutionDay!.day));
+      _pollutants.add(PollutantItem(value: '${currentPoll.avg}', name: name));
     }
 
     return AqiSection(
       title: 'POLLUTANTS',
       child: GridView.count(
+        padding: EdgeInsets.zero,
         crossAxisCount: 3,
-        crossAxisSpacing: 20.0.r,
+        crossAxisSpacing: 30.0.r,
         shrinkWrap: true,
         childAspectRatio: 6 / 4,
         children: _pollutants,
@@ -43,7 +44,4 @@ class PollutantsGridView extends SelectorViewModelWidget<HomeViewModel, Daily> {
       ),
     );
   }
-
-  @override
-  Daily selector(viewModel) => viewModel.airQuality!.forecast!.daily!;
 }

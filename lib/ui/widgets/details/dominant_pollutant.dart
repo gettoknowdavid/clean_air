@@ -1,11 +1,12 @@
-import 'package:clean_air/ui/views/home/home_viewmodel.dart';
-import 'package:clean_air/ui/widgets/home/aqi_section.dart';
+import 'package:clean_air/ui/views/details/details_viewmodel.dart';
+import 'package:clean_air/ui/widgets/aqi_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 
-class DominantPollutant extends SelectorViewModelWidget<HomeViewModel, String> {
+class DominantPollutant
+    extends SelectorViewModelWidget<DetailsViewModel, String> {
   const DominantPollutant({super.key});
 
   @override
@@ -42,5 +43,5 @@ class DominantPollutant extends SelectorViewModelWidget<HomeViewModel, String> {
   }
 
   @override
-  String selector(viewModel) => viewModel.airQuality!.dominentpol!;
+  String selector(viewModel) => viewModel.airQuality.dominentpol!;
 }

@@ -1,17 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:clean_air/core/helpers/get_color_legend.dart';
 import 'package:clean_air/ui/common/app_constants.dart';
+import 'package:clean_air/ui/views/home/home_viewmodel.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked/stacked.dart';
 
-class AqiValueWidget extends StatelessWidget {
-  final int aqi;
+class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
   final void Function()? onTap;
 
-  const AqiValueWidget({super.key, required this.aqi, this.onTap});
+  const AqiValueWidget({super.key, this.onTap});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, HomeViewModel viewModel) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
@@ -19,8 +19,8 @@ class AqiValueWidget extends StatelessWidget {
       depth: 30,
       intensity: 0.56,
       lightSource: LightSource.top,
-      shadowLightColor: getColorLegend(aqi),
-      shadowDarkColor: getColorLegend(aqi),
+      shadowLightColor: viewModel.indexColor,
+      shadowDarkColor: viewModel.indexColor,
       color: theme.colorScheme.background,
       boxShape: const NeumorphicBoxShape.circle(),
     );
@@ -40,12 +40,12 @@ class AqiValueWidget extends StatelessWidget {
             children: [
               16.verticalSpace,
               AutoSizeText(
-                '$aqi',
+                '${viewModel.airQuality!.aqi}',
                 textAlign: TextAlign.center,
                 minFontSize: 90,
                 style: textTheme.displayLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: getColorLegend(aqi),
+                  color: viewModel.indexColor,
                 ),
               ),
               4.verticalSpace,

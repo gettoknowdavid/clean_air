@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clean_air/core/utils/date_formatter.dart';
 import 'package:clean_air/models/city.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 class CityNameWidget extends StatelessWidget {
   final City city;
@@ -39,15 +39,4 @@ class CityNameWidget extends StatelessWidget {
       ],
     );
   }
-}
-
-String dateFormatter(String dateTimeString) {
-  var _dateTime = DateTime.parse(dateTimeString);
-
-  String _weekDay = DateFormat('EEEE').format(_dateTime);
-  String _day = DateFormat('d').format(_dateTime);
-  String _month = DateFormat('MMM').format(_dateTime);
-
-  String formattedDate = '$_weekDay, $_day $_month';
-  return formattedDate;
 }

@@ -13,4 +13,8 @@ extension PollutionLevelExtension on PollutionLevel {
     return enumString[0].toUpperCase() +
         enumString.substring(1).replaceAll(RegExp(r'(?<=[a-z])[A-Z]'), ' \$&');
   }
+
+  String toSentence() {
+    return 'The air today is ${toName()}';
+  }
 }

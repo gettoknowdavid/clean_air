@@ -1,6 +1,6 @@
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
-import 'package:clean_air/core/helpers/get_color_legend.dart';
+import 'package:clean_air/core/utils/aqi_helpers.dart';
 import 'package:clean_air/models/air_quality.dart';
 import 'package:clean_air/models/pollutant.dart';
 import 'package:clean_air/models/pollution_level.dart';
@@ -18,16 +18,16 @@ class HomeViewModel extends ReactiveViewModel
   final _navigationService = locator<NavigationService>();
 
   AirQuality? get airQuality => _airQualityService.appAQI;
-  String get healthImplication => _airQualityService.healthImplication;
-  Color get indexColor => _airQualityService.indexColor;
+  String get healthImplication => getHealthImplications(airQuality!.aqi!);
+  Color get indexColor => getColorLegend(airQuality!.aqi!);
+  List<Pollutant> get pollutants => _airQualityService.pollutants;
+  PollutionLevel get pollutionLevel => getPollutionLevel(airQuality!.aqi!);
 
   @override
   List<ListenableServiceMixin> get listenableServices => [
         _airQualityService,
         _authService,
       ];
-  List<Pollutant> get pollutants => _airQualityService.pollutants;
-  PollutionLevel get pollutionLevel => _airQualityService.pollutionLevel;
 
   User? get user => _authService.currentUser;
 

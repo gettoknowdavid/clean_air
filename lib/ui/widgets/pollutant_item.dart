@@ -1,22 +1,21 @@
-import 'package:clean_air/ui/views/home/home_viewmodel.dart';
+import 'package:clean_air/core/utils/aqi_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stacked/stacked.dart';
 
-class PollutantItem extends ViewModelWidget<HomeViewModel> {
+class PollutantItem extends StatelessWidget {
   final String value;
   final String name;
 
   const PollutantItem({super.key, required this.value, required this.name});
 
   @override
-  Widget build(BuildContext context, HomeViewModel viewModel) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
     final valuePercentage = int.parse(value) / 300 * 100;
-    final pollutantColor = viewModel.pollutantColor(int.parse(value));
+    final pollutantColor = getColorLegend(int.parse(value));
 
     return SizedBox(
       height: 50.r,

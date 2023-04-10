@@ -2,9 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clean_air/models/pollution_level.dart';
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/widgets/home/aqi_value_widget.dart';
-import 'package:clean_air/ui/widgets/home/city_name_widget.dart';
+import 'package:clean_air/ui/widgets/city_name_widget.dart';
 import 'package:clean_air/ui/widgets/home/home_app_bar.dart';
-import 'package:clean_air/ui/widgets/home/pollutants_grid_view.dart';
+import 'package:clean_air/ui/widgets/pollutants_grid_view.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
@@ -29,17 +29,14 @@ class HomeView extends StackedView<HomeViewModel> {
             10.verticalSpace,
             CityNameWidget(city: viewModel.airQuality!.city!),
             20.verticalSpace,
-            AqiValueWidget(
-              aqi: viewModel.airQuality!.aqi!,
-              onTap: viewModel.navigateToDetails,
-            ),
-            15.verticalSpace,
+            AqiValueWidget(onTap: viewModel.navigateToDetails),
+            10.verticalSpace,
             const _PollutionLevel(),
             10.verticalSpace,
             const _HealthImplication(),
-            30.verticalSpace,
-            const PollutantsGridView(),
-            30.verticalSpace,
+            20.verticalSpace,
+            PollutantsGridView(daily: viewModel.airQuality!.forecast!.daily!),
+            20.verticalSpace,
           ],
         ),
       ),

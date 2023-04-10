@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AqiSection extends StatelessWidget {
   final Widget child;
-  final String title;
+  final String? title;
 
-  const AqiSection({super.key, required this.child, required this.title});
+  const AqiSection({super.key, required this.child, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class AqiSection extends StatelessWidget {
 
     return Container(
       width: 1.sw,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14).r,
+      padding: const EdgeInsets.all(18).r,
       decoration: BoxDecoration(
         borderRadius: kGlobalBorderRadius,
         color: containerColor,
@@ -27,8 +27,10 @@ class AqiSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AqiSectionTitle(title: title),
-          10.verticalSpace,
+          if (title != null) ...[
+            AqiSectionTitle(title: title!),
+            10.verticalSpace,
+          ],
           child,
         ],
       ),

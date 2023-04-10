@@ -1,9 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clean_air/models/pollution_level.dart';
 import 'package:clean_air/ui/common/app_constants.dart';
-import 'package:clean_air/ui/widgets/home/aqi_value_widget.dart';
 import 'package:clean_air/ui/widgets/city_name_widget.dart';
-import 'package:clean_air/ui/widgets/home/home_app_bar.dart';
+import 'package:clean_air/ui/widgets/home/aqi_value_widget.dart';
 import 'package:clean_air/ui/widgets/pollutants_grid_view.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +19,6 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   Widget builder(context, viewModel, child) {
     return Scaffold(
-      appBar: HomeAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
         child: Column(

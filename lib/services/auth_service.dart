@@ -40,6 +40,12 @@ class AuthService with ListenableServiceMixin {
 
     if (firebaseUser != null || localUserString != null) {
       _isAuthenticated.value = true;
+      _currentUser.value = User(
+        uid: firebaseUser!.uid,
+        name: firebaseUser.displayName!,
+        email: firebaseUser.email!,
+        verified: firebaseUser.emailVerified,
+      );
     }
   }
 
@@ -69,10 +75,11 @@ class AuthService with ListenableServiceMixin {
       _isEmailVerified.value = true;
 
       final updatedUser = User(
-          uid: firebaseUser.uid,
-          name: firebaseUser.displayName!,
-          email: firebaseUser.email!,
-          verified: true);
+        uid: firebaseUser.uid,
+        name: firebaseUser.displayName!,
+        email: firebaseUser.email!,
+        verified: true,
+      );
 
       await userRef.doc(firebaseUser.uid).set(updatedUser);
 

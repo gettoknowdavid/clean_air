@@ -27,6 +27,7 @@ class SearchResultItem extends ViewModelWidget<SearchViewModel> {
 
     return ListTile(
       onTap: () async => await viewModel.onItemSelect(geo!),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10,).r,
       leading: Container(
         height: 50.r,
         width: 50.r,

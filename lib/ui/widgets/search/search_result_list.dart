@@ -15,7 +15,7 @@ class SearchResultList
     return ListView.separated(
       shrinkWrap: true,
       primary: false,
-      separatorBuilder: (context, index) => 20.verticalSpace,
+      separatorBuilder: (context, index) => 5.verticalSpace,
       padding: const EdgeInsets.only(bottom: 30).r,
       itemCount: value.length,
       itemBuilder: (context, index) => SearchResultItem(item: value[index]),

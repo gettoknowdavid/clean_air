@@ -34,7 +34,7 @@ class AppBottomNavigationBar extends ViewModelWidget<LayoutViewModel> {
     return BottomNavigationBar(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       currentIndex: viewModel.currentIndex,
-      onTap: viewModel.setIndex,
+      onTap: viewModel.handleNavigation,
       items: items,
     );
   }

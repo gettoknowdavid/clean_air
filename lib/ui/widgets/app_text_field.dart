@@ -22,6 +22,9 @@ class AppTextField extends StatefulWidget {
     this.autofocus = false,
     this.textInputAction = TextInputAction.next,
     this.focusNode,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onFieldSubmitted,
   });
 
   final String hint;
@@ -40,6 +43,9 @@ class AppTextField extends StatefulWidget {
   final bool autofocus;
   final TextInputAction textInputAction;
   final FocusNode? focusNode;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -69,10 +75,12 @@ class _AppTextFieldState extends State<AppTextField> {
       autofocus: widget.autofocus,
       textInputAction: widget.textInputAction,
       focusNode: widget.focusNode,
+      onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         hintText: widget.hint,
         labelText: widget.label,
-        suffixIcon: !widget.isPassword ? null : _suffixIcon(),
+        prefixIcon: widget.prefixIcon,
+        suffixIcon: !widget.isPassword ? widget.suffixIcon : _suffixIcon(),
         contentPadding: padding,
       ),
     );

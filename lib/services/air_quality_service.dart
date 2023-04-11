@@ -6,6 +6,7 @@ import 'package:clean_air/core/client/dio_client.dart';
 import 'package:clean_air/core/keys.dart';
 import 'package:clean_air/models/air_quality.dart';
 import 'package:clean_air/models/pollutant.dart';
+import 'package:clean_air/models/search_data.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:dio/dio.dart';
@@ -59,12 +60,17 @@ class AirQualityService with ListenableServiceMixin {
       return null;
     }
   }
-}
 
-// if (_preferences.hasKey(kLastAQIKey)) {
-//       final valueString = _preferences.read(kLastAQIKey);
-//       final lastAqiModel = AirQuality.fromJson(jsonDecode(valueString));
-//       _appAQI.value = lastAqiModel;
-//       _indexColor.value = getColorLegend(_appAQI.value!.aqi!);
-//       _pollutionLevel.value = getPollutionLevel(_appAQI.value!.aqi!);
-//     }
+  Future<List<SearchData?>> searchByName(String keyword) async {
+    try {
+      final result = await _client.searchByName(keyword);
+      if (result.data == null) {
+        return [];
+      } else {
+        return result.data!;
+      }
+    } on DioError {
+      return [];
+    }
+  }
+}

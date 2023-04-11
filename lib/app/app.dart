@@ -12,6 +12,7 @@ import 'package:clean_air/ui/dialogs/mail_app/mail_app_dialog.dart';
 import 'package:clean_air/ui/dialogs/network_error/network_error_dialog.dart';
 import 'package:clean_air/ui/dialogs/no_mail_app/no_mail_app_dialog.dart';
 import 'package:clean_air/ui/layout/layout_view.dart';
+import 'package:clean_air/ui/views/details/details_view.dart';
 import 'package:clean_air/ui/views/favourites/favourites_view.dart';
 import 'package:clean_air/ui/views/forgot_password/forgot_password_view.dart';
 import 'package:clean_air/ui/views/home/home_view.dart';
@@ -27,24 +28,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:clean_air/ui/views/details/details_view.dart';
 // @stacked-import
 
 @StackedApp(
   routes: [
     MaterialRoute(page: OnboardingView, initial: true),
-    MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: VerificationView),
-    MaterialRoute(page: LayoutView),
-    MaterialRoute(page: SearchView),
-    MaterialRoute(page: FavouritesView),
-    MaterialRoute(page: ProfileView),
     MaterialRoute(page: ForgotPasswordView),
     MaterialRoute(page: PasswordResetConfirmationView),
-    MaterialRoute(page: DetailsView),
+    MaterialRoute(
+      page: LayoutView,
+      maintainState: true,
+      children: [
+        MaterialRoute(page: HomeView),
+        MaterialRoute(page: DetailsView),
+        MaterialRoute(page: SearchView, maintainState: true),
+        MaterialRoute(page: FavouritesView),
+        MaterialRoute(page: ProfileView),
+      ],
+    ),
 // @stacked-route
   ],
   dependencies: [

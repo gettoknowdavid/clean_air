@@ -5,27 +5,50 @@ import 'package:clean_air/ui/views/favourites/favourites_view.dart';
 import 'package:clean_air/ui/views/home/home_view.dart';
 import 'package:clean_air/ui/views/profile/profile_view.dart';
 import 'package:clean_air/ui/views/search/search_view.dart';
-import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class LayoutViewModel extends IndexTrackingViewModel
     with ListenableServiceMixin {
   final _authService = locator<AuthService>();
+  final _navigationService = locator<NavigationService>();
 
   User? get user => _authService.currentUser;
 
   String? get firstName => '${user?.name.split(' ')[0]}';
 
-  Widget get getView {
-    switch (currentIndex) {
+  void handleNavigation(int index) {
+    setIndex(index);
+    switch (index) {
       case 0:
-        return const HomeView();
+        _navigationService.replaceWithTransition(
+          const HomeView(),
+          transitionStyle: Transition.fade,
+          id: 1,
+        );
+        break;
       case 1:
-        return const SearchView();
+        _navigationService.replaceWithTransition(
+          SearchView(),
+          transitionStyle: Transition.fade,
+          id: 1,
+        );
+        break;
       case 2:
-        return const FavouritesView();
+        _navigationService.replaceWithTransition(
+          const FavouritesView(),
+          transitionStyle: Transition.fade,
+          id: 1,
+        );
+        break;
+      case 3:
+        _navigationService.replaceWithTransition(
+          const ProfileView(),
+          transitionStyle: Transition.fade,
+          id: 1,
+        );
+        break;
       default:
-        return const ProfileView();
     }
   }
 

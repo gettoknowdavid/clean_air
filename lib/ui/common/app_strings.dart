@@ -34,3 +34,6 @@ const String kVerificationViewDesc =
 const String kConfirmationTitle = 'Email Verified';
 const String kConfirmationMessage =
     'Congratulations! Your email has been successfully verified.';
+
+const String kAirQualityErrorMessage =
+    'Cannot retrieve the air quality data for this location at the moment. Please try again later.';

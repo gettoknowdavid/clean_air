@@ -1113,15 +1113,17 @@ class MockAirQualityService extends _i1.Mock implements _i15.AirQualityService {
         returnValueForMissingStub: _i3.Future<_i17.AirQuality?>.value(),
       ) as _i3.Future<_i17.AirQuality?>);
   @override
-  _i3.Future<_i18.SearchData?> searchByName(String? keyword) =>
+  _i3.Future<List<_i18.SearchData?>> searchByName(String? keyword) =>
       (super.noSuchMethod(
         Invocation.method(
           #searchByName,
           [keyword],
         ),
-        returnValue: _i3.Future<_i18.SearchData?>.value(),
-        returnValueForMissingStub: _i3.Future<_i18.SearchData?>.value(),
-      ) as _i3.Future<_i18.SearchData?>);
+        returnValue:
+            _i3.Future<List<_i18.SearchData?>>.value(<_i18.SearchData?>[]),
+        returnValueForMissingStub:
+            _i3.Future<List<_i18.SearchData?>>.value(<_i18.SearchData?>[]),
+      ) as _i3.Future<List<_i18.SearchData?>>);
   @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>
       super.noSuchMethod(

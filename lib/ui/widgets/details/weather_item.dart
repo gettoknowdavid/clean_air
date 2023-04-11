@@ -16,8 +16,9 @@ class WeatherItem extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return Container(
-      height: 80.h,
-      width: 40.w,
+      height: 85.h,
+      width: 50.w,
+      padding: const EdgeInsets.symmetric(horizontal: 4).r,
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor.withOpacity(0.2),
         borderRadius: const BorderRadius.all(Radius.circular(14)).r,
@@ -32,12 +33,14 @@ class WeatherItem extends StatelessWidget {
           AutoSizeText(
             value,
             maxFontSize: 20,
+            maxLines: 1,
             style: textTheme.titleLarge,
           ),
           5.verticalSpace,
           AutoSizeText(
             type.toUnit(),
-            maxFontSize: 20,
+            maxFontSize: 14,
+            maxLines: 1,
             style: textTheme.bodySmall?.copyWith(
               color: textTheme.bodySmall?.color?.withOpacity(0.4),
             ),

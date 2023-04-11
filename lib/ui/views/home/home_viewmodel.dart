@@ -42,9 +42,9 @@ class HomeViewModel extends ReactiveViewModel
   }
 
   void navigateToDetails() async {
-    _navigationService.navigateTo(
-      Routes.detailsView,
-      arguments: DetailsViewArguments(airQuality: airQuality!),
+    _navigationService.navigateToNestedDetailsViewInLayoutViewRouter(
+      airQuality: airQuality!,
+      routerId: 1,
     );
   }
 

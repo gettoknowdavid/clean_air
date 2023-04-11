@@ -13,12 +13,19 @@ import 'details_viewmodel.dart';
 
 class DetailsView extends StackedView<DetailsViewModel> {
   final AirQuality airQuality;
+
   const DetailsView({super.key, required this.airQuality});
+
+  @override
+  void onViewModelReady(DetailsViewModel viewModel) {
+    viewModel.init(airQuality);
+    super.onViewModelReady(viewModel);
+  }
 
   @override
   Widget builder(context, viewModel, child) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Details')),
+      appBar: AppBar(title: const Text('Details'), scrolledUnderElevation: 0.0),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
         child: Column(

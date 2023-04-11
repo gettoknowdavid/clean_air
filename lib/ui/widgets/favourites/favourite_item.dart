@@ -1,23 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clean_air/core/utils/aqi_helpers.dart';
 import 'package:clean_air/models/search_data.dart';
-import 'package:clean_air/ui/views/search/search_viewmodel.dart';
+import 'package:clean_air/ui/views/favourites/favourites_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 
-const kLikeIcon = Icon(PhosphorIcons.heartFill, color: Colors.red);
-const kUnLikeIcon = Icon(PhosphorIcons.heart);
-
-class SearchResultItem extends ViewModelWidget<SearchViewModel> {
+class FavouriteItem extends ViewModelWidget<FavouritesViewModel> {
   final SearchData item;
 
-  const SearchResultItem({super.key, required this.item});
+  const FavouriteItem({super.key, required this.item});
 
   @override
-  Widget build(BuildContext context, SearchViewModel viewModel) {
+  Widget build(BuildContext context, FavouritesViewModel viewModel) {
     final textTheme = Theme.of(context).textTheme;
 
     final geo = item.station?.geo;
@@ -42,8 +39,8 @@ class SearchResultItem extends ViewModelWidget<SearchViewModel> {
         ],
       ),
       trailing: IconButton(
-        onPressed: () => viewModel.onFavouriteTap(item),
-        icon: viewModel.isFavourite(item) ? kLikeIcon : kUnLikeIcon,
+        onPressed: () => viewModel.delete(item),
+        icon: const Icon(PhosphorIcons.trash, color: Colors.red),
       ),
     );
   }

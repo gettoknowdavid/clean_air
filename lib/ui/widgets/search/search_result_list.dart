@@ -18,7 +18,7 @@ class SearchResultList
       separatorBuilder: (context, index) => 5.verticalSpace,
       padding: const EdgeInsets.only(bottom: 30).r,
       itemCount: value.length,
-      itemBuilder: (context, index) => SearchResultItem(item: value[index]),
+      itemBuilder: (context, index) => SearchResultItem(item: value[index]!),
     );
   }
 

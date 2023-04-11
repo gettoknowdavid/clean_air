@@ -3,14 +3,16 @@ import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/app/app.snackbars.dart';
 import 'package:clean_air/models/search_data.dart';
 import 'package:clean_air/services/air_quality_service.dart';
+import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class SearchViewModel extends BaseViewModel with ListenableServiceMixin {
+class SearchViewModel extends ReactiveViewModel with ListenableServiceMixin {
   final _aqiService = locator<AirQualityService>();
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();
+  final _favouritesService = locator<FavouritesService>();
 
   final _result = ReactiveValue<List<SearchData?>>([]);
   List<SearchData?> get result => _result.value;
@@ -39,6 +41,15 @@ class SearchViewModel extends BaseViewModel with ListenableServiceMixin {
     }
   }
 
+  bool isFavourite(SearchData item) {
+    return _favouritesService.isFavourite(item);
+  }
+
+  Future<void> onFavouriteTap(SearchData item) async {
+    await _favouritesService.onFavouriteTap(item);
+    notifyListeners();
+  }
+
   Future<List<SearchData?>> search(String keyword) async {
     setBusy(true);
     _result.value = [];
@@ -49,4 +60,7 @@ class SearchViewModel extends BaseViewModel with ListenableServiceMixin {
     setBusy(false);
     return result;
   }
+
+  @override
+  List<ListenableServiceMixin> get listenableServices => [_favouritesService];
 }

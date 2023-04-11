@@ -1,5 +1,7 @@
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/common/validators.dart';
+import 'package:clean_air/ui/widgets/app_empty_state.dart';
+import 'package:clean_air/ui/widgets/app_loading_indicator.dart';
 import 'package:clean_air/ui/widgets/app_text_field.dart';
 import 'package:clean_air/ui/widgets/layout_app_bar.dart';
 import 'package:clean_air/ui/widgets/search/search_result_list.dart';
@@ -21,7 +23,14 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
   @override
   Widget builder(context, viewModel, child) {
     return Scaffold(
-      appBar: LayoutAppBar(),
+      appBar: LayoutAppBar(
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(3.r),
+          child: const AppLoadingIndicator<SearchViewModel>(
+            addBottomSpace: false,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,9 +48,11 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
               ),
             ),
             20.verticalSpace,
-            const _LoadingIndicator(),
-            const _Empty(),
-            const SearchResultList()
+            if (viewModel.result.isEmpty && !viewModel.isBusy) ...[
+              20.verticalSpace,
+              const AppEmptyState()
+            ] else
+              const SearchResultList()
           ],
         ),
       ),
@@ -50,44 +61,4 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
 
   @override
   SearchViewModel viewModelBuilder(context) => SearchViewModel();
-}
-
-class _Empty extends ViewModelWidget<SearchViewModel> {
-  const _Empty();
-
-  @override
-  Widget build(BuildContext context, SearchViewModel viewModel) {
-    if (viewModel.result.isEmpty && !viewModel.isBusy) {
-      return Column(
-        children: [
-          30.verticalSpace,
-          Image.asset('assets/images/empty-list-light.png', height: 0.8.sw),
-          const Text('Oops! Nothing to see here', textAlign: TextAlign.center),
-        ],
-      );
-    }
-
-    return const SizedBox();
-  }
-}
-
-class _LoadingIndicator extends ViewModelWidget<SearchViewModel> {
-  const _LoadingIndicator();
-
-  @override
-  Widget build(BuildContext context, SearchViewModel viewModel) {
-    if (viewModel.isBusy) {
-      return Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
-            child: const LinearProgressIndicator(),
-          ),
-          20.verticalSpace,
-        ],
-      );
-    }
-
-    return const SizedBox();
-  }
 }

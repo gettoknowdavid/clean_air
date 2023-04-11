@@ -8,7 +8,11 @@ import 'package:stacked/stacked.dart';
 
 class LayoutAppBar extends ViewModelWidget<LayoutViewModel>
     with PreferredSizeWidget {
-  LayoutAppBar({super.key});
+  final String? title;
+  final Widget? action;
+  final PreferredSizeWidget? bottom;
+
+  LayoutAppBar({super.key, this.action, this.title, this.bottom});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -31,16 +35,21 @@ class LayoutAppBar extends ViewModelWidget<LayoutViewModel>
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.only(left: kGlobalPadding).r,
         child: AutoSizeText(
-          'Hi, ${viewModel.firstName}',
+          title ?? 'Hi, ${viewModel.firstName}',
           maxFontSize: 22,
           minFontSize: 18,
           style: leadingStyle?.copyWith(fontWeight: FontWeight.w500),
         ),
       ),
       actions: [
+        if (action != null) ...[
+          action!,
+          kGlobalPadding.horizontalSpace,
+        ],
         const AppAvatar(),
         kGlobalPadding.horizontalSpace,
       ],
+      bottom: bottom,
     );
   }
 }

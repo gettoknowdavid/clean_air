@@ -9,7 +9,7 @@ class AppAvatar extends ViewModelWidget<LayoutViewModel> {
   @override
   Widget build(context, viewModel) {
     return GestureDetector(
-      onTap: () => viewModel.setIndex(3),
+      onTap: () => viewModel.handleNavigation(3),
       child: const CircleAvatar(
         child: Icon(PhosphorIcons.user),
       ),

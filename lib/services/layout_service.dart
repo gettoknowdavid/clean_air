@@ -1,7 +1,4 @@
 import 'package:clean_air/app/app.locator.dart';
-import 'package:clean_air/models/user.dart';
-import 'package:clean_air/services/auth_service.dart';
-import 'package:clean_air/services/layout_service.dart';
 import 'package:clean_air/ui/views/favourites/favourites_view.dart';
 import 'package:clean_air/ui/views/home/home_view.dart';
 import 'package:clean_air/ui/views/profile/profile_view.dart';
@@ -9,19 +6,9 @@ import 'package:clean_air/ui/views/search/search_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class LayoutViewModel extends IndexTrackingViewModel
-    with ListenableServiceMixin {
-  final _authService = locator<AuthService>();
+class LayoutService extends BaseViewModel
+    with IndexTrackingStateHelper, ListenableServiceMixin {
   final _navigationService = locator<NavigationService>();
-
-  // int get currentIndex => _layoutService.currentIndex;
-  // void Function(int index) get handleNavigation =>
-  //     _layoutService.handleNavigation;
-  // void Function(int index) get setIndex => _layoutService.setIndex;
-
-  User? get user => _authService.currentUser;
-
-  String? get firstName => '${user?.name.split(' ')[0]}';
 
   void handleNavigation(int index) {
     switch (index) {
@@ -61,7 +48,4 @@ class LayoutViewModel extends IndexTrackingViewModel
     }
     notifyListeners();
   }
-
-  @override
-  List<ListenableServiceMixin> get listenableServices => [_authService];
 }

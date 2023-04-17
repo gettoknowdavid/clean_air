@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'app_loading_indicator.dart';
-
 class AppButton extends StatefulWidget {
   const AppButton({
     super.key,
@@ -35,7 +33,15 @@ class _AppButtonState extends State<AppButton> {
         foregroundColor: widget.foreground,
         backgroundColor: widget.background,
       ),
-      child: widget.loading ? const AppLoadingIndicator() : Text(widget.title),
+      child: widget.loading ? _buildLoadingIndicator() : Text(widget.title),
+    );
+  }
+
+  SizedBox _buildLoadingIndicator() {
+    return SizedBox(
+      height: 20.r,
+      width: 20.r,
+      child: const CircularProgressIndicator(),
     );
   }
 }

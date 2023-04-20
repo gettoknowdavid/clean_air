@@ -24,6 +24,7 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
   Widget builder(context, viewModel, child) {
     return Scaffold(
       appBar: LayoutAppBar(
+        title: 'Search',
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(3.r),
           child: const AppLoadingIndicator<SearchViewModel>(

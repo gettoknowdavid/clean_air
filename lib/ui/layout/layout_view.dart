@@ -11,24 +11,24 @@ class LayoutView extends StackedView<LayoutViewModel> {
   const LayoutView({super.key});
 
   @override
-  bool get disposeViewModel => false;
-
-  @override
   Widget builder(context, viewModel, child) {
-    return Scaffold(
-      body: ExtendedNavigator(
-        navigatorKey: StackedService.nestedNavigationKey(1),
-        initialRoute: LayoutViewRoutes.homeView,
-        router: LayoutViewRouter(),
+    return WillPopScope(
+      onWillPop: viewModel.onWillPop,
+      child: Scaffold(
+        body: ExtendedNavigator(
+          navigatorKey: StackedService.nestedNavigationKey(1),
+          initialRoute: LayoutViewRoutes.homeView,
+          router: LayoutViewRouter(),
+        ),
+        floatingActionButton: viewModel.currentIndex == 2
+            ? FloatingActionButton(
+                onPressed: () => viewModel.handleNavigation(1),
+                tooltip: 'Add City',
+                child: const Icon(PhosphorIcons.plus),
+              )
+            : null,
+        bottomNavigationBar: const AppBottomNavigationBar(),
       ),
-      floatingActionButton: viewModel.currentIndex == 2
-          ? FloatingActionButton(
-              onPressed: () => viewModel.handleNavigation(1),
-              tooltip: 'Add City',
-              child: const Icon(PhosphorIcons.plus),
-            )
-          : null,
-      bottomNavigationBar: const AppBottomNavigationBar(),
     );
   }
 

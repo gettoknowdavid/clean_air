@@ -23,6 +23,10 @@ class SharedPreferencesService {
     return _pref.get(key);
   }
 
+  dynamic readList(String key) {
+    return _pref.getStringList(key);
+  }
+
   Future write({required String key, required dynamic value}) async {
     if (value is bool) {
       _pref.setBool(key, value);
@@ -33,6 +37,10 @@ class SharedPreferencesService {
     } else if (value is double) {
       _pref.setDouble(key, value);
     }
+  }
+
+  Future writeList({required String key, required List<String> value}) async {
+    await _pref.setStringList(key, value);
   }
 
   static Future<SharedPreferencesService> getInstance() async {

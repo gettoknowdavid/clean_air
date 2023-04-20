@@ -67,6 +67,9 @@ class AirQualityService with ListenableServiceMixin {
       if (result.data == null) {
         return [];
       } else {
+        final strgs = result.data?.map((e) => jsonEncode(e!.toJson())).toList();
+        await _preferences.writeList(key: kSearchResultKey, value: strgs!);
+
         return result.data!;
       }
     } on DioError {

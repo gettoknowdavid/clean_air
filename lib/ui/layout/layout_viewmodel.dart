@@ -1,7 +1,8 @@
 import 'package:clean_air/app/app.locator.dart';
+import 'package:clean_air/core/keys.dart';
 import 'package:clean_air/models/user.dart';
 import 'package:clean_air/services/auth_service.dart';
-import 'package:clean_air/services/layout_service.dart';
+import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:clean_air/ui/views/favourites/favourites_view.dart';
 import 'package:clean_air/ui/views/home/home_view.dart';
 import 'package:clean_air/ui/views/profile/profile_view.dart';
@@ -13,11 +14,7 @@ class LayoutViewModel extends IndexTrackingViewModel
     with ListenableServiceMixin {
   final _authService = locator<AuthService>();
   final _navigationService = locator<NavigationService>();
-
-  // int get currentIndex => _layoutService.currentIndex;
-  // void Function(int index) get handleNavigation =>
-  //     _layoutService.handleNavigation;
-  // void Function(int index) get setIndex => _layoutService.setIndex;
+  final _preferences = locator<SharedPreferencesService>();
 
   User? get user => _authService.currentUser;
 
@@ -60,6 +57,10 @@ class LayoutViewModel extends IndexTrackingViewModel
       default:
     }
     notifyListeners();
+  }
+
+  Future<bool> onWillPop() async {
+    return await _preferences.delete(kSearchResultKey).whenComplete(() => true);
   }
 
   @override

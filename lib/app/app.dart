@@ -1,6 +1,7 @@
 import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
+import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/services/firestore_service.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
@@ -28,7 +29,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:clean_air/services/favourites_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -97,13 +97,11 @@ class CleanAirApp extends StatelessWidget {
           initialRoute: Routes.startupView,
           onGenerateRoute: StackedRouter().onGenerateRoute,
           navigatorKey: StackedService.navigatorKey,
-          navigatorObservers: [
-            StackedService.routeObserver,
-          ],
-          builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: child!,
-          ),
+          navigatorObservers: [StackedService.routeObserver],
+          // builder: (context, child) => MediaQuery(
+          //   data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          //   child: child!,
+          // ),
         );
       },
     );

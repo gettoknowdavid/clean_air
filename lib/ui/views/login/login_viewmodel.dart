@@ -2,6 +2,7 @@ import 'package:clean_air/app/app.dialogs.dart';
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/app/app.snackbars.dart';
+import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
@@ -11,14 +12,11 @@ import 'package:stacked_services/stacked_services.dart';
 import 'login_view.form.dart';
 
 class LoginViewModel extends FormViewModel with ListenableServiceMixin {
+  final _aqiService = locator<AirQualityService>();
   final _authService = locator<AuthService>();
-
   final _dialogService = locator<DialogService>();
-
   final _networkService = locator<NetworkService>();
-
   final _snackbarService = locator<SnackbarService>();
-
   final _navigationService = locator<NavigationService>();
 
   bool get disabled => !isFormValid || !hasEmail || !hasPassword || isBusy;
@@ -47,7 +45,20 @@ class LoginViewModel extends FormViewModel with ListenableServiceMixin {
             ),
           );
         },
-        (success) => _navigationService.clearStackAndShow(Routes.layoutView),
+        (success) async {
+          await _aqiService.getCurrentLocationAQI().then((value) {
+            if (value != null) {
+              _navigationService.clearStackAndShow(Routes.layoutView);
+            } else {
+              setBusy(false);
+              _snackbarService.showCustomSnackBar(
+                duration: const Duration(seconds: 6),
+                variant: SnackbarType.error,
+                message: kAirQualityErrorMessage,
+              );
+            }
+          });
+        },
       );
     }
   }

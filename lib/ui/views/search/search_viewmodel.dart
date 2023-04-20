@@ -9,6 +9,8 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class SearchViewModel extends ReactiveViewModel with ListenableServiceMixin {
+  //Todo: Change SearchView to a proper reactive model
+
   final _aqiService = locator<AirQualityService>();
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();

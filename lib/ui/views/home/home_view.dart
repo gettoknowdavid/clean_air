@@ -21,24 +21,21 @@ class HomeView extends StackedView<HomeViewModel> {
   Widget builder(context, viewModel, child) {
     return Scaffold(
       appBar: LayoutAppBar(),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            10.verticalSpace,
-            CityNameWidget(city: viewModel.airQuality!.city!),
-            20.verticalSpace,
-            AqiValueWidget(onTap: viewModel.navigateToDetails),
-            10.verticalSpace,
-            const _PollutionLevel(),
-            10.verticalSpace,
-            const _HealthImplication(),
-            20.verticalSpace,
-            PollutantsGridView(daily: viewModel.airQuality!.forecast!.daily!),
-            20.verticalSpace,
-          ],
-        ),
+        children: [
+          10.verticalSpace,
+          CityNameWidget(city: viewModel.airQuality!.city!),
+          20.verticalSpace,
+          AqiValueWidget(onTap: viewModel.navigateToDetails),
+          10.verticalSpace,
+          const _PollutionLevel(),
+          10.verticalSpace,
+          const _HealthImplication(),
+          20.verticalSpace,
+          PollutantsGridView(daily: viewModel.airQuality!.forecast!.daily!),
+          20.verticalSpace,
+        ],
       ),
     );
   }

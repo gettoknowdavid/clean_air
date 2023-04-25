@@ -49,9 +49,10 @@ class ProfileView extends StackedView<ProfileViewModel> {
               leadingIcon: PhosphorIcons.navigationArrow,
             ),
             10.verticalSpace,
-            const ProfileItem(
+            ProfileItem(
               'About CleanAir',
               leadingIcon: PhosphorIcons.info,
+              onTap: viewModel.navigateToAboutView,
             ),
             10.verticalSpace,
             ProfileItem(

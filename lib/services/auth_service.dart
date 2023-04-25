@@ -36,12 +36,16 @@ class AuthService with ListenableServiceMixin {
     }
 
     if (firebaseUser != null || localUserString != null) {
+      print("==============================================================");
+      final localUserStringDynamic = localUserString as dynamic;
+      final localUser = User.fromJson(jsonDecode(localUserStringDynamic));
       _isAuthenticated.value = true;
       _currentUser.value = User(
         uid: firebaseUser!.uid,
         name: firebaseUser.displayName!,
         email: firebaseUser.email!,
         verified: firebaseUser.emailVerified,
+        avatar: localUser.avatar,
       );
     }
   }
@@ -216,17 +220,11 @@ class AuthService with ListenableServiceMixin {
     }
   }
 
-  Future<Either<AuthError, Unit>> updateProfile({
-    String? name,
-    String? avatarUrl,
-  }) async {
+  Future<Either<AuthError, Unit>> updateProfile(User u) async {
     final id = _firebaseAuth.currentUser!.uid;
 
     try {
-      userRef.doc(id).update(
-            avatar: avatarUrl,
-            name: name ?? _firebaseAuth.currentUser!.displayName!,
-          );
+      userRef.doc(id).set(u);
 
       final updatedUserSnapshot = await userRef.doc(id).get();
       final updatedUser = updatedUserSnapshot.data;

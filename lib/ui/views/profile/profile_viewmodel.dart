@@ -8,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class ProfileViewModel extends ReactiveViewModel {
   final _authService = locator<AuthService>();
+  final _dialogService = locator<DialogService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _navigationService = locator<NavigationService>();
 
@@ -24,6 +25,10 @@ class ProfileViewModel extends ReactiveViewModel {
       variant: BottomSheetType.editProfile,
       isScrollControlled: true,
     );
+  }
+
+  Future<void> navigateToAboutView() async {
+    _navigationService.navigateToNestedAboutViewInLayoutViewRouter(1);
   }
 
   @override

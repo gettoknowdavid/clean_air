@@ -45,7 +45,12 @@ class EditProfileSheetModel extends FormViewModel with ListenableServiceMixin {
       _avatar.value = await _mediaService.getFileFromCloud(ref);
     }
 
-    await _authService.updateProfile(name: nameValue, avatarUrl: _avatar.value);
+    final updatedUser = user?.copyWith(
+      avatar: _avatar.value ?? user?.avatar,
+      name: nameValue ?? user!.name,
+    );
+
+    await _authService.updateProfile(updatedUser!);
 
     notifyListeners();
     _bottomSheetService.completeSheet(SheetResponse());

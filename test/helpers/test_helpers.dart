@@ -10,6 +10,7 @@ import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'package:clean_air/services/favourites_service.dart';
+import 'package:clean_air/services/media_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -25,6 +26,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<OpenMailAppService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AirQualityService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<FavouritesService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<MediaService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -38,6 +40,7 @@ void registerServices() {
   getAndRegisterOpenMailAppService();
   getAndRegisterAqiService();
   getAndRegisterFavouritesService();
+  getAndRegisterMediaService();
 // @stacked-mock-register
 }
 
@@ -137,6 +140,13 @@ MockFavouritesService getAndRegisterFavouritesService() {
   _removeRegistrationIfExists<FavouritesService>();
   final service = MockFavouritesService();
   locator.registerSingleton<FavouritesService>(service);
+  return service;
+}
+
+MockMediaService getAndRegisterMediaService() {
+  _removeRegistrationIfExists<MediaService>();
+  final service = MockMediaService();
+  locator.registerSingleton<MediaService>(service);
   return service;
 }
 // @stacked-mock-create

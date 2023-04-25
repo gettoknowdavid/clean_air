@@ -29,6 +29,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:clean_air/ui/bottom_sheets/image_source/image_source_sheet.dart';
+import 'package:clean_air/ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
+import 'package:clean_air/services/media_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -69,6 +72,7 @@ import 'package:stacked_services/stacked_services.dart';
       presolveUsing: SharedPreferencesService.getInstance,
     ),
     LazySingleton(classType: FavouritesService),
+    LazySingleton(classType: MediaService),
 // @stacked-service
   ],
   dialogs: [

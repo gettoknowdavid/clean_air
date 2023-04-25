@@ -14,11 +14,8 @@ class AuthService with ListenableServiceMixin {
   final fb.FirebaseAuth _firebaseAuth = fb.FirebaseAuth.instance;
   final _networkService = locator<NetworkService>();
   final _secureStorageService = locator<SecureStorageService>();
-
   final _isAuthenticated = ReactiveValue<bool>(false);
-
   final _isEmailVerified = ReactiveValue<bool?>(null);
-
   final _currentUser = ReactiveValue<User?>(null);
 
   AuthService() {
@@ -216,6 +213,36 @@ class AuthService with ListenableServiceMixin {
         // Otherwise, return a server error
         return left(const AuthError.serverError());
       }
+    }
+  }
+
+  Future<Either<AuthError, Unit>> updateProfile({
+    String? name,
+    String? avatarUrl,
+  }) async {
+    final id = _firebaseAuth.currentUser!.uid;
+
+    try {
+      userRef.doc(id).update(
+            avatar: avatarUrl,
+            name: name ?? _firebaseAuth.currentUser!.displayName!,
+          );
+
+      final updatedUserSnapshot = await userRef.doc(id).get();
+      final updatedUser = updatedUserSnapshot.data;
+
+      await _secureStorageService.write(
+        key: kAuthUser,
+        value: jsonEncode(updatedUser?.toJson()),
+      );
+
+      _currentUser.value = updatedUser;
+
+      notifyListeners();
+
+      return right(unit);
+    } on fb.FirebaseAuthException {
+      return left(const AuthError.serverError());
     }
   }
 }

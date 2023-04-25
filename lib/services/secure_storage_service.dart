@@ -18,7 +18,7 @@ class SecureStorageService {
   /// Reads the value associated with the given [key].
   ///
   /// Returns the value if present, or null if the key is not found.
-  Future<String?> read(String key) async => await _secure.read(key: key);
+  Future<dynamic> read(String key) async => await _secure.read(key: key);
 
   /// Writes the given [value] to the secure storage associated with the given [key].
   Future<void> write({required String key, required String? value}) async {

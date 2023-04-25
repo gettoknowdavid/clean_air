@@ -58,6 +58,16 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final padding = const EdgeInsets.all(18).r;
+    final isMaxLine = widget.maxLines != null && widget.maxLines! > 1;
+
+    final prefixIcon = !isMaxLine
+        ? widget.prefixIcon
+        : Align(
+            heightFactor: 3,
+            widthFactor: 1,
+            alignment: Alignment.topCenter,
+            child: widget.prefixIcon,
+          );
 
     return TextFormField(
       obscureText: widget.isPassword ? !obscure : obscure,
@@ -78,6 +88,7 @@ class _AppTextFieldState extends State<AppTextField> {
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         hintText: widget.hint,
+        alignLabelWithHint: true,
         labelText: widget.label,
         prefixIcon: widget.prefixIcon,
         suffixIcon: !widget.isPassword ? widget.suffixIcon : _suffixIcon(),

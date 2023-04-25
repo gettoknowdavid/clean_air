@@ -15,6 +15,7 @@ import 'package:clean_air/services/air_quality_service.dart' as _i15;
 import 'package:clean_air/services/auth_service.dart' as _i7;
 import 'package:clean_air/services/favourites_service.dart' as _i19;
 import 'package:clean_air/services/firestore_service.dart' as _i11;
+import 'package:clean_air/services/media_service.dart' as _i20;
 import 'package:clean_air/services/network_service.dart' as _i9;
 import 'package:clean_air/services/open_mail_app_service.dart' as _i14;
 import 'package:clean_air/services/secure_storage_service.dart' as _i13;
@@ -864,6 +865,46 @@ class MockAuthService extends _i1.Mock implements _i7.AuthService {
         )),
       ) as _i3.Future<_i2.Either<_i8.AuthError, _i2.Unit>>);
   @override
+  _i3.Future<_i2.Either<_i8.AuthError, _i2.Unit>> updateProfile({
+    String? name,
+    String? avatarUrl,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateProfile,
+          [],
+          {
+            #name: name,
+            #avatarUrl: avatarUrl,
+          },
+        ),
+        returnValue: _i3.Future<_i2.Either<_i8.AuthError, _i2.Unit>>.value(
+            _FakeEither_1<_i8.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #updateProfile,
+            [],
+            {
+              #name: name,
+              #avatarUrl: avatarUrl,
+            },
+          ),
+        )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.Either<_i8.AuthError, _i2.Unit>>.value(
+                _FakeEither_1<_i8.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #updateProfile,
+            [],
+            {
+              #name: name,
+              #avatarUrl: avatarUrl,
+            },
+          ),
+        )),
+      ) as _i3.Future<_i2.Either<_i8.AuthError, _i2.Unit>>);
+  @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>
       super.noSuchMethod(
         Invocation.method(
@@ -1029,14 +1070,14 @@ class MockSecureStorageService extends _i1.Mock
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<String?> read(String? key) => (super.noSuchMethod(
+  _i3.Future<dynamic> read(String? key) => (super.noSuchMethod(
         Invocation.method(
           #read,
           [key],
         ),
-        returnValue: _i3.Future<String?>.value(),
-        returnValueForMissingStub: _i3.Future<String?>.value(),
-      ) as _i3.Future<String?>);
+        returnValue: _i3.Future<dynamic>.value(),
+        returnValueForMissingStub: _i3.Future<dynamic>.value(),
+      ) as _i3.Future<dynamic>);
   @override
   _i3.Future<void> write({
     required String? key,
@@ -1256,3 +1297,8 @@ class MockFavouritesService extends _i1.Mock implements _i19.FavouritesService {
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [MediaService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMediaService extends _i1.Mock implements _i20.MediaService {}

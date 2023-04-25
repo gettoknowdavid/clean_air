@@ -43,9 +43,8 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => SecureStorageService());
   locator.registerLazySingleton(() => OpenMailAppService());
   locator.registerLazySingleton(() => AirQualityService());
-  final sharedPreferencesService = await SharedPreferencesService.getInstance();
-  locator.registerSingleton(sharedPreferencesService);
-
   locator.registerLazySingleton(() => FavouritesService());
   locator.registerLazySingleton(() => MediaService());
+  final sharedPreferencesService = await SharedPreferencesService.getInstance();
+  locator.registerSingleton(sharedPreferencesService);
 }

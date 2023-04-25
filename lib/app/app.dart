@@ -3,16 +3,19 @@ import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/services/firestore_service.dart';
+import 'package:clean_air/services/media_service.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
 import 'package:clean_air/services/secure_storage_service.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
+import 'package:clean_air/ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
+import 'package:clean_air/ui/bottom_sheets/image_source/image_source_sheet.dart';
 import 'package:clean_air/ui/common/app_theme.dart';
-import 'package:clean_air/ui/dialogs/error/error_dialog.dart';
 import 'package:clean_air/ui/dialogs/mail_app/mail_app_dialog.dart';
 import 'package:clean_air/ui/dialogs/network_error/network_error_dialog.dart';
 import 'package:clean_air/ui/dialogs/no_mail_app/no_mail_app_dialog.dart';
 import 'package:clean_air/ui/layout/layout_view.dart';
+import 'package:clean_air/ui/views/about/about_view.dart';
 import 'package:clean_air/ui/views/details/details_view.dart';
 import 'package:clean_air/ui/views/favourites/favourites_view.dart';
 import 'package:clean_air/ui/views/forgot_password/forgot_password_view.dart';
@@ -29,9 +32,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:clean_air/ui/bottom_sheets/image_source/image_source_sheet.dart';
-import 'package:clean_air/ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
-import 'package:clean_air/services/media_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -49,9 +49,10 @@ import 'package:clean_air/services/media_service.dart';
       children: [
         MaterialRoute(page: HomeView),
         MaterialRoute(page: DetailsView),
-        MaterialRoute(page: SearchView, maintainState: true),
+        MaterialRoute(page: SearchView),
         MaterialRoute(page: FavouritesView),
         MaterialRoute(page: ProfileView),
+        MaterialRoute(page: AboutView),
       ],
     ),
 // @stacked-route
@@ -67,20 +68,24 @@ import 'package:clean_air/services/media_service.dart';
     LazySingleton(classType: SecureStorageService),
     LazySingleton(classType: OpenMailAppService),
     LazySingleton(classType: AirQualityService),
+    LazySingleton(classType: FavouritesService),
+    LazySingleton(classType: MediaService),
     Presolve(
       classType: SharedPreferencesService,
       presolveUsing: SharedPreferencesService.getInstance,
     ),
-    LazySingleton(classType: FavouritesService),
-    LazySingleton(classType: MediaService),
 // @stacked-service
   ],
   dialogs: [
-    StackedDialog(classType: ErrorDialog),
     StackedDialog(classType: NetworkErrorDialog),
     StackedDialog(classType: NoMailAppDialog),
     StackedDialog(classType: MailAppDialog),
 // @stacked-dialog
+  ],
+  bottomsheets: [
+    StackedBottomsheet(classType: ImageSourceSheet),
+    StackedBottomsheet(classType: EditProfileSheet),
+// @stacked-bottom-sheets
   ],
 )
 class CleanAirApp extends StatelessWidget {

@@ -28,7 +28,11 @@ class ProfileViewModel extends ReactiveViewModel {
   }
 
   Future<void> navigateToAboutView() async {
-    _navigationService.navigateToNestedAboutViewInLayoutViewRouter(1);
+    _navigationService.navigateToAboutView();
+  }
+
+  Future<void> navigateToAccountView() async {
+    _navigationService.navigateToAccountView();
   }
 
   @override

@@ -39,9 +39,10 @@ class ProfileView extends StackedView<ProfileViewModel> {
               leadingIcon: PhosphorIcons.heartbeat,
             ),
             10.verticalSpace,
-            const ProfileItem(
+            ProfileItem(
               'Account',
               leadingIcon: PhosphorIcons.userCircle,
+              onTap: viewModel.navigateToAccountView,
             ),
             10.verticalSpace,
             const ProfileItem(

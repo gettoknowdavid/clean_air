@@ -36,7 +36,6 @@ class AuthService with ListenableServiceMixin {
     }
 
     if (firebaseUser != null || localUserString != null) {
-      print("==============================================================");
       final localUserStringDynamic = localUserString as dynamic;
       final localUser = User.fromJson(jsonDecode(localUserStringDynamic));
       _isAuthenticated.value = true;
@@ -208,6 +207,23 @@ class AuthService with ListenableServiceMixin {
     try {
       // Sends the verification email to the current user's email address
       await _firebaseAuth.currentUser!.sendEmailVerification();
+      return right(unit);
+    } on fb.FirebaseAuthException catch (e) {
+      // If the user is not logged in, return an authentication error
+      if (e.code == 'user-mismatch') {
+        return left(const AuthError.userNotFound());
+      } else {
+        // Otherwise, return a server error
+        return left(const AuthError.serverError());
+      }
+    }
+  }
+
+  Future<Either<AuthError, Unit>> sendPasswordResetEmail() async {
+    try {
+      // Sends the verification email to the current user's email address
+      final email = _firebaseAuth.currentUser!.email!;
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
       return right(unit);
     } on fb.FirebaseAuthException catch (e) {
       // If the user is not logged in, return an authentication error

@@ -877,6 +877,31 @@ class MockAuthService extends _i1.Mock implements _i8.AuthService {
         )),
       ) as _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>);
   @override
+  _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>> sendPasswordResetEmail() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #sendPasswordResetEmail,
+          [],
+        ),
+        returnValue: _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>.value(
+            _FakeEither_1<_i9.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #sendPasswordResetEmail,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>.value(
+                _FakeEither_1<_i9.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #sendPasswordResetEmail,
+            [],
+          ),
+        )),
+      ) as _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>);
+  @override
   _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>> updateProfile(_i10.User? u) =>
       (super.noSuchMethod(
         Invocation.method(

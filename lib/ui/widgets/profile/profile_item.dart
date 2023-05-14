@@ -11,6 +11,7 @@ class ProfileItem extends StatelessWidget {
     this.tileColor,
     this.iconColor,
     this.titleColor,
+    this.loading = false,
   });
 
   final IconData? leadingIcon;
@@ -19,6 +20,7 @@ class ProfileItem extends StatelessWidget {
   final Color? tileColor;
   final Color? iconColor;
   final Color? titleColor;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,13 @@ class ProfileItem extends StatelessWidget {
       leading: leadingIcon != null ? Icon(leadingIcon) : null,
       contentPadding: const EdgeInsets.fromLTRB(12, 4, 12, 4).r,
       title: Text(title, style: textTheme.bodyLarge),
-      trailing: const Icon(PhosphorIcons.caretRight),
+      trailing: !loading
+          ? const Icon(PhosphorIcons.caretRight)
+          : SizedBox(
+              height: 15.r,
+              width: 15.r,
+              child: const CircularProgressIndicator(),
+            ),
       iconColor: iconColor ?? theme.primaryColor,
       minLeadingWidth: leadingIcon == null ? 0 : 20.r,
       tileColor: tileColor ?? theme.colorScheme.primary.withOpacity(0.1),

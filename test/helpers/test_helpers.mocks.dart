@@ -927,6 +927,32 @@ class MockAuthService extends _i1.Mock implements _i8.AuthService {
         )),
       ) as _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>);
   @override
+  _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>> updateEmailAddress(
+          String? newEmail) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateEmailAddress,
+          [newEmail],
+        ),
+        returnValue: _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>.value(
+            _FakeEither_1<_i9.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #updateEmailAddress,
+            [newEmail],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>.value(
+                _FakeEither_1<_i9.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #updateEmailAddress,
+            [newEmail],
+          ),
+        )),
+      ) as _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>);
+  @override
   _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>> updatePassword(
           String? newPassword) =>
       (super.noSuchMethod(
@@ -949,6 +975,31 @@ class MockAuthService extends _i1.Mock implements _i8.AuthService {
           Invocation.method(
             #updatePassword,
             [newPassword],
+          ),
+        )),
+      ) as _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>);
+  @override
+  _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>> deleteAccount() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAccount,
+          [],
+        ),
+        returnValue: _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>.value(
+            _FakeEither_1<_i9.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteAccount,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>.value(
+                _FakeEither_1<_i9.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteAccount,
+            [],
           ),
         )),
       ) as _i3.Future<_i2.Either<_i9.AuthError, _i2.Unit>>);

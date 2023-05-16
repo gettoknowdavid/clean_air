@@ -1,0 +1,1 @@
+enum Condition { asthma, hbp, bronchitis, lungCancer, emphysema, none }

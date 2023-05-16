@@ -15,6 +15,7 @@ class HomeViewModel extends ReactiveViewModel
     with Initialisable, ListenableServiceMixin {
   final _authService = locator<AuthService>();
   final _airQualityService = locator<AirQualityService>();
+  final _bottomSheetService = locator<BottomSheetService>();
   final _navigationService = locator<NavigationService>();
 
   AirQuality? get airQuality => _airQualityService.appAQI;
@@ -41,10 +42,18 @@ class HomeViewModel extends ReactiveViewModel
     _navigationService.clearStackAndShow(Routes.loginView);
   }
 
-  void navigateToDetails() async {
-    _navigationService.navigateToNestedDetailsViewInLayoutViewRouter(
+  Future<void> navigateToDetails() async {
+    await _navigationService.navigateToNestedDetailsViewInLayoutViewRouter(
       airQuality: airQuality!,
       routerId: 1,
+    );
+  }
+
+  Future<void> onTapCityName() async {
+    await _bottomSheetService.showBottomSheet(
+      title: 'Air Quality Sensor Station',
+      description:
+          'Showing the nearest air quality sensor station to your current location.',
     );
   }
 

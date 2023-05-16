@@ -25,7 +25,10 @@ class HomeView extends StackedView<HomeViewModel> {
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
         children: [
           10.verticalSpace,
-          CityNameWidget(city: viewModel.airQuality!.city!),
+          CityNameWidget(
+            city: viewModel.airQuality!.city!,
+            onTap: viewModel.onTapCityName,
+          ),
           20.verticalSpace,
           AqiValueWidget(onTap: viewModel.navigateToDetails),
           10.verticalSpace,

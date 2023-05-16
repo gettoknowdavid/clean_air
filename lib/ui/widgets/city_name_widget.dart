@@ -3,11 +3,12 @@ import 'package:clean_air/core/utils/date_formatter.dart';
 import 'package:clean_air/models/city.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class CityNameWidget extends StatelessWidget {
   final City city;
-
-  const CityNameWidget({super.key, required this.city});
+  final void Function()? onTap;
+  const CityNameWidget({super.key, required this.city, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,26 +18,35 @@ class CityNameWidget extends StatelessWidget {
     final today = DateTime.now();
     final formattedDate = dateFormatter(today.toIso8601String());
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AutoSizeText(
-          '${city.name}',
-          maxLines: 2,
-          maxFontSize: 20,
-          overflow: TextOverflow.ellipsis,
-          style: textTheme.titleLarge?.copyWith(
-            color: theme.colorScheme.primary,
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AutoSizeText(
+                '${city.name}',
+                maxLines: 2,
+                maxFontSize: 20,
+                overflow: TextOverflow.ellipsis,
+                style: textTheme.titleLarge?.copyWith(
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+              3.verticalSpace,
+              Text(
+                formattedDate,
+                style: textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onBackground.withOpacity(0.7),
+                ),
+              ),
+            ],
           ),
-        ),
-        3.verticalSpace,
-        Text(
-          formattedDate,
-          style: textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onBackground.withOpacity(0.7),
-          ),
-        ),
-      ],
+          Icon(PhosphorIcons.info, size: 12.r),
+        ],
+      ),
     );
   }
 }

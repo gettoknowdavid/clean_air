@@ -21,8 +21,7 @@ class ImageSourceSheet extends StackedView<ImageSourceSheetModel> {
 
     return Container(
       color: theme.bottomSheetTheme.backgroundColor,
-      height: 0.17.sh,
-      child: Column(
+      child: Wrap(
         children: [
           6.verticalSpace,
           ListTile(

@@ -74,17 +74,6 @@ class AuthService with ListenableServiceMixin {
     if (firebaseUser.emailVerified) {
       _isEmailVerified.value = true;
 
-      final updatedUser = User(
-        uid: firebaseUser.uid,
-        name: firebaseUser.displayName!,
-        email: firebaseUser.email!,
-        verified: true,
-      );
-
-      await userRef.doc(firebaseUser.uid).set(updatedUser);
-
-      _currentUser.value = _currentUser.value?.copyWith(verified: true);
-
       return optionOf(right(true));
     } else {
       return optionOf(left(const AuthError.notVerified()));
@@ -254,6 +243,50 @@ class AuthService with ListenableServiceMixin {
 
       notifyListeners();
 
+      return right(unit);
+    } on fb.FirebaseAuthException {
+      return left(const AuthError.serverError());
+    }
+  }
+
+  Future<Either<AuthError, Unit>> updateEmailAddress(String newEmail) async {
+    final curUser = _firebaseAuth.currentUser!;
+
+    try {
+      await curUser.updateEmail(newEmail);
+      await userRef.doc(curUser.uid).update(email: newEmail);
+      return right(unit);
+    } on fb.FirebaseAuthException catch (e) {
+      // Handle specific Firebase authentication exceptions.
+      if (e.code == 'email-already-in-use') {
+        return left(const AuthError.emailInUse());
+      } else if (e.code == 'requires-recent-login') {
+        return left(const AuthError.requiresRecentLogin());
+      } else {
+        return left(AuthError.error(e.message));
+      }
+    }
+  }
+
+  Future<Either<AuthError, Unit>> updatePassword(String newPassword) async {
+    final curUser = _firebaseAuth.currentUser!;
+
+    try {
+      await curUser.updatePassword(newPassword);
+      return right(unit);
+    } on fb.FirebaseAuthException {
+      return left(const AuthError.serverError());
+    }
+  }
+
+  Future<Either<AuthError, Unit>> deleteAccount() async {
+    final curUser = _firebaseAuth.currentUser!;
+
+    try {
+      await curUser.delete().then((value) async {
+        await userRef.doc(curUser.uid).delete();
+        await _secureStorageService.deleteAll();
+      });
       return right(unit);
     } on fb.FirebaseAuthException {
       return left(const AuthError.serverError());

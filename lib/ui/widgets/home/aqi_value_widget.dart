@@ -31,7 +31,7 @@ class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
         height: 0.35.sh,
         width: 0.35.sh,
         margin: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
-        padding: const EdgeInsets.all(kGlobalPadding).r,
+        padding: const EdgeInsets.all(8).r,
         child: Neumorphic(
           style: neumorphicStyle,
           child: Column(
@@ -42,13 +42,13 @@ class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
               AutoSizeText(
                 '${viewModel.airQuality!.aqi}',
                 textAlign: TextAlign.center,
-                minFontSize: 90,
+                minFontSize: 110,
+                maxFontSize: 250,
                 style: textTheme.displayLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: viewModel.indexColor,
                 ),
               ),
-              4.verticalSpace,
               Text(
                 'TAP TO LEARN MORE',
                 textAlign: TextAlign.center,

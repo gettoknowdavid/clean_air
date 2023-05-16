@@ -13,29 +13,34 @@ class ProfileView extends StackedView<ProfileViewModel> {
 
   @override
   Widget builder(context, viewModel, child) {
+    final theme = Theme.of(context);
+
     if (viewModel.isBusy) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
-      body: Center(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
+        child: Column(
           children: [
             (kToolbarHeight * 1.2).verticalSpace,
             const ProfileAvatar(),
             20.verticalSpace,
             const _Name(),
+            const _Email(),
             const _Location(),
             30.verticalSpace,
             ProfileItem(
               'Edit Profile',
+              showTrailing: false,
               leadingIcon: PhosphorIcons.pencil,
               onTap: viewModel.showEditProfileBottomSheet,
             ),
             10.verticalSpace,
             const ProfileItem(
               'Change Health Condition',
+              showTrailing: false,
               leadingIcon: PhosphorIcons.heartbeat,
             ),
             10.verticalSpace,
@@ -43,11 +48,6 @@ class ProfileView extends StackedView<ProfileViewModel> {
               'Account',
               leadingIcon: PhosphorIcons.userCircle,
               onTap: viewModel.navigateToAccountView,
-            ),
-            10.verticalSpace,
-            const ProfileItem(
-              'Change Location',
-              leadingIcon: PhosphorIcons.navigationArrow,
             ),
             10.verticalSpace,
             ProfileItem(
@@ -58,7 +58,9 @@ class ProfileView extends StackedView<ProfileViewModel> {
             10.verticalSpace,
             ProfileItem(
               'Logout',
+              showTrailing: false,
               onTap: viewModel.logout,
+              tileColor: theme.colorScheme.error.withOpacity(0.2),
               leadingIcon: PhosphorIcons.signOut,
             ),
             30.verticalSpace,
@@ -72,20 +74,56 @@ class ProfileView extends StackedView<ProfileViewModel> {
   ProfileViewModel viewModelBuilder(context) => ProfileViewModel();
 }
 
-class _Location extends StatelessWidget {
+class _Location extends ViewModelWidget<ProfileViewModel> {
   const _Location();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
     final textTheme = Theme.of(context).textTheme;
+
+    return FutureBuilder<String>(
+      future: viewModel.getCurrentLocation,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const SizedBox();
+        } else {
+          return Center(
+            child: SkeletonLoader(
+              loading: snapshot.connectionState == ConnectionState.waiting,
+              child: Text(
+                snapshot.data!,
+                textAlign: TextAlign.center,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: textTheme.bodyLarge?.color?.withOpacity(0.5),
+                ),
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+
+class _Email extends SelectorViewModelWidget<ProfileViewModel, String> {
+  const _Email();
+
+  @override
+  Widget build(BuildContext context, String value) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Text(
-      'Lagos, NG',
+      value,
       textAlign: TextAlign.center,
       style: textTheme.bodyMedium?.copyWith(
-        color: textTheme.bodyLarge?.color?.withOpacity(0.5),
+        fontStyle: FontStyle.italic,
+        color: textTheme.bodyMedium?.color?.withOpacity(0.5),
       ),
     );
   }
+
+  @override
+  String selector(ProfileViewModel viewModel) => viewModel.user!.email;
 }
 
 class _Name extends SelectorViewModelWidget<ProfileViewModel, String> {

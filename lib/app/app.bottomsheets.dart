@@ -9,12 +9,14 @@ import 'package:stacked_services/stacked_services.dart';
 import 'app.locator.dart';
 import '../ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
 import '../ui/bottom_sheets/image_source/image_source_sheet.dart';
+import '../ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
 import '../ui/bottom_sheets/reset_password/reset_password_sheet.dart';
 
 enum BottomSheetType {
   imageSource,
   editProfile,
   resetPassword,
+  passwordConfirmation,
 }
 
 void setupBottomSheetUi() {
@@ -27,6 +29,8 @@ void setupBottomSheetUi() {
         EditProfileSheet(request: request, completer: completer),
     BottomSheetType.resetPassword: (context, request, completer) =>
         ResetPasswordSheet(request: request, completer: completer),
+    BottomSheetType.passwordConfirmation: (context, request, completer) =>
+        PasswordConfirmationSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

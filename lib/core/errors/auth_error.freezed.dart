@@ -18,9 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -30,9 +33,12 @@ mixin _$AuthError {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -42,9 +48,12 @@ mixin _$AuthError {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -55,10 +64,13 @@ mixin _$AuthError {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -68,9 +80,12 @@ mixin _$AuthError {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -80,9 +95,12 @@ mixin _$AuthError {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -108,6 +126,195 @@ class _$AuthErrorCopyWithImpl<$Res, $Val extends AuthError>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$_AuthErrorMessageCopyWith<$Res> {
+  factory _$$_AuthErrorMessageCopyWith(
+          _$_AuthErrorMessage value, $Res Function(_$_AuthErrorMessage) then) =
+      __$$_AuthErrorMessageCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String? message});
+}
+
+/// @nodoc
+class __$$_AuthErrorMessageCopyWithImpl<$Res>
+    extends _$AuthErrorCopyWithImpl<$Res, _$_AuthErrorMessage>
+    implements _$$_AuthErrorMessageCopyWith<$Res> {
+  __$$_AuthErrorMessageCopyWithImpl(
+      _$_AuthErrorMessage _value, $Res Function(_$_AuthErrorMessage) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_$_AuthErrorMessage(
+      freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AuthErrorMessage implements _AuthErrorMessage {
+  const _$_AuthErrorMessage([this.message]);
+
+  @override
+  final String? message;
+
+  @override
+  String toString() {
+    return 'AuthError.error(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AuthErrorMessage &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AuthErrorMessageCopyWith<_$_AuthErrorMessage> get copyWith =>
+      __$$_AuthErrorMessageCopyWithImpl<_$_AuthErrorMessage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
+    required TResult Function() emailInUse,
+    required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
+    required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
+    required TResult Function() noGoogleAccount,
+    required TResult Function() notVerified,
+    required TResult Function() serverError,
+    required TResult Function() userNotFound,
+    required TResult Function() noNetworkConnection,
+  }) {
+    return error(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
+    TResult? Function()? emailInUse,
+    TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
+    TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
+    TResult? Function()? noGoogleAccount,
+    TResult? Function()? notVerified,
+    TResult? Function()? serverError,
+    TResult? Function()? userNotFound,
+    TResult? Function()? noNetworkConnection,
+  }) {
+    return error?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
+    TResult Function()? emailInUse,
+    TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
+    TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
+    TResult Function()? noGoogleAccount,
+    TResult Function()? notVerified,
+    TResult Function()? serverError,
+    TResult Function()? userNotFound,
+    TResult Function()? noNetworkConnection,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
+    required TResult Function(_EmailInUse value) emailInUse,
+    required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
+    required TResult Function(_InvalidEmailOrPassword value)
+        invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
+    required TResult Function(_NoGoogleAccount value) noGoogleAccount,
+    required TResult Function(_NotVerified value) notVerified,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_NoNetworkConnection value) noNetworkConnection,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
+    TResult? Function(_EmailInUse value)? emailInUse,
+    TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
+    TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
+    TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
+    TResult? Function(_NotVerified value)? notVerified,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_NoNetworkConnection value)? noNetworkConnection,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
+    TResult Function(_EmailInUse value)? emailInUse,
+    TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
+    TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
+    TResult Function(_NoGoogleAccount value)? noGoogleAccount,
+    TResult Function(_NotVerified value)? notVerified,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_NoNetworkConnection value)? noNetworkConnection,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthErrorMessage implements AuthError {
+  const factory _AuthErrorMessage([final String? message]) =
+      _$_AuthErrorMessage;
+
+  String? get message;
+  @JsonKey(ignore: true)
+  _$$_AuthErrorMessageCopyWith<_$_AuthErrorMessage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -148,9 +355,12 @@ class _$_EmailInUse implements _EmailInUse {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -163,9 +373,12 @@ class _$_EmailInUse implements _EmailInUse {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -178,9 +391,12 @@ class _$_EmailInUse implements _EmailInUse {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -197,10 +413,13 @@ class _$_EmailInUse implements _EmailInUse {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -213,9 +432,12 @@ class _$_EmailInUse implements _EmailInUse {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -228,9 +450,12 @@ class _$_EmailInUse implements _EmailInUse {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -287,9 +512,12 @@ class _$_InvalidEmail implements _InvalidEmail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -302,9 +530,12 @@ class _$_InvalidEmail implements _InvalidEmail {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -317,9 +548,12 @@ class _$_InvalidEmail implements _InvalidEmail {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -336,10 +570,13 @@ class _$_InvalidEmail implements _InvalidEmail {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -352,9 +589,12 @@ class _$_InvalidEmail implements _InvalidEmail {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -367,9 +607,12 @@ class _$_InvalidEmail implements _InvalidEmail {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -386,6 +629,163 @@ class _$_InvalidEmail implements _InvalidEmail {
 
 abstract class _InvalidEmail implements AuthError {
   const factory _InvalidEmail() = _$_InvalidEmail;
+}
+
+/// @nodoc
+abstract class _$$_RequiresRecentLoginCopyWith<$Res> {
+  factory _$$_RequiresRecentLoginCopyWith(_$_RequiresRecentLogin value,
+          $Res Function(_$_RequiresRecentLogin) then) =
+      __$$_RequiresRecentLoginCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RequiresRecentLoginCopyWithImpl<$Res>
+    extends _$AuthErrorCopyWithImpl<$Res, _$_RequiresRecentLogin>
+    implements _$$_RequiresRecentLoginCopyWith<$Res> {
+  __$$_RequiresRecentLoginCopyWithImpl(_$_RequiresRecentLogin _value,
+      $Res Function(_$_RequiresRecentLogin) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RequiresRecentLogin implements _RequiresRecentLogin {
+  const _$_RequiresRecentLogin();
+
+  @override
+  String toString() {
+    return 'AuthError.requiresRecentLogin()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RequiresRecentLogin);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
+    required TResult Function() emailInUse,
+    required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
+    required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
+    required TResult Function() noGoogleAccount,
+    required TResult Function() notVerified,
+    required TResult Function() serverError,
+    required TResult Function() userNotFound,
+    required TResult Function() noNetworkConnection,
+  }) {
+    return requiresRecentLogin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
+    TResult? Function()? emailInUse,
+    TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
+    TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
+    TResult? Function()? noGoogleAccount,
+    TResult? Function()? notVerified,
+    TResult? Function()? serverError,
+    TResult? Function()? userNotFound,
+    TResult? Function()? noNetworkConnection,
+  }) {
+    return requiresRecentLogin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
+    TResult Function()? emailInUse,
+    TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
+    TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
+    TResult Function()? noGoogleAccount,
+    TResult Function()? notVerified,
+    TResult Function()? serverError,
+    TResult Function()? userNotFound,
+    TResult Function()? noNetworkConnection,
+    required TResult orElse(),
+  }) {
+    if (requiresRecentLogin != null) {
+      return requiresRecentLogin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
+    required TResult Function(_EmailInUse value) emailInUse,
+    required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
+    required TResult Function(_InvalidEmailOrPassword value)
+        invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
+    required TResult Function(_NoGoogleAccount value) noGoogleAccount,
+    required TResult Function(_NotVerified value) notVerified,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_NoNetworkConnection value) noNetworkConnection,
+  }) {
+    return requiresRecentLogin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
+    TResult? Function(_EmailInUse value)? emailInUse,
+    TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
+    TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
+    TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
+    TResult? Function(_NotVerified value)? notVerified,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_NoNetworkConnection value)? noNetworkConnection,
+  }) {
+    return requiresRecentLogin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
+    TResult Function(_EmailInUse value)? emailInUse,
+    TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
+    TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
+    TResult Function(_NoGoogleAccount value)? noGoogleAccount,
+    TResult Function(_NotVerified value)? notVerified,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_NoNetworkConnection value)? noNetworkConnection,
+    required TResult orElse(),
+  }) {
+    if (requiresRecentLogin != null) {
+      return requiresRecentLogin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RequiresRecentLogin implements AuthError {
+  const factory _RequiresRecentLogin() = _$_RequiresRecentLogin;
 }
 
 /// @nodoc
@@ -427,9 +827,12 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -442,9 +845,12 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -457,9 +863,12 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -476,10 +885,13 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -492,9 +904,12 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -507,9 +922,12 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -526,6 +944,163 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
 
 abstract class _InvalidEmailOrPassword implements AuthError {
   const factory _InvalidEmailOrPassword() = _$_InvalidEmailOrPassword;
+}
+
+/// @nodoc
+abstract class _$$_InvalidPasswordCopyWith<$Res> {
+  factory _$$_InvalidPasswordCopyWith(
+          _$_InvalidPassword value, $Res Function(_$_InvalidPassword) then) =
+      __$$_InvalidPasswordCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InvalidPasswordCopyWithImpl<$Res>
+    extends _$AuthErrorCopyWithImpl<$Res, _$_InvalidPassword>
+    implements _$$_InvalidPasswordCopyWith<$Res> {
+  __$$_InvalidPasswordCopyWithImpl(
+      _$_InvalidPassword _value, $Res Function(_$_InvalidPassword) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_InvalidPassword implements _InvalidPassword {
+  const _$_InvalidPassword();
+
+  @override
+  String toString() {
+    return 'AuthError.invalidPassword()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_InvalidPassword);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
+    required TResult Function() emailInUse,
+    required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
+    required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
+    required TResult Function() noGoogleAccount,
+    required TResult Function() notVerified,
+    required TResult Function() serverError,
+    required TResult Function() userNotFound,
+    required TResult Function() noNetworkConnection,
+  }) {
+    return invalidPassword();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
+    TResult? Function()? emailInUse,
+    TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
+    TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
+    TResult? Function()? noGoogleAccount,
+    TResult? Function()? notVerified,
+    TResult? Function()? serverError,
+    TResult? Function()? userNotFound,
+    TResult? Function()? noNetworkConnection,
+  }) {
+    return invalidPassword?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
+    TResult Function()? emailInUse,
+    TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
+    TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
+    TResult Function()? noGoogleAccount,
+    TResult Function()? notVerified,
+    TResult Function()? serverError,
+    TResult Function()? userNotFound,
+    TResult Function()? noNetworkConnection,
+    required TResult orElse(),
+  }) {
+    if (invalidPassword != null) {
+      return invalidPassword();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
+    required TResult Function(_EmailInUse value) emailInUse,
+    required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
+    required TResult Function(_InvalidEmailOrPassword value)
+        invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
+    required TResult Function(_NoGoogleAccount value) noGoogleAccount,
+    required TResult Function(_NotVerified value) notVerified,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_UserNotFound value) userNotFound,
+    required TResult Function(_NoNetworkConnection value) noNetworkConnection,
+  }) {
+    return invalidPassword(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
+    TResult? Function(_EmailInUse value)? emailInUse,
+    TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
+    TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
+    TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
+    TResult? Function(_NotVerified value)? notVerified,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_UserNotFound value)? userNotFound,
+    TResult? Function(_NoNetworkConnection value)? noNetworkConnection,
+  }) {
+    return invalidPassword?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
+    TResult Function(_EmailInUse value)? emailInUse,
+    TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
+    TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
+    TResult Function(_NoGoogleAccount value)? noGoogleAccount,
+    TResult Function(_NotVerified value)? notVerified,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_UserNotFound value)? userNotFound,
+    TResult Function(_NoNetworkConnection value)? noNetworkConnection,
+    required TResult orElse(),
+  }) {
+    if (invalidPassword != null) {
+      return invalidPassword(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InvalidPassword implements AuthError {
+  const factory _InvalidPassword() = _$_InvalidPassword;
 }
 
 /// @nodoc
@@ -566,9 +1141,12 @@ class _$_NoGoogleAccount implements _NoGoogleAccount {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -581,9 +1159,12 @@ class _$_NoGoogleAccount implements _NoGoogleAccount {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -596,9 +1177,12 @@ class _$_NoGoogleAccount implements _NoGoogleAccount {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -615,10 +1199,13 @@ class _$_NoGoogleAccount implements _NoGoogleAccount {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -631,9 +1218,12 @@ class _$_NoGoogleAccount implements _NoGoogleAccount {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -646,9 +1236,12 @@ class _$_NoGoogleAccount implements _NoGoogleAccount {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -705,9 +1298,12 @@ class _$_NotVerified implements _NotVerified {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -720,9 +1316,12 @@ class _$_NotVerified implements _NotVerified {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -735,9 +1334,12 @@ class _$_NotVerified implements _NotVerified {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -754,10 +1356,13 @@ class _$_NotVerified implements _NotVerified {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -770,9 +1375,12 @@ class _$_NotVerified implements _NotVerified {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -785,9 +1393,12 @@ class _$_NotVerified implements _NotVerified {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -844,9 +1455,12 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -859,9 +1473,12 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -874,9 +1491,12 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -893,10 +1513,13 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -909,9 +1532,12 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -924,9 +1550,12 @@ class _$_ServerError implements _ServerError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -983,9 +1612,12 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -998,9 +1630,12 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -1013,9 +1648,12 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -1032,10 +1670,13 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -1048,9 +1689,12 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -1063,9 +1707,12 @@ class _$_UserNotFound implements _UserNotFound {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,
@@ -1122,9 +1769,12 @@ class _$_NoNetworkConnection implements _NoNetworkConnection {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String? message) error,
     required TResult Function() emailInUse,
     required TResult Function() invalidEmail,
+    required TResult Function() requiresRecentLogin,
     required TResult Function() invalidEmailOrPassword,
+    required TResult Function() invalidPassword,
     required TResult Function() noGoogleAccount,
     required TResult Function() notVerified,
     required TResult Function() serverError,
@@ -1137,9 +1787,12 @@ class _$_NoNetworkConnection implements _NoNetworkConnection {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? message)? error,
     TResult? Function()? emailInUse,
     TResult? Function()? invalidEmail,
+    TResult? Function()? requiresRecentLogin,
     TResult? Function()? invalidEmailOrPassword,
+    TResult? Function()? invalidPassword,
     TResult? Function()? noGoogleAccount,
     TResult? Function()? notVerified,
     TResult? Function()? serverError,
@@ -1152,9 +1805,12 @@ class _$_NoNetworkConnection implements _NoNetworkConnection {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? message)? error,
     TResult Function()? emailInUse,
     TResult Function()? invalidEmail,
+    TResult Function()? requiresRecentLogin,
     TResult Function()? invalidEmailOrPassword,
+    TResult Function()? invalidPassword,
     TResult Function()? noGoogleAccount,
     TResult Function()? notVerified,
     TResult Function()? serverError,
@@ -1171,10 +1827,13 @@ class _$_NoNetworkConnection implements _NoNetworkConnection {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_AuthErrorMessage value) error,
     required TResult Function(_EmailInUse value) emailInUse,
     required TResult Function(_InvalidEmail value) invalidEmail,
+    required TResult Function(_RequiresRecentLogin value) requiresRecentLogin,
     required TResult Function(_InvalidEmailOrPassword value)
         invalidEmailOrPassword,
+    required TResult Function(_InvalidPassword value) invalidPassword,
     required TResult Function(_NoGoogleAccount value) noGoogleAccount,
     required TResult Function(_NotVerified value) notVerified,
     required TResult Function(_ServerError value) serverError,
@@ -1187,9 +1846,12 @@ class _$_NoNetworkConnection implements _NoNetworkConnection {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthErrorMessage value)? error,
     TResult? Function(_EmailInUse value)? emailInUse,
     TResult? Function(_InvalidEmail value)? invalidEmail,
+    TResult? Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult? Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult? Function(_InvalidPassword value)? invalidPassword,
     TResult? Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult? Function(_NotVerified value)? notVerified,
     TResult? Function(_ServerError value)? serverError,
@@ -1202,9 +1864,12 @@ class _$_NoNetworkConnection implements _NoNetworkConnection {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthErrorMessage value)? error,
     TResult Function(_EmailInUse value)? emailInUse,
     TResult Function(_InvalidEmail value)? invalidEmail,
+    TResult Function(_RequiresRecentLogin value)? requiresRecentLogin,
     TResult Function(_InvalidEmailOrPassword value)? invalidEmailOrPassword,
+    TResult Function(_InvalidPassword value)? invalidPassword,
     TResult Function(_NoGoogleAccount value)? noGoogleAccount,
     TResult Function(_NotVerified value)? notVerified,
     TResult Function(_ServerError value)? serverError,

@@ -184,8 +184,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i11.AccountView: (data) {
+      final args = data.getArgs<AccountViewArguments>(
+        orElse: () => const AccountViewArguments(),
+      );
       return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i11.AccountView(),
+        builder: (context) => _i11.AccountView(key: args.key),
         settings: data,
         maintainState: false,
       );
@@ -207,6 +210,17 @@ class StackedRouter extends _i1.RouterBase {
 
 class ForgotPasswordViewArguments {
   const ForgotPasswordViewArguments({this.key});
+
+  final _i13.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+}
+
+class AccountViewArguments {
+  const AccountViewArguments({this.key});
 
   final _i13.Key? key;
 
@@ -465,14 +479,16 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAccountView([
+  Future<dynamic> navigateToAccountView({
+    _i13.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.accountView,
+        arguments: AccountViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -696,14 +712,16 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAccountView([
+  Future<dynamic> replaceWithAccountView({
+    _i13.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.accountView,
+        arguments: AccountViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

@@ -12,6 +12,7 @@ class ProfileItem extends StatelessWidget {
     this.iconColor,
     this.titleColor,
     this.loading = false,
+    this.showTrailing = true,
   });
 
   final IconData? leadingIcon;
@@ -21,6 +22,7 @@ class ProfileItem extends StatelessWidget {
   final Color? iconColor;
   final Color? titleColor;
   final bool loading;
+  final bool showTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +33,14 @@ class ProfileItem extends StatelessWidget {
       dense: true,
       leading: leadingIcon != null ? Icon(leadingIcon) : null,
       contentPadding: const EdgeInsets.fromLTRB(12, 4, 12, 4).r,
-      title: Text(title, style: textTheme.bodyLarge),
+      title: Text(
+        title,
+        style: textTheme.bodyLarge?.copyWith(color: titleColor),
+      ),
       trailing: !loading
-          ? const Icon(PhosphorIcons.caretRight)
+          ? showTrailing
+              ? const Icon(PhosphorIcons.caretRight)
+              : const SizedBox()
           : SizedBox(
               height: 15.r,
               width: 15.r,

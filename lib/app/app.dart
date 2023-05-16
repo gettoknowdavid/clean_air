@@ -35,6 +35,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:clean_air/ui/views/reset_password/reset_password_view.dart';
 import 'package:clean_air/ui/bottom_sheets/reset_password/reset_password_sheet.dart';
+import 'package:clean_air/ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -91,6 +92,7 @@ import 'package:clean_air/ui/bottom_sheets/reset_password/reset_password_sheet.d
     StackedBottomsheet(classType: ImageSourceSheet),
     StackedBottomsheet(classType: EditProfileSheet),
     StackedBottomsheet(classType: ResetPasswordSheet),
+    StackedBottomsheet(classType: PasswordConfirmationSheet),
 // @stacked-bottom-sheets
   ],
 )

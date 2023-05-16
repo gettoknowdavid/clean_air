@@ -44,3 +44,6 @@ const String kAboutApp =
     "Whether you're a health-conscious individual, an athlete looking to optimize your performance, or simply concerned about the quality of the air you breathe, CleanAir is the perfect app for you. Powered by the latest technology, CleanAir utilizes advanced sensors and algorithms to provide users with accurate and up-to-date air quality data.\n"
     "The app also features a community-driven platform that enables users to share their air quality experiences, exchange tips and insights, and collaborate on efforts to improve air quality in their local communities. At CleanAir, we are committed to promoting a healthy and sustainable lifestyle by providing users with the tools and information they need to make informed decisions about their health and environment.\n"
     "Join our community today and start breathing clean air with CleanAir!";
+
+const String kRequiresRecentLoginErrorMessage =
+    'This operation is sensitive and requires recent authentication. Log in again before retrying this request.';

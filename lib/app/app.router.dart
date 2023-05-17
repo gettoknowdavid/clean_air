@@ -5,10 +5,11 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:clean_air/models/air_quality.dart' as _i19;
+import 'package:clean_air/models/air_quality.dart' as _i20;
 import 'package:clean_air/ui/layout/layout_view.dart' as _i9;
 import 'package:clean_air/ui/views/about/about_view.dart' as _i10;
 import 'package:clean_air/ui/views/account/account_view.dart' as _i11;
+import 'package:clean_air/ui/views/condition/condition_view.dart' as _i19;
 import 'package:clean_air/ui/views/details/details_view.dart' as _i15;
 import 'package:clean_air/ui/views/favourites/favourites_view.dart' as _i17;
 import 'package:clean_air/ui/views/forgot_password/forgot_password_view.dart'
@@ -28,7 +29,7 @@ import 'package:clean_air/ui/views/verification/verification_view.dart' as _i6;
 import 'package:flutter/material.dart' as _i13;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i20;
+import 'package:stacked_services/stacked_services.dart' as _i21;
 
 class Routes {
   static const onboardingView = '/';
@@ -241,12 +242,15 @@ class LayoutViewRoutes {
 
   static const profileView = 'profile-view';
 
+  static const conditionView = 'condition-view';
+
   static const all = <String>{
     homeView,
     detailsView,
     searchView,
     favouritesView,
     profileView,
+    conditionView,
   };
 }
 
@@ -271,6 +275,10 @@ class LayoutViewRouter extends _i1.RouterBase {
     _i1.RouteDef(
       LayoutViewRoutes.profileView,
       page: _i18.ProfileView,
+    ),
+    _i1.RouteDef(
+      LayoutViewRoutes.conditionView,
+      page: _i19.ConditionView,
     ),
   ];
 
@@ -315,6 +323,13 @@ class LayoutViewRouter extends _i1.RouterBase {
         maintainState: false,
       );
     },
+    _i19.ConditionView: (data) {
+      return _i13.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i19.ConditionView(),
+        settings: data,
+        maintainState: false,
+      );
+    },
   };
 
   @override
@@ -331,7 +346,7 @@ class NestedDetailsViewArguments {
 
   final _i13.Key? key;
 
-  final _i19.AirQuality airQuality;
+  final _i20.AirQuality airQuality;
 
   @override
   String toString() {
@@ -350,7 +365,7 @@ class NestedSearchViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i20.NavigationService {
+extension NavigatorStateExtension on _i21.NavigationService {
   Future<dynamic> navigateToOnboardingView([
     int? routerId,
     bool preventDuplicates = true,
@@ -525,7 +540,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
 
   Future<dynamic> navigateToNestedDetailsViewInLayoutViewRouter({
     _i13.Key? key,
-    required _i19.AirQuality airQuality,
+    required _i20.AirQuality airQuality,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -578,6 +593,20 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(LayoutViewRoutes.profileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToNestedConditionViewInLayoutViewRouter([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(LayoutViewRoutes.conditionView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -758,7 +787,7 @@ extension NavigatorStateExtension on _i20.NavigationService {
 
   Future<dynamic> replaceWithNestedDetailsViewInLayoutViewRouter({
     _i13.Key? key,
-    required _i19.AirQuality airQuality,
+    required _i20.AirQuality airQuality,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -811,6 +840,20 @@ extension NavigatorStateExtension on _i20.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(LayoutViewRoutes.profileView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithNestedConditionViewInLayoutViewRouter([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(LayoutViewRoutes.conditionView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

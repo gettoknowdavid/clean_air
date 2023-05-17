@@ -8,8 +8,11 @@ import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
 import 'package:clean_air/services/secure_storage_service.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
+import 'package:clean_air/ui/bottom_sheets/condition/condition_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/image_source/image_source_sheet.dart';
+import 'package:clean_air/ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
+import 'package:clean_air/ui/bottom_sheets/reset_password/reset_password_sheet.dart';
 import 'package:clean_air/ui/common/app_theme.dart';
 import 'package:clean_air/ui/dialogs/mail_app/mail_app_dialog.dart';
 import 'package:clean_air/ui/dialogs/network_error/network_error_dialog.dart';
@@ -17,6 +20,7 @@ import 'package:clean_air/ui/dialogs/no_mail_app/no_mail_app_dialog.dart';
 import 'package:clean_air/ui/layout/layout_view.dart';
 import 'package:clean_air/ui/views/about/about_view.dart';
 import 'package:clean_air/ui/views/account/account_view.dart';
+import 'package:clean_air/ui/views/condition/condition_view.dart';
 import 'package:clean_air/ui/views/details/details_view.dart';
 import 'package:clean_air/ui/views/favourites/favourites_view.dart';
 import 'package:clean_air/ui/views/forgot_password/forgot_password_view.dart';
@@ -26,6 +30,7 @@ import 'package:clean_air/ui/views/onboarding/onboarding_view.dart';
 import 'package:clean_air/ui/views/password_reset_confirmation/password_reset_confirmation_view.dart';
 import 'package:clean_air/ui/views/profile/profile_view.dart';
 import 'package:clean_air/ui/views/register/register_view.dart';
+import 'package:clean_air/ui/views/reset_password/reset_password_view.dart';
 import 'package:clean_air/ui/views/search/search_view.dart';
 import 'package:clean_air/ui/views/startup/startup_view.dart';
 import 'package:clean_air/ui/views/verification/verification_view.dart';
@@ -33,9 +38,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:clean_air/ui/views/reset_password/reset_password_view.dart';
-import 'package:clean_air/ui/bottom_sheets/reset_password/reset_password_sheet.dart';
-import 'package:clean_air/ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -56,6 +58,7 @@ import 'package:clean_air/ui/bottom_sheets/password_confirmation/password_confir
         MaterialRoute(page: SearchView),
         MaterialRoute(page: FavouritesView),
         MaterialRoute(page: ProfileView),
+        MaterialRoute(page: ConditionView),
       ],
     ),
     MaterialRoute(page: AboutView),
@@ -93,6 +96,7 @@ import 'package:clean_air/ui/bottom_sheets/password_confirmation/password_confir
     StackedBottomsheet(classType: EditProfileSheet),
     StackedBottomsheet(classType: ResetPasswordSheet),
     StackedBottomsheet(classType: PasswordConfirmationSheet),
+    StackedBottomsheet(classType: ConditionSheet),
 // @stacked-bottom-sheets
   ],
 )

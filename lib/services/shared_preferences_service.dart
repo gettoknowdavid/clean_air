@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:clean_air/core/keys.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class SharedPreferencesService {
   static late SharedPreferencesService _instance;
@@ -48,5 +53,26 @@ class SharedPreferencesService {
     _instance = SharedPreferencesService();
 
     return Future.value(_instance);
+  }
+
+  Future<bool> writeImage(List<int> imageBytes) async {
+    String base64Image = base64Encode(imageBytes);
+    return await _pref.setString(kProfileImageKey, base64Image);
+  }
+
+  Future<bool> writeImageFromNetwork(String url) async {
+    final response = await http.get(Uri.parse(url));
+    SharedPreferences _pref = await SharedPreferences.getInstance();
+    String base64Image = base64Encode(response.bodyBytes);
+    return await _pref.setString(kProfileImageKey, base64Image);
+  }
+
+  Future<Image?> readImage(String key) async {
+    if (_pref.containsKey(key)) {
+      Uint8List bytes = base64Decode(_pref.getString(key)!);
+      return Image.memory(bytes);
+    } else {
+      return null;
+    }
   }
 }

@@ -22,9 +22,10 @@ class AppAvatar extends ViewModelWidget<LayoutViewModel> {
         child: CircleAvatar(
           radius: innerRadius,
           child: const Icon(PhosphorIcons.user),
-          foregroundImage: viewModel.user?.avatar != null
-              ? NetworkImage(viewModel.user!.avatar!)
-              : null,
+          foregroundImage:
+              viewModel.user?.avatar != null && viewModel.isConnected
+                  ? NetworkImage(viewModel.user!.avatar!)
+                  : viewModel.localProfileAvatar?.image,
         ),
       ),
     );

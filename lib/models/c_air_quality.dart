@@ -1,3 +1,4 @@
+import 'package:clean_air/core/utils/aqi_helpers.dart';
 import 'package:clean_air/models/condition.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,5 +22,11 @@ class CAirQuality with _$CAirQuality {
   @override
   Map<String, dynamic> toJson() => _$CAirQualityToJson(this);
 
-  factory CAirQuality.none() => CAirQuality(condition: Condition.none);
+  factory CAirQuality.none() {
+    return CAirQuality(
+      condition: Condition.none,
+      dominantPollutant: null,
+      message: tailoredMessage(null, Condition.none),
+    );
+  }
 }

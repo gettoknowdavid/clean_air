@@ -7,6 +7,7 @@
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
+import '../ui/bottom_sheets/condition/condition_sheet.dart';
 import '../ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
 import '../ui/bottom_sheets/image_source/image_source_sheet.dart';
 import '../ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
@@ -17,6 +18,7 @@ enum BottomSheetType {
   editProfile,
   resetPassword,
   passwordConfirmation,
+  condition,
 }
 
 void setupBottomSheetUi() {
@@ -31,6 +33,8 @@ void setupBottomSheetUi() {
         ResetPasswordSheet(request: request, completer: completer),
     BottomSheetType.passwordConfirmation: (context, request, completer) =>
         PasswordConfirmationSheet(request: request, completer: completer),
+    BottomSheetType.condition: (context, request, completer) =>
+        ConditionSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

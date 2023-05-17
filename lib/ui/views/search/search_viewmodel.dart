@@ -7,8 +7,10 @@ import 'package:clean_air/core/keys.dart';
 import 'package:clean_air/models/search_data.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
+import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
+import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,6 +19,7 @@ class SearchViewModel extends FormViewModel
   final _aqiService = locator<AirQualityService>();
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();
+  final _networkService = locator<NetworkService>();
   final _favouritesService = locator<FavouritesService>();
   final _preferences = locator<SharedPreferencesService>();
 
@@ -27,7 +30,13 @@ class SearchViewModel extends FormViewModel
     listenToReactiveValues([_result]);
   }
 
+  NetworkStatus get networkStatus => _networkService.status;
+
   Future<void> onItemSelect(List<double> geo) async {
+    if (networkStatus == NetworkStatus.disconnected) {
+      return await HapticFeedback.vibrate();
+    }
+
     setBusy(true);
     final airQuality = await _aqiService.getAqiByGeo(geo[0], geo[1]);
 
@@ -77,7 +86,10 @@ class SearchViewModel extends FormViewModel
   }
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_favouritesService];
+  List<ListenableServiceMixin> get listenableServices => [
+        _favouritesService,
+        _networkService,
+      ];
 
   @override
   Future<void> initialise() async {

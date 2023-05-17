@@ -1,3 +1,4 @@
+import 'package:clean_air/models/condition.dart';
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/widgets/profile/profile_avatar.dart';
 import 'package:clean_air/ui/widgets/profile/profile_item.dart';
@@ -9,7 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'profile_viewmodel.dart';
 
 class ProfileView extends StackedView<ProfileViewModel> {
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
 
   @override
   Widget builder(context, viewModel, child) {
@@ -38,10 +39,11 @@ class ProfileView extends StackedView<ProfileViewModel> {
               onTap: viewModel.showEditProfileBottomSheet,
             ),
             10.verticalSpace,
-            const ProfileItem(
+            ProfileItem(
               'Change Health Condition',
-              showTrailing: false,
               leadingIcon: PhosphorIcons.heartbeat,
+              onTap: viewModel.navigateToConditionView,
+              subtitle: const _HealthConditionSubtitle(),
             ),
             10.verticalSpace,
             ProfileItem(
@@ -72,6 +74,29 @@ class ProfileView extends StackedView<ProfileViewModel> {
 
   @override
   ProfileViewModel viewModelBuilder(context) => ProfileViewModel();
+}
+
+class _HealthConditionSubtitle extends ViewModelWidget<ProfileViewModel> {
+  const _HealthConditionSubtitle();
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    final theme = Theme.of(context);
+
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10).r,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(4)).r,
+          color: viewModel.conditionedAQI.condition == Condition.none
+              ? theme.colorScheme.primaryContainer.withOpacity(0.2)
+              : Colors.green.shade300,
+        ),
+        child: Text(viewModel.conditionName),
+      ),
+    );
+  }
 }
 
 class _Location extends ViewModelWidget<ProfileViewModel> {

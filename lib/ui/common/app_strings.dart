@@ -47,3 +47,9 @@ const String kAboutApp =
 
 const String kRequiresRecentLoginErrorMessage =
     'This operation is sensitive and requires recent authentication. Log in again before retrying this request.';
+
+const String kAboutHealthCondition =
+    "Health Condition enables you to receive messages and health implications tailored to your selected condition. "
+    "This will keep you safe in your choice location and prevent you from inhaling harmful air."
+    "\n\nThe different health condition presets are: Asthma, Lung Cancer, High Blood Pressure, Emphysema, and Bronchitis."
+    "\n\nTo properly determine the health implications for each condition, the dominant pollutants available in the air from the choice location are put into consideration to deliver helpful tips.";

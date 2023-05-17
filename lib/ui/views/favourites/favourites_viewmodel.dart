@@ -4,8 +4,10 @@ import 'package:clean_air/app/app.snackbars.dart';
 import 'package:clean_air/models/search_data.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
+import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
 import 'package:clean_air/ui/layout/layout_viewmodel.dart';
+import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -15,12 +17,17 @@ class FavouritesViewModel extends ReactiveViewModel with Initialisable {
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();
   final _layoutViewModel = LayoutViewModel();
+  final _networkService = locator<NetworkService>();
 
   Set<SearchData?> get favouritesSet => _favouritesService.favourites;
   List<SearchData?> get favourites => favouritesSet.toList();
+  NetworkStatus get networkStatus => _networkService.status;
 
   @override
-  List<ListenableServiceMixin> get listenableServices => [_favouritesService];
+  List<ListenableServiceMixin> get listenableServices => [
+        _favouritesService,
+        _networkService,
+      ];
 
   @override
   Future<void> initialise() async {
@@ -33,6 +40,10 @@ class FavouritesViewModel extends ReactiveViewModel with Initialisable {
   }
 
   Future<void> onItemSelect(List<double> geo) async {
+    if (networkStatus == NetworkStatus.disconnected) {
+      return await HapticFeedback.vibrate();
+    }
+
     setBusy(true);
     final airQuality = await _aqiService.getAqiByGeo(geo[0], geo[1]);
 

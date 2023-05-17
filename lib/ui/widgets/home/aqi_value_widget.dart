@@ -28,8 +28,8 @@ class AqiValueWidget extends ViewModelWidget<HomeViewModel> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 0.35.sh,
-        width: 0.35.sh,
+        height: 0.7.sw,
+        width: 0.7.sw,
         margin: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
         padding: const EdgeInsets.all(8).r,
         child: Neumorphic(

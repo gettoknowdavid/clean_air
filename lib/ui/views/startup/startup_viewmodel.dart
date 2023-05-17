@@ -39,6 +39,7 @@ class StartupViewModel extends ReactiveViewModel {
 
       if (isAuthenticated && isEmailVerified == true) {
         await _airQualityService.getCurrentLocationAQI();
+        await _airQualityService.getConditionedAQI();
         _navigationService.clearStackAndShow(Routes.layoutView);
       }
     }

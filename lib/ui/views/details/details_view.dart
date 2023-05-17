@@ -1,8 +1,9 @@
 import 'package:clean_air/models/air_quality.dart';
+import 'package:clean_air/models/condition.dart';
 import 'package:clean_air/ui/common/app_constants.dart';
+import 'package:clean_air/ui/widgets/aqi_section.dart';
 import 'package:clean_air/ui/widgets/details/details_aqi_widget.dart';
 import 'package:clean_air/ui/widgets/details/dominant_pollutant.dart';
-import 'package:clean_air/ui/widgets/details/health_condition_widget.dart';
 import 'package:clean_air/ui/widgets/details/weather_grid_view.dart';
 import 'package:clean_air/ui/widgets/pollutants_grid_view.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class DetailsView extends StackedView<DetailsViewModel> {
             16.verticalSpace,
             PollutantsGridView(daily: airQuality.forecast!.daily!),
             16.verticalSpace,
-            const HealthConditionWidget(),
+            const _HealthConditionWidget(),
             16.verticalSpace,
             const WeatherGridView(),
             20.verticalSpace,
@@ -50,4 +51,38 @@ class DetailsView extends StackedView<DetailsViewModel> {
 
   @override
   DetailsViewModel viewModelBuilder(BuildContext context) => DetailsViewModel();
+}
+
+class _HealthConditionWidget extends ViewModelWidget<DetailsViewModel> {
+  const _HealthConditionWidget();
+
+  @override
+  Widget build(BuildContext context, DetailsViewModel viewModel) {
+    final textTheme = Theme.of(context).textTheme;
+    return AqiSection(
+      title: 'HEALTH CONDITION',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (viewModel.conditionAQI.condition != Condition.none) ...[
+            Text(
+              viewModel.conditionAQI.message!,
+              style: textTheme.bodyMedium?.copyWith(letterSpacing: 0),
+            ),
+            6.verticalSpace,
+          ],
+          FilledButton(
+            onPressed: viewModel.setHealthCondition,
+            style: FilledButton.styleFrom(
+              textStyle: textTheme.labelLarge,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(const Radius.circular(10).r),
+              ),
+            ),
+            child: Text(viewModel.conditionAQI.condition.name),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -28,6 +28,8 @@ const String _kTMHBP =
     'Present conditions may increase your blood pressure. Please wear a nose mask to protect yourself from the bad air.';
 const String _kTMLungCancer =
     'May lead to lung cancer. Please wear a nose mask to protect yourself from the bad air.';
+const String _kTMNone =
+    'No health condition selected. Please select your preferred health condition.';
 
 Color getColorLegend(int index) {
   switch (index ~/ 50) {
@@ -112,7 +114,8 @@ WeatherType getWeatherType(String name) {
   }
 }
 
-Map<Condition, Map<String, String>> _getTailoredMessages = {
+Map<Condition, Map<String?, String>> _getTailoredMessages = {
+  Condition.none: {null: _kTMNone},
   Condition.asthma: {'o3': _kTMAsthma, 'pm25': _kTMAsthma, 'pm10': _kTMAsthma},
   Condition.hbp: {'o3': _kTMHBP, 'pm25': _kTMHBP, 'pm10': _kTMHBP},
   Condition.emphysema: {
@@ -135,6 +138,6 @@ Map<Condition, Map<String, String>> _getTailoredMessages = {
   },
 };
 
-String? tailoredMessage(String dominantPol, Condition condition) {
+String? tailoredMessage(String? dominantPol, Condition condition) {
   return _getTailoredMessages[condition]?[dominantPol];
 }

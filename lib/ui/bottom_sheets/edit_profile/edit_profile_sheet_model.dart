@@ -5,6 +5,7 @@ import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/models/user.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/media_service.dart';
+import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:clean_air/ui/bottom_sheets/edit_profile/edit_profile_sheet.form.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -17,6 +18,7 @@ class EditProfileSheetModel extends FormViewModel with ListenableServiceMixin {
   final _authService = locator<AuthService>();
   final _bottomSheetService = locator<BottomSheetService>();
   final _mediaService = locator<MediaService>();
+  final _preferences = locator<SharedPreferencesService>();
 
   final _file = ReactiveValue<File?>(null);
   File? get file => _file.value;
@@ -43,6 +45,7 @@ class EditProfileSheetModel extends FormViewModel with ListenableServiceMixin {
       final ref = _mediaService.storageRef.child('images/avatar/$name');
       await _mediaService.uploadFileToCloud(_file.value!.path, name, ref);
       _avatar.value = await _mediaService.getFileFromCloud(ref);
+      await _preferences.writeImageFromNetwork(_avatar.value!);
     }
 
     final updatedUser = user?.copyWith(

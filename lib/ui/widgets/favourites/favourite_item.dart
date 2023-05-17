@@ -21,7 +21,9 @@ class FavouriteItem extends ViewModelWidget<FavouritesViewModel> {
     final time = item.time?.sTime;
 
     return ListTile(
-      onTap: () async => await viewModel.onItemSelect(geo!),
+      onTap: viewModel.isBusy
+          ? null
+          : () async => await viewModel.onItemSelect(geo!),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 14,
         vertical: 10,

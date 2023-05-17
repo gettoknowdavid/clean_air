@@ -6,6 +6,7 @@ class ProfileItem extends StatelessWidget {
   const ProfileItem(
     this.title, {
     super.key,
+    this.subtitle,
     this.leadingIcon,
     this.onTap,
     this.tileColor,
@@ -17,6 +18,7 @@ class ProfileItem extends StatelessWidget {
 
   final IconData? leadingIcon;
   final String title;
+  final Widget? subtitle;
   final void Function()? onTap;
   final Color? tileColor;
   final Color? iconColor;
@@ -37,6 +39,7 @@ class ProfileItem extends StatelessWidget {
         title,
         style: textTheme.bodyLarge?.copyWith(color: titleColor),
       ),
+      subtitle: subtitle,
       trailing: !loading
           ? showTrailing
               ? const Icon(PhosphorIcons.caretRight)

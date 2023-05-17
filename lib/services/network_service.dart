@@ -7,53 +7,42 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class NetworkService with ListenableServiceMixin {
-  final _status = ReactiveValue<NetworkStatus>(NetworkStatus.disconnected);
+  final _status = ReactiveValue<NetworkStatus>(NetworkStatus.connected);
 
   final _snackbarService = locator<SnackbarService>();
 
   NetworkService() {
+    listenToReactiveValues([_status]);
     listenForChange();
   }
 
   NetworkStatus get status => _status.value;
 
-  Future<void> checkConnectivity() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-    if (result == true) {
-      _status.value = NetworkStatus.connected;
-      _snackbarService.showCustomSnackBar(
-        duration: const Duration(seconds: 6),
-        variant: SnackbarType.networkOnline,
-        message: 'Back Online',
-      );
-    } else {
-      _status.value = NetworkStatus.disconnected;
-      _snackbarService.showCustomSnackBar(
-        duration: const Duration(seconds: 6),
-        variant: SnackbarType.networkOffline,
-        message: "You're Offline",
-      );
-    }
-  }
-
   StreamSubscription<InternetConnectionStatus> listenForChange() {
-    return InternetConnectionChecker().onStatusChange.listen((status) async {
-      switch (status) {
+    return InternetConnectionChecker().onStatusChange.listen((event) {
+      switch (event) {
         case InternetConnectionStatus.connected:
-          _status.value = NetworkStatus.connected;
-
+          if (_status.value != NetworkStatus.connected) {
+            _status.value = NetworkStatus.connected;
+            _snackbarService.closeSnackbar();
+            _snackbarService.showCustomSnackBar(
+              message: 'Back online.',
+              variant: SnackbarType.networkOnline,
+              duration: const Duration(seconds: 6),
+            );
+          }
           break;
-        case InternetConnectionStatus.disconnected:
-          _status.value = NetworkStatus.disconnected;
 
+        default:
+          _status.value = NetworkStatus.disconnected;
+          _snackbarService.showCustomSnackBar(
+            message: 'You are offline.',
+            variant: SnackbarType.networkOffline,
+            duration: const Duration(days: 1000),
+          );
           break;
       }
     });
-  }
-
-  @override
-  void listenToReactiveValues(List reactiveValues) {
-    super.listenToReactiveValues([_status]);
   }
 }
 

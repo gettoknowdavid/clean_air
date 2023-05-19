@@ -11,6 +11,7 @@ import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:clean_air/ui/bottom_sheets/condition/condition_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/image_source/image_source_sheet.dart';
+import 'package:clean_air/ui/bottom_sheets/info/info_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/reset_password/reset_password_sheet.dart';
 import 'package:clean_air/ui/common/app_theme.dart';
@@ -37,7 +38,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:clean_air/ui/bottom_sheets/info/info_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -119,10 +119,10 @@ class CleanAirApp extends StatelessWidget {
           onGenerateRoute: StackedRouter().onGenerateRoute,
           navigatorKey: StackedService.navigatorKey,
           navigatorObservers: [StackedService.routeObserver],
-          // builder: (context, child) => MediaQuery(
-          //   data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          //   child: child!,
-          // ),
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: child!,
+          ),
         );
       },
     );

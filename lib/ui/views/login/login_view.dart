@@ -1,8 +1,6 @@
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/common/validators.dart';
 import 'package:clean_air/ui/widgets/auth_redirect_button.dart';
-import 'package:clean_air/ui/widgets/login/google_button.dart';
-import 'package:clean_air/ui/widgets/login/or_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
@@ -40,10 +38,10 @@ class LoginView extends StackedView<LoginViewModel> {
               ),
               30.verticalSpace,
               LoginForm(),
-              10.verticalSpace,
-              const OrDivider(),
-              10.verticalSpace,
-              const GoogleButton(),
+              // 10.verticalSpace,
+              // const OrDivider(),
+              // 10.verticalSpace,
+              // const GoogleButton(),
               10.verticalSpace,
               AuthRedirectButton(
                 buttonLabel: 'Register',

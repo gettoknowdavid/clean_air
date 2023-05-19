@@ -51,7 +51,7 @@ dependencies:
   cloud_firestore: ^4.4.5
   firebase_storage: ^11.0.16
   cloud_firestore_odm: ^1.0.0-dev.52
-  google_sign_in: ^6.0.2
+  google_sign_in: ^6.1.0
 
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0

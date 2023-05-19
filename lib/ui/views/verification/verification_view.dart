@@ -21,9 +21,8 @@ class VerificationView extends StackedView<VerificationViewModel> {
           padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Spacer(),
               Text(
                 viewModel.isEmailVerified == true
                     ? kConfirmationTitle

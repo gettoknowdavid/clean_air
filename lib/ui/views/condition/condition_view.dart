@@ -16,10 +16,6 @@ class ConditionView extends StackedView<ConditionViewModel> {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     final colorScheme = theme.colorScheme;
-    final backgroundColor = colorScheme.primary.withOpacity(0.1);
-    final shape = RoundedRectangleBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(10)).r,
-    );
 
     if (viewModel.isBusy) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));

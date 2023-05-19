@@ -90,7 +90,7 @@ class _AppTextFieldState extends State<AppTextField> {
         hintText: widget.hint,
         alignLabelWithHint: true,
         labelText: widget.label,
-        prefixIcon: widget.prefixIcon,
+        prefixIcon: prefixIcon,
         suffixIcon: !widget.isPassword ? widget.suffixIcon : _suffixIcon(),
         contentPadding: padding,
       ),

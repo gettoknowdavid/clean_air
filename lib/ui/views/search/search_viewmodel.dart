@@ -7,7 +7,6 @@ import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/services/network_service.dart';
-import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
 import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
@@ -20,7 +19,6 @@ class SearchViewModel extends FormViewModel with ListenableServiceMixin {
   final _snackbarService = locator<SnackbarService>();
   final _networkService = locator<NetworkService>();
   final _favouritesService = locator<FavouritesService>();
-  final _preferences = locator<SharedPreferencesService>();
 
   final _result = ReactiveValue<List<SearchData?>>([]);
   List<SearchData?> get result => _aqiService.searchResult;

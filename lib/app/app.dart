@@ -30,7 +30,6 @@ import 'package:clean_air/ui/views/onboarding/onboarding_view.dart';
 import 'package:clean_air/ui/views/password_reset_confirmation/password_reset_confirmation_view.dart';
 import 'package:clean_air/ui/views/profile/profile_view.dart';
 import 'package:clean_air/ui/views/register/register_view.dart';
-import 'package:clean_air/ui/views/reset_password/reset_password_view.dart';
 import 'package:clean_air/ui/views/search/search_view.dart';
 import 'package:clean_air/ui/views/startup/startup_view.dart';
 import 'package:clean_air/ui/views/verification/verification_view.dart';
@@ -64,7 +63,6 @@ import 'package:clean_air/ui/bottom_sheets/info/info_sheet.dart';
     ),
     MaterialRoute(page: AboutView),
     MaterialRoute(page: AccountView),
-    MaterialRoute(page: ResetPasswordView),
 // @stacked-route
   ],
   dependencies: [

@@ -18,5 +18,5 @@ const Color kGreen = Colors.green;
 const Color kYellow = Colors.yellow;
 const Color kOrange = Colors.orange;
 const Color kRed = Colors.red;
-const Color kPurple = Color(0xFF4F008A);
-const Color kMaroon = Color(0xFF67001B);
+const Color kPurple = Colors.purple;
+const Color kMaroon = Color.fromARGB(255, 129, 4, 37);

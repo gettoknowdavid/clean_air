@@ -5,31 +5,29 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:clean_air/models/air_quality.dart' as _i20;
+import 'package:clean_air/models/air_quality.dart' as _i19;
 import 'package:clean_air/ui/layout/layout_view.dart' as _i9;
 import 'package:clean_air/ui/views/about/about_view.dart' as _i10;
 import 'package:clean_air/ui/views/account/account_view.dart' as _i11;
-import 'package:clean_air/ui/views/condition/condition_view.dart' as _i19;
-import 'package:clean_air/ui/views/details/details_view.dart' as _i15;
-import 'package:clean_air/ui/views/favourites/favourites_view.dart' as _i17;
+import 'package:clean_air/ui/views/condition/condition_view.dart' as _i18;
+import 'package:clean_air/ui/views/details/details_view.dart' as _i14;
+import 'package:clean_air/ui/views/favourites/favourites_view.dart' as _i16;
 import 'package:clean_air/ui/views/forgot_password/forgot_password_view.dart'
     as _i7;
-import 'package:clean_air/ui/views/home/home_view.dart' as _i14;
+import 'package:clean_air/ui/views/home/home_view.dart' as _i13;
 import 'package:clean_air/ui/views/login/login_view.dart' as _i4;
 import 'package:clean_air/ui/views/onboarding/onboarding_view.dart' as _i2;
 import 'package:clean_air/ui/views/password_reset_confirmation/password_reset_confirmation_view.dart'
     as _i8;
-import 'package:clean_air/ui/views/profile/profile_view.dart' as _i18;
+import 'package:clean_air/ui/views/profile/profile_view.dart' as _i17;
 import 'package:clean_air/ui/views/register/register_view.dart' as _i5;
-import 'package:clean_air/ui/views/reset_password/reset_password_view.dart'
-    as _i12;
-import 'package:clean_air/ui/views/search/search_view.dart' as _i16;
+import 'package:clean_air/ui/views/search/search_view.dart' as _i15;
 import 'package:clean_air/ui/views/startup/startup_view.dart' as _i3;
 import 'package:clean_air/ui/views/verification/verification_view.dart' as _i6;
-import 'package:flutter/material.dart' as _i13;
+import 'package:flutter/material.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i21;
+import 'package:stacked_services/stacked_services.dart' as _i20;
 
 class Routes {
   static const onboardingView = '/';
@@ -53,8 +51,6 @@ class Routes {
 
   static const accountView = '/account-view';
 
-  static const resetPasswordView = '/reset-password-view';
-
   static const all = <String>{
     onboardingView,
     startupView,
@@ -66,7 +62,6 @@ class Routes {
     layoutView,
     aboutView,
     accountView,
-    resetPasswordView,
   };
 }
 
@@ -112,43 +107,39 @@ class StackedRouter extends _i1.RouterBase {
       Routes.accountView,
       page: _i11.AccountView,
     ),
-    _i1.RouteDef(
-      Routes.resetPasswordView,
-      page: _i12.ResetPasswordView,
-    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.OnboardingView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.OnboardingView(),
         settings: data,
         maintainState: false,
       );
     },
     _i3.StartupView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
         maintainState: false,
       );
     },
     _i4.LoginView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
         maintainState: false,
       );
     },
     _i5.RegisterView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.RegisterView(),
         settings: data,
         maintainState: false,
       );
     },
     _i6.VerificationView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.VerificationView(),
         settings: data,
         maintainState: false,
@@ -158,27 +149,27 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<ForgotPasswordViewArguments>(
         orElse: () => const ForgotPasswordViewArguments(),
       );
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => _i7.ForgotPasswordView(key: args.key),
         settings: data,
         maintainState: false,
       );
     },
     _i8.PasswordResetConfirmationView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.PasswordResetConfirmationView(),
         settings: data,
         maintainState: false,
       );
     },
     _i9.LayoutView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.LayoutView(),
         settings: data,
       );
     },
     _i10.AboutView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.AboutView(),
         settings: data,
         maintainState: false,
@@ -188,15 +179,8 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<AccountViewArguments>(
         orElse: () => const AccountViewArguments(),
       );
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => _i11.AccountView(key: args.key),
-        settings: data,
-        maintainState: false,
-      );
-    },
-    _i12.ResetPasswordView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i12.ResetPasswordView(),
         settings: data,
         maintainState: false,
       );
@@ -212,7 +196,7 @@ class StackedRouter extends _i1.RouterBase {
 class ForgotPasswordViewArguments {
   const ForgotPasswordViewArguments({this.key});
 
-  final _i13.Key? key;
+  final _i12.Key? key;
 
   @override
   String toString() {
@@ -223,7 +207,7 @@ class ForgotPasswordViewArguments {
 class AccountViewArguments {
   const AccountViewArguments({this.key});
 
-  final _i13.Key? key;
+  final _i12.Key? key;
 
   @override
   String toString() {
@@ -258,74 +242,74 @@ class LayoutViewRouter extends _i1.RouterBase {
   final _routes = <_i1.RouteDef>[
     _i1.RouteDef(
       LayoutViewRoutes.homeView,
-      page: _i14.HomeView,
+      page: _i13.HomeView,
     ),
     _i1.RouteDef(
       LayoutViewRoutes.detailsView,
-      page: _i15.DetailsView,
+      page: _i14.DetailsView,
     ),
     _i1.RouteDef(
       LayoutViewRoutes.searchView,
-      page: _i16.SearchView,
+      page: _i15.SearchView,
     ),
     _i1.RouteDef(
       LayoutViewRoutes.favouritesView,
-      page: _i17.FavouritesView,
+      page: _i16.FavouritesView,
     ),
     _i1.RouteDef(
       LayoutViewRoutes.profileView,
-      page: _i18.ProfileView,
+      page: _i17.ProfileView,
     ),
     _i1.RouteDef(
       LayoutViewRoutes.conditionView,
-      page: _i19.ConditionView,
+      page: _i18.ConditionView,
     ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
-    _i14.HomeView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i14.HomeView(),
+    _i13.HomeView: (data) {
+      return _i12.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i13.HomeView(),
         settings: data,
         maintainState: false,
       );
     },
-    _i15.DetailsView: (data) {
+    _i14.DetailsView: (data) {
       final args = data.getArgs<NestedDetailsViewArguments>(nullOk: false);
-      return _i13.MaterialPageRoute<dynamic>(
+      return _i12.MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i15.DetailsView(key: args.key, airQuality: args.airQuality),
+            _i14.DetailsView(key: args.key, airQuality: args.airQuality),
         settings: data,
         maintainState: false,
       );
     },
-    _i16.SearchView: (data) {
+    _i15.SearchView: (data) {
       final args = data.getArgs<NestedSearchViewArguments>(
         orElse: () => const NestedSearchViewArguments(),
       );
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => _i16.SearchView(key: args.key),
+      return _i12.MaterialPageRoute<dynamic>(
+        builder: (context) => _i15.SearchView(key: args.key),
         settings: data,
         maintainState: false,
       );
     },
-    _i17.FavouritesView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i17.FavouritesView(),
+    _i16.FavouritesView: (data) {
+      return _i12.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i16.FavouritesView(),
         settings: data,
         maintainState: false,
       );
     },
-    _i18.ProfileView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i18.ProfileView(),
+    _i17.ProfileView: (data) {
+      return _i12.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i17.ProfileView(),
         settings: data,
         maintainState: false,
       );
     },
-    _i19.ConditionView: (data) {
-      return _i13.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i19.ConditionView(),
+    _i18.ConditionView: (data) {
+      return _i12.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i18.ConditionView(),
         settings: data,
         maintainState: false,
       );
@@ -344,9 +328,9 @@ class NestedDetailsViewArguments {
     required this.airQuality,
   });
 
-  final _i13.Key? key;
+  final _i12.Key? key;
 
-  final _i20.AirQuality airQuality;
+  final _i19.AirQuality airQuality;
 
   @override
   String toString() {
@@ -357,7 +341,7 @@ class NestedDetailsViewArguments {
 class NestedSearchViewArguments {
   const NestedSearchViewArguments({this.key});
 
-  final _i13.Key? key;
+  final _i12.Key? key;
 
   @override
   String toString() {
@@ -365,7 +349,7 @@ class NestedSearchViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i21.NavigationService {
+extension NavigatorStateExtension on _i20.NavigationService {
   Future<dynamic> navigateToOnboardingView([
     int? routerId,
     bool preventDuplicates = true,
@@ -437,7 +421,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> navigateToForgotPasswordView({
-    _i13.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -495,7 +479,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> navigateToAccountView({
-    _i13.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -504,20 +488,6 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }) async {
     return navigateTo<dynamic>(Routes.accountView,
         arguments: AccountViewArguments(key: key),
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> navigateToResetPasswordView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.resetPasswordView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -539,8 +509,8 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> navigateToNestedDetailsViewInLayoutViewRouter({
-    _i13.Key? key,
-    required _i20.AirQuality airQuality,
+    _i12.Key? key,
+    required _i19.AirQuality airQuality,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -556,7 +526,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> navigateToNestedSearchViewInLayoutViewRouter({
-    _i13.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -684,7 +654,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> replaceWithForgotPasswordView({
-    _i13.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -742,7 +712,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> replaceWithAccountView({
-    _i13.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -751,20 +721,6 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }) async {
     return replaceWith<dynamic>(Routes.accountView,
         arguments: AccountViewArguments(key: key),
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> replaceWithResetPasswordView([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.resetPasswordView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -786,8 +742,8 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> replaceWithNestedDetailsViewInLayoutViewRouter({
-    _i13.Key? key,
-    required _i20.AirQuality airQuality,
+    _i12.Key? key,
+    required _i19.AirQuality airQuality,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -803,7 +759,7 @@ extension NavigatorStateExtension on _i21.NavigationService {
   }
 
   Future<dynamic> replaceWithNestedSearchViewInLayoutViewRouter({
-    _i13.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,

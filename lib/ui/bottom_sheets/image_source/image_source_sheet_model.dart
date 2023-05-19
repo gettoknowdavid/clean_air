@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/services/media_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class ImageSourceSheetModel extends BaseViewModel with ListenableServiceMixin {
   ImageSourceSheetModel() {
@@ -11,7 +10,6 @@ class ImageSourceSheetModel extends BaseViewModel with ListenableServiceMixin {
   }
 
   final _mediaService = locator<MediaService>();
-  final _bottomSheetService = locator<BottomSheetService>();
 
   final _file = ReactiveValue<File?>(null);
   File? get file => _file.value;

@@ -32,14 +32,14 @@ class WeatherItem extends StatelessWidget {
           5.verticalSpace,
           AutoSizeText(
             value,
-            maxFontSize: 20,
+            maxFontSize: 18,
             maxLines: 1,
             style: textTheme.titleLarge,
           ),
           5.verticalSpace,
           AutoSizeText(
             type.toUnit(),
-            maxFontSize: 14,
+            maxFontSize: 12,
             maxLines: 1,
             style: textTheme.bodySmall?.copyWith(
               color: textTheme.bodySmall?.color?.withOpacity(0.4),

@@ -10,6 +10,7 @@ import 'app.locator.dart';
 import '../ui/bottom_sheets/condition/condition_sheet.dart';
 import '../ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
 import '../ui/bottom_sheets/image_source/image_source_sheet.dart';
+import '../ui/bottom_sheets/info/info_sheet.dart';
 import '../ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
 import '../ui/bottom_sheets/reset_password/reset_password_sheet.dart';
 
@@ -19,6 +20,7 @@ enum BottomSheetType {
   resetPassword,
   passwordConfirmation,
   condition,
+  info,
 }
 
 void setupBottomSheetUi() {
@@ -35,6 +37,8 @@ void setupBottomSheetUi() {
         PasswordConfirmationSheet(request: request, completer: completer),
     BottomSheetType.condition: (context, request, completer) =>
         ConditionSheet(request: request, completer: completer),
+    BottomSheetType.info: (context, request, completer) =>
+        InfoSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

@@ -20,7 +20,7 @@ class ImageSourceSheet extends StackedView<ImageSourceSheetModel> {
     final theme = Theme.of(context);
 
     return Container(
-      color: theme.bottomSheetTheme.backgroundColor,
+      color: theme.colorScheme.background,
       child: Wrap(
         children: [
           6.verticalSpace,

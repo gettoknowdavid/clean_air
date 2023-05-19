@@ -14,7 +14,7 @@ class AqiSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final containerColor = theme.brightness == Brightness.light
-        ? theme.colorScheme.tertiaryContainer.withOpacity(0.1)
+        ? theme.colorScheme.primaryContainer.withOpacity(0.2)
         : theme.colorScheme.background;
 
     return Container(

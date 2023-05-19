@@ -18,6 +18,7 @@ class HomeViewModel extends ReactiveViewModel
   final _authService = locator<AuthService>();
   final _airQualityService = locator<AirQualityService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _dialogService = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
 
   AirQuality? get airQuality => _airQualityService.appAQI;
@@ -53,7 +54,8 @@ class HomeViewModel extends ReactiveViewModel
   }
 
   Future<void> onTapCityName() async {
-    await _bottomSheetService.showBottomSheet(
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.info,
       title: 'Air Quality Sensor Station',
       description:
           'Showing the nearest air quality sensor station to your current location.',

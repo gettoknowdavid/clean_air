@@ -28,7 +28,7 @@ class ConditionSheet extends StackedView<ConditionSheetModel> {
 
     children.add(
       Padding(
-        padding: const EdgeInsets.only(top: 4, bottom: 16).r,
+        padding: const EdgeInsets.symmetric(vertical: 14).r,
         child: Text(
           'Select preferred health condition',
           style: textTheme.bodyLarge,

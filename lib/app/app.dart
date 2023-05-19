@@ -38,6 +38,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:clean_air/ui/bottom_sheets/info/info_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -97,6 +98,7 @@ import 'package:stacked_services/stacked_services.dart';
     StackedBottomsheet(classType: ResetPasswordSheet),
     StackedBottomsheet(classType: PasswordConfirmationSheet),
     StackedBottomsheet(classType: ConditionSheet),
+    StackedBottomsheet(classType: InfoSheet),
 // @stacked-bottom-sheets
   ],
 )

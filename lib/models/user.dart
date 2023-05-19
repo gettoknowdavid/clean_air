@@ -9,6 +9,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @Collection<User>('users')
+@Collection<Favourite>('users/*/favourites')
 @freezed
 @JsonSerializable(createFactory: false)
 class User with _$User {
@@ -44,3 +45,39 @@ const _$$_UserFieldMap = <String, String>{
   'avatar': 'avatar',
   'verified': 'verified',
 };
+
+@freezed
+@JsonSerializable(createFactory: false, explicitToJson: true)
+class Favourite with _$Favourite {
+  factory Favourite({
+    required dynamic uid,
+    dynamic aqi,
+    String? name,
+    List<double>? geo,
+    @FirestoreTimestampConverter() DateTime? time,
+  }) = _Favourite;
+
+  factory Favourite.fromJson(Map<String, dynamic> json) =>
+      _$FavouriteFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$FavouriteToJson(this);
+}
+
+const _$$_FavouriteFieldMap = <String, String>{
+  'uid': 'uid',
+  'aqi': 'aqi',
+  'name': 'name',
+  'geo': 'geo',
+  'time': 'time',
+};
+
+
+// class FirestoreDateTimeConverter extends JsonConverter<DateTime, Timestamp> {
+//   const FirestoreDateTimeConverter();
+//   @override
+//   DateTime fromJson(Timestamp json) => json.toDate();
+
+//   @override
+//   Timestamp toJson(DateTime object) => Timestamp.fromDate(object);
+// }

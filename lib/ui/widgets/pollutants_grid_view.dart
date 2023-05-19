@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+
+
 class PollutantsGridView extends StatelessWidget {
   final Daily daily;
   final DateTime? pollutionDay;
@@ -28,7 +31,12 @@ class PollutantsGridView extends StatelessWidget {
       final currentPoll = v.firstWhere((e) =>
           e.day!.day ==
           (pollutionDay == null ? DateTime.now().day : pollutionDay!.day));
-      _pollutants.add(PollutantItem(value: '${currentPoll.avg}', name: name));
+      _pollutants.add(
+        PollutantItem(
+          value: '${currentPoll.avg}',
+          name: name,
+        ),
+      );
     }
 
     return AqiSection(

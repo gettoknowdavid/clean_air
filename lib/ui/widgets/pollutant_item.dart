@@ -7,14 +7,18 @@ class PollutantItem extends StatelessWidget {
   final String value;
   final String name;
 
-  const PollutantItem({super.key, required this.value, required this.name});
+  const PollutantItem({
+    super.key,
+    required this.value,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
-    final valuePercentage = int.parse(value) / 300 * 100;
+    final valuePercentage = int.parse(value) / 500 * 100;
     final pollutantColor = getColorLegend(int.parse(value));
 
     return SizedBox(
@@ -47,7 +51,7 @@ class PollutantItem extends StatelessWidget {
           ),
           10.horizontalSpace,
           Container(
-            height: 34.r,
+            height: 30.r,
             width: 3.r,
             alignment: Alignment.bottomCenter,
             decoration: BoxDecoration(

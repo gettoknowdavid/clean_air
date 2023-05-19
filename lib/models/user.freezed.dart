@@ -218,3 +218,239 @@ abstract class _User implements User {
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
 }
+
+Favourite _$FavouriteFromJson(Map<String, dynamic> json) {
+  return _Favourite.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Favourite {
+  dynamic get uid => throw _privateConstructorUsedError;
+  dynamic get aqi => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  List<double>? get geo => throw _privateConstructorUsedError;
+  @FirestoreTimestampConverter()
+  DateTime? get time => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FavouriteCopyWith<Favourite> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FavouriteCopyWith<$Res> {
+  factory $FavouriteCopyWith(Favourite value, $Res Function(Favourite) then) =
+      _$FavouriteCopyWithImpl<$Res, Favourite>;
+  @useResult
+  $Res call(
+      {dynamic uid,
+      dynamic aqi,
+      String? name,
+      List<double>? geo,
+      @FirestoreTimestampConverter() DateTime? time});
+}
+
+/// @nodoc
+class _$FavouriteCopyWithImpl<$Res, $Val extends Favourite>
+    implements $FavouriteCopyWith<$Res> {
+  _$FavouriteCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = freezed,
+    Object? aqi = freezed,
+    Object? name = freezed,
+    Object? geo = freezed,
+    Object? time = freezed,
+  }) {
+    return _then(_value.copyWith(
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      aqi: freezed == aqi
+          ? _value.aqi
+          : aqi // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      geo: freezed == geo
+          ? _value.geo
+          : geo // ignore: cast_nullable_to_non_nullable
+              as List<double>?,
+      time: freezed == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_FavouriteCopyWith<$Res> implements $FavouriteCopyWith<$Res> {
+  factory _$$_FavouriteCopyWith(
+          _$_Favourite value, $Res Function(_$_Favourite) then) =
+      __$$_FavouriteCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {dynamic uid,
+      dynamic aqi,
+      String? name,
+      List<double>? geo,
+      @FirestoreTimestampConverter() DateTime? time});
+}
+
+/// @nodoc
+class __$$_FavouriteCopyWithImpl<$Res>
+    extends _$FavouriteCopyWithImpl<$Res, _$_Favourite>
+    implements _$$_FavouriteCopyWith<$Res> {
+  __$$_FavouriteCopyWithImpl(
+      _$_Favourite _value, $Res Function(_$_Favourite) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = freezed,
+    Object? aqi = freezed,
+    Object? name = freezed,
+    Object? geo = freezed,
+    Object? time = freezed,
+  }) {
+    return _then(_$_Favourite(
+      uid: freezed == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      aqi: freezed == aqi
+          ? _value.aqi
+          : aqi // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      geo: freezed == geo
+          ? _value._geo
+          : geo // ignore: cast_nullable_to_non_nullable
+              as List<double>?,
+      time: freezed == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Favourite implements _Favourite {
+  _$_Favourite(
+      {required this.uid,
+      this.aqi,
+      this.name,
+      final List<double>? geo,
+      @FirestoreTimestampConverter() this.time})
+      : _geo = geo;
+
+  factory _$_Favourite.fromJson(Map<String, dynamic> json) =>
+      _$$_FavouriteFromJson(json);
+
+  @override
+  final dynamic uid;
+  @override
+  final dynamic aqi;
+  @override
+  final String? name;
+  final List<double>? _geo;
+  @override
+  List<double>? get geo {
+    final value = _geo;
+    if (value == null) return null;
+    if (_geo is EqualUnmodifiableListView) return _geo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  @FirestoreTimestampConverter()
+  final DateTime? time;
+
+  @override
+  String toString() {
+    return 'Favourite(uid: $uid, aqi: $aqi, name: $name, geo: $geo, time: $time)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_Favourite &&
+            const DeepCollectionEquality().equals(other.uid, uid) &&
+            const DeepCollectionEquality().equals(other.aqi, aqi) &&
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._geo, _geo) &&
+            (identical(other.time, time) || other.time == time));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(uid),
+      const DeepCollectionEquality().hash(aqi),
+      name,
+      const DeepCollectionEquality().hash(_geo),
+      time);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_FavouriteCopyWith<_$_Favourite> get copyWith =>
+      __$$_FavouriteCopyWithImpl<_$_Favourite>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_FavouriteToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Favourite implements Favourite {
+  factory _Favourite(
+      {required final dynamic uid,
+      final dynamic aqi,
+      final String? name,
+      final List<double>? geo,
+      @FirestoreTimestampConverter() final DateTime? time}) = _$_Favourite;
+
+  factory _Favourite.fromJson(Map<String, dynamic> json) =
+      _$_Favourite.fromJson;
+
+  @override
+  dynamic get uid;
+  @override
+  dynamic get aqi;
+  @override
+  String? get name;
+  @override
+  List<double>? get geo;
+  @override
+  @FirestoreTimestampConverter()
+  DateTime? get time;
+  @override
+  @JsonKey(ignore: true)
+  _$$_FavouriteCopyWith<_$_Favourite> get copyWith =>
+      throw _privateConstructorUsedError;
+}

@@ -61,12 +61,6 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
   }
 
   @override
-  bool get disposeViewModel => false;
-
-  @override
-  bool get initialiseSpecialViewModelsOnce => true;
-
-  @override
   void onViewModelReady(SearchViewModel viewModel) {
     syncFormWithViewModel(viewModel);
   }

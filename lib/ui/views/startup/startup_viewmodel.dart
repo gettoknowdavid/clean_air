@@ -2,6 +2,7 @@ import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
+import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:stacked/stacked.dart';
@@ -10,6 +11,7 @@ import 'package:stacked_services/stacked_services.dart';
 class StartupViewModel extends ReactiveViewModel {
   final _authService = locator<AuthService>();
   final _airQualityService = locator<AirQualityService>();
+  final _favouriteService = locator<FavouritesService>();
   final _navigationService = locator<NavigationService>();
   final _preferences = locator<SharedPreferencesService>();
 
@@ -40,6 +42,7 @@ class StartupViewModel extends ReactiveViewModel {
       if (isAuthenticated && isEmailVerified == true) {
         await _airQualityService.getCurrentLocationAQI();
         await _airQualityService.getConditionedAQI();
+        await _favouriteService.retrieveAllFavourites();
         _navigationService.clearStackAndShow(Routes.layoutView);
       }
     }

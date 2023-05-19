@@ -21,6 +21,7 @@ class AirQualityService with ListenableServiceMixin {
   final _networkService = locator<NetworkService>();
   final _preferences = locator<SharedPreferencesService>();
   final _appAQI = ReactiveValue<AirQuality?>(null);
+  final _searchResult = ReactiveValue<List<SearchData?>>([]);
   final _allPollutants = ReactiveValue<List<Pollutant>>([]);
   final _conditionedAQI = ReactiveValue<CAirQuality>(CAirQuality.none());
 
@@ -31,11 +32,14 @@ class AirQualityService with ListenableServiceMixin {
         _networkService.status == NetworkStatus.disconnected) {
       // ...
     }
+
+    // persistResult();
   }
 
   AirQuality? get appAQI => _appAQI.value;
   List<Pollutant> get pollutants => _allPollutants.value;
   CAirQuality get conditionedAQI => _conditionedAQI.value;
+  List<SearchData?> get searchResult => _searchResult.value;
 
   Future<AirQuality?> getAqiByGeo(double lat, double lon) async {
     try {
@@ -68,18 +72,33 @@ class AirQualityService with ListenableServiceMixin {
 
   Future<List<SearchData?>> searchByName(String keyword) async {
     try {
-      final result = await _client.searchByName(keyword);
-      if (result.data == null) {
+      final response = await _client.searchByName(keyword);
+      final result = response.data?.where((e) => e?.aqi != '-').toList();
+      if (result == null) {
+        _searchResult.value = [];
+        notifyListeners();
         return [];
       } else {
-        final strgs = result.data?.map((e) => jsonEncode(e!.toJson())).toList();
-        await _preferences.writeList(key: kSearchResultKey, value: strgs!);
+        _searchResult.value = result;
+        notifyListeners();
+        // final strgs = result.map((e) => jsonEncode(e!.toJson())).toList();
+        // await _preferences.writeList(key: kSearchResultKey, value: strgs);
 
-        return result.data!;
+        return result;
       }
     } on DioError {
       return [];
     }
+  }
+
+  Future<void> persistResult() async {
+    await _preferences.delete(kSearchResultKey);
+    // if (_preferences.hasKey(kSearchResultKey)) {
+    //   List<String> list = _preferences.readList(kSearchResultKey);
+    //   _searchResult.value =
+    //       list.map((e) => SearchData.fromJson(jsonDecode(e))).toList();
+    //   notifyListeners();
+    // }
   }
 
   Future<CAirQuality?> getConditionedAQI() async {

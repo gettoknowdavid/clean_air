@@ -7,11 +7,11 @@ import 'dart:async' as _i3;
 import 'dart:ui' as _i8;
 
 import 'package:clean_air/core/errors/auth_error.dart' as _i10;
-import 'package:clean_air/models/air_quality.dart' as _i19;
+import 'package:clean_air/models/air_quality.dart' as _i20;
 import 'package:clean_air/models/c_air_quality.dart' as _i4;
 import 'package:clean_air/models/condition.dart' as _i21;
 import 'package:clean_air/models/pollutant.dart' as _i18;
-import 'package:clean_air/models/search_data.dart' as _i20;
+import 'package:clean_air/models/search_data.dart' as _i19;
 import 'package:clean_air/models/user.dart' as _i11;
 import 'package:clean_air/services/air_quality_service.dart' as _i17;
 import 'package:clean_air/services/auth_service.dart' as _i9;
@@ -1239,13 +1239,19 @@ class MockAirQualityService extends _i1.Mock implements _i17.AirQualityService {
         ),
       ) as _i4.CAirQuality);
   @override
+  List<_i19.SearchData?> get searchResult => (super.noSuchMethod(
+        Invocation.getter(#searchResult),
+        returnValue: <_i19.SearchData?>[],
+        returnValueForMissingStub: <_i19.SearchData?>[],
+      ) as List<_i19.SearchData?>);
+  @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  _i3.Future<_i19.AirQuality?> getAqiByGeo(
+  _i3.Future<_i20.AirQuality?> getAqiByGeo(
     double? lat,
     double? lon,
   ) =>
@@ -1257,30 +1263,39 @@ class MockAirQualityService extends _i1.Mock implements _i17.AirQualityService {
             lon,
           ],
         ),
-        returnValue: _i3.Future<_i19.AirQuality?>.value(),
-        returnValueForMissingStub: _i3.Future<_i19.AirQuality?>.value(),
-      ) as _i3.Future<_i19.AirQuality?>);
+        returnValue: _i3.Future<_i20.AirQuality?>.value(),
+        returnValueForMissingStub: _i3.Future<_i20.AirQuality?>.value(),
+      ) as _i3.Future<_i20.AirQuality?>);
   @override
-  _i3.Future<_i19.AirQuality?> getCurrentLocationAQI() => (super.noSuchMethod(
+  _i3.Future<_i20.AirQuality?> getCurrentLocationAQI() => (super.noSuchMethod(
         Invocation.method(
           #getCurrentLocationAQI,
           [],
         ),
-        returnValue: _i3.Future<_i19.AirQuality?>.value(),
-        returnValueForMissingStub: _i3.Future<_i19.AirQuality?>.value(),
-      ) as _i3.Future<_i19.AirQuality?>);
+        returnValue: _i3.Future<_i20.AirQuality?>.value(),
+        returnValueForMissingStub: _i3.Future<_i20.AirQuality?>.value(),
+      ) as _i3.Future<_i20.AirQuality?>);
   @override
-  _i3.Future<List<_i20.SearchData?>> searchByName(String? keyword) =>
+  _i3.Future<List<_i19.SearchData?>> searchByName(String? keyword) =>
       (super.noSuchMethod(
         Invocation.method(
           #searchByName,
           [keyword],
         ),
         returnValue:
-            _i3.Future<List<_i20.SearchData?>>.value(<_i20.SearchData?>[]),
+            _i3.Future<List<_i19.SearchData?>>.value(<_i19.SearchData?>[]),
         returnValueForMissingStub:
-            _i3.Future<List<_i20.SearchData?>>.value(<_i20.SearchData?>[]),
-      ) as _i3.Future<List<_i20.SearchData?>>);
+            _i3.Future<List<_i19.SearchData?>>.value(<_i19.SearchData?>[]),
+      ) as _i3.Future<List<_i19.SearchData?>>);
+  @override
+  _i3.Future<void> persistResult() => (super.noSuchMethod(
+        Invocation.method(
+          #persistResult,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
   @override
   _i3.Future<_i4.CAirQuality?> getConditionedAQI() => (super.noSuchMethod(
         Invocation.method(
@@ -1346,11 +1361,11 @@ class MockAirQualityService extends _i1.Mock implements _i17.AirQualityService {
 /// See the documentation for Mockito's code generation for more information.
 class MockFavouritesService extends _i1.Mock implements _i22.FavouritesService {
   @override
-  Set<_i20.SearchData?> get favourites => (super.noSuchMethod(
+  Set<_i11.Favourite?> get favourites => (super.noSuchMethod(
         Invocation.getter(#favourites),
-        returnValue: <_i20.SearchData?>{},
-        returnValueForMissingStub: <_i20.SearchData?>{},
-      ) as Set<_i20.SearchData?>);
+        returnValue: <_i11.Favourite?>{},
+        returnValueForMissingStub: <_i11.Favourite?>{},
+      ) as Set<_i11.Favourite?>);
   @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
@@ -1358,7 +1373,7 @@ class MockFavouritesService extends _i1.Mock implements _i22.FavouritesService {
         returnValueForMissingStub: 0,
       ) as int);
   @override
-  bool isFavourite(_i20.SearchData? item) => (super.noSuchMethod(
+  bool isFavourite(_i11.Favourite? item) => (super.noSuchMethod(
         Invocation.method(
           #isFavourite,
           [item],
@@ -1367,8 +1382,7 @@ class MockFavouritesService extends _i1.Mock implements _i22.FavouritesService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
-  _i3.Future<void> removeFavourite(_i20.SearchData? item) =>
-      (super.noSuchMethod(
+  _i3.Future<void> removeFavourite(_i11.Favourite? item) => (super.noSuchMethod(
         Invocation.method(
           #removeFavourite,
           [item],
@@ -1386,10 +1400,17 @@ class MockFavouritesService extends _i1.Mock implements _i22.FavouritesService {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
-  _i3.Future<void> onFavouriteTap(_i20.SearchData? item) => (super.noSuchMethod(
+  _i3.Future<void> onFavouriteTap(
+    _i11.Favourite? item,
+    String? userId,
+  ) =>
+      (super.noSuchMethod(
         Invocation.method(
           #onFavouriteTap,
-          [item],
+          [
+            item,
+            userId,
+          ],
         ),
         returnValue: _i3.Future<void>.value(),
         returnValueForMissingStub: _i3.Future<void>.value(),

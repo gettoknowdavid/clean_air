@@ -2,47 +2,74 @@ import 'dart:convert';
 
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/core/keys.dart';
-import 'package:clean_air/models/search_data.dart';
-import 'package:clean_air/services/shared_preferences_service.dart';
+import 'package:clean_air/models/user.dart';
 import 'package:stacked/stacked.dart';
 
+import 'auth_service.dart';
+import 'network_service.dart';
+import 'shared_preferences_service.dart';
+
 class FavouritesService with ListenableServiceMixin {
+  final _authService = locator<AuthService>();
+  final _networkService = locator<NetworkService>();
   final _preferences = locator<SharedPreferencesService>();
 
-  final _favourites = ReactiveValue<Set<SearchData?>>(<SearchData?>{});
+  final _favourites = ReactiveValue<Set<Favourite?>>(<Favourite?>{});
+
   FavouritesService() {
     listenToReactiveValues([_favourites]);
-    retrieveAllFavourites();
   }
 
-  Set<SearchData?> get favourites => _favourites.value;
+  NetworkStatus get networkStatus => _networkService.status;
+  User get user => _authService.currentUser!;
 
-  // Future<void> addFavourite(SearchData item) async {
-  //   _favourites.value.add(item);
-  //   await updateLocal();
-  // }
+  Set<Favourite?> get favourites => _favourites.value;
 
-  bool isFavourite(SearchData item) => _favourites.value.contains(item);
+  bool isFavourite(Favourite item) => _favourites.value.contains(item);
 
-  Future<void> removeFavourite(SearchData item) async {
+  Future<void> removeFavourite(Favourite item) async {
     _favourites.value.remove(item);
-    await updateLocal();
+    notifyListeners();
+    final favouritesRef = userRef.doc(user.uid).favourites;
+    await favouritesRef.doc('${item.uid}').delete();
   }
 
   Future<void> retrieveAllFavourites() async {
-    final fSetJson = _preferences.read(kFavouritesKey) ?? '[]';
-    final fSetMap = jsonDecode(fSetJson) as List<dynamic>;
-    _favourites.value = fSetMap.map((e) => SearchData.fromJson(e)).toSet();
+    if (networkStatus == NetworkStatus.connected) {
+      await pullFromCloud();
+    } else {
+      pullFromLocal();
+    }
   }
 
-  Future<void> onFavouriteTap(SearchData item) async {
+  Future<void> pullFromLocal() async {
+    final fSetJson = _preferences.read(kFavouritesKey) ?? '[]';
+    final fSetMap = jsonDecode(fSetJson) as List<dynamic>;
+    _favourites.value = fSetMap.map((e) => Favourite.fromJson(e)).toSet();
+    notifyListeners();
+  }
+
+  Future<void> pullFromCloud() async {
+    final favouritesRef = userRef.doc(user.uid).favourites;
+    final snapshots = await favouritesRef.get();
+    final favSet = snapshots.docs.map((e) => e.data).toSet();
+    _favourites.value = favSet;
+    await updateLocal();
+  }
+
+  Future<void> onFavouriteTap(Favourite item) async {
+    final favouritesRef = userRef.doc(user.uid).favourites;
+    final doc = favouritesRef.doc('${item.uid}');
+
     if (_favourites.value.contains(item)) {
       _favourites.value.remove(item);
+      notifyListeners();
+      doc.delete();
     } else {
       _favourites.value.add(item);
+      notifyListeners();
+      doc.set(item);
     }
-    await updateLocal();
-    notifyListeners();
   }
 
   Future<void> updateLocal() async {

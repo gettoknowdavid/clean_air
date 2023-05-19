@@ -1,4 +1,4 @@
-import 'package:clean_air/models/search_data.dart';
+import 'package:clean_air/models/user.dart';
 import 'package:clean_air/ui/widgets/app_empty_state.dart';
 import 'package:clean_air/ui/widgets/app_loading_indicator.dart';
 import 'package:clean_air/ui/widgets/favourites/favourite_item.dart';
@@ -33,11 +33,11 @@ class FavouritesView extends StackedView<FavouritesViewModel> {
 }
 
 class _FavouritesList
-    extends SelectorViewModelWidget<FavouritesViewModel, List<SearchData?>> {
+    extends SelectorViewModelWidget<FavouritesViewModel, List<Favourite?>> {
   const _FavouritesList();
 
   @override
-  Widget build(BuildContext context, List<SearchData?> value) {
+  Widget build(BuildContext context, List<Favourite?> value) {
     if (value.isEmpty) {
       return const Center(child: AppEmptyState());
     }
@@ -52,5 +52,5 @@ class _FavouritesList
   }
 
   @override
-  List<SearchData?> selector(viewModel) => viewModel.favourites;
+  List<Favourite?> selector(viewModel) => viewModel.favourites;
 }

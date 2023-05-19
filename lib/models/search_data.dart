@@ -10,10 +10,10 @@ part 'search_data.g.dart';
 @JsonSerializable(createFactory: false, explicitToJson: true)
 class SearchData with _$SearchData {
   factory SearchData({
+    dynamic uid,
     dynamic aqi,
-    int? idx,
-    City? station,
     Time? time,
+    City? station,
   }) = _SearchData;
 
   factory SearchData.fromJson(Map<String, dynamic> json) =>

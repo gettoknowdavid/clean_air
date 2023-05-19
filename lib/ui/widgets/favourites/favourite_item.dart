@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clean_air/core/utils/aqi_helpers.dart';
-import 'package:clean_air/models/search_data.dart';
+import 'package:clean_air/models/user.dart';
 import 'package:clean_air/ui/views/favourites/favourites_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +9,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 
 class FavouriteItem extends ViewModelWidget<FavouritesViewModel> {
-  final SearchData item;
+  final Favourite item;
 
   const FavouriteItem({super.key, required this.item});
 
@@ -17,8 +17,8 @@ class FavouriteItem extends ViewModelWidget<FavouritesViewModel> {
   Widget build(BuildContext context, FavouritesViewModel viewModel) {
     final textTheme = Theme.of(context).textTheme;
 
-    final geo = item.station?.geo;
-    final time = item.time?.sTime;
+    final geo = item.geo;
+    final time = item.time;
 
     return ListTile(
       onTap: viewModel.isBusy
@@ -74,7 +74,7 @@ class FavouriteItem extends ViewModelWidget<FavouritesViewModel> {
 
   Widget _buildDate(TextTheme textTheme) {
     return Text(
-      DateFormat.yMMMMEEEEd().format(item.time!.sTime!),
+      DateFormat.yMMMMEEEEd().format(item.time!),
       style: textTheme.bodySmall?.copyWith(
         color: textTheme.bodySmall?.color?.withOpacity(0.5),
       ),
@@ -83,7 +83,7 @@ class FavouriteItem extends ViewModelWidget<FavouritesViewModel> {
 
   AutoSizeText _buildStationName() {
     return AutoSizeText(
-      '${item.station?.name}',
+      '${item.name}',
       maxLines: 1,
       minFontSize: 14,
       maxFontSize: 16,

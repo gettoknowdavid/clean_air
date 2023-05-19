@@ -1,8 +1,9 @@
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/app/app.snackbars.dart';
-import 'package:clean_air/models/search_data.dart';
+import 'package:clean_air/models/user.dart';
 import 'package:clean_air/services/air_quality_service.dart';
+import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
@@ -11,28 +12,30 @@ import 'package:flutter/services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class FavouritesViewModel extends ReactiveViewModel with Initialisable {
+class FavouritesViewModel extends ReactiveViewModel {
   final _aqiService = locator<AirQualityService>();
+  final _authService = locator<AuthService>();
   final _favouritesService = locator<FavouritesService>();
   final _navigationService = locator<NavigationService>();
   final _snackbarService = locator<SnackbarService>();
   final _layoutViewModel = LayoutViewModel();
   final _networkService = locator<NetworkService>();
 
-  Set<SearchData?> get favouritesSet => _favouritesService.favourites;
-  List<SearchData?> get favourites => favouritesSet.toList();
+  FavouritesViewModel() {
+    _favouritesService.pullFromCloud();
+  }
+
+  Set<Favourite?> get favouritesSet => _favouritesService.favourites;
+  List<Favourite?> get favourites => favouritesSet.toList();
   NetworkStatus get networkStatus => _networkService.status;
+  User get user => _authService.currentUser!;
 
   @override
   List<ListenableServiceMixin> get listenableServices => [
+        _authService,
         _favouritesService,
         _networkService,
       ];
-
-  @override
-  Future<void> initialise() async {
-    await _favouritesService.retrieveAllFavourites();
-  }
 
   void navigateToSearchView() {
     _layoutViewModel.handleNavigation(1);
@@ -63,12 +66,13 @@ class FavouritesViewModel extends ReactiveViewModel with Initialisable {
     }
   }
 
-  Future<void> delete(SearchData item) async {
+  Future<void> delete(Favourite item) async {
     await _favouritesService.removeFavourite(item);
     notifyListeners();
+    await _favouritesService.updateLocal();
   }
 
-  bool isFavourite(SearchData item) {
+  bool isFavourite(Favourite item) {
     return _favouritesService.isFavourite(item);
   }
 }

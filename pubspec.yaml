@@ -79,6 +79,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   image_picker: ^0.8.7+4
   uuid: ^3.0.7
+  stacked_themes: ^0.3.10
   intl:
 
 dev_dependencies:

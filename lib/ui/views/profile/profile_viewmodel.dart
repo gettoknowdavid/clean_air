@@ -12,8 +12,10 @@ import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 
 class ProfileViewModel extends ReactiveViewModel with ListenableServiceMixin {
   final _aqiService = locator<AirQualityService>();
@@ -77,6 +79,36 @@ class ProfileViewModel extends ReactiveViewModel with ListenableServiceMixin {
       final result = await _preferences.readImage(kProfileImageKey);
       _localProfileAvatar.value = result;
       notifyListeners();
+    }
+  }
+
+  ThemeMode? selectedThemeMode(BuildContext context) {
+    return getThemeManager(context).selectedThemeMode;
+  }
+
+  Future<void> showThemeBottomSheet() async {
+    await _bottomSheetService.showCustomSheet(variant: BottomSheetType.theme);
+  }
+
+  String getThemeModeName(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.dark:
+        return 'Dark Mode';
+      case ThemeMode.light:
+        return 'Light Mode';
+      default:
+        return 'System';
+    }
+  }
+
+  IconData getIcon(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.dark:
+        return PhosphorIcons.moon;
+      case ThemeMode.light:
+        return PhosphorIcons.sun;
+      default:
+        return PhosphorIcons.nut;
     }
   }
 

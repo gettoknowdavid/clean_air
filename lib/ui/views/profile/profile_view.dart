@@ -15,6 +15,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
   @override
   Widget builder(context, viewModel, child) {
     final theme = Theme.of(context);
+    final mode = viewModel.selectedThemeMode(context) ?? ThemeMode.system;
 
     if (viewModel.isBusy) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -44,6 +45,14 @@ class ProfileView extends StackedView<ProfileViewModel> {
               leadingIcon: PhosphorIcons.heartbeat,
               onTap: viewModel.navigateToConditionView,
               subtitle: const _HealthConditionSubtitle(),
+            ),
+            10.verticalSpace,
+            ProfileItem(
+              'Set Theme',
+              showTrailing: false,
+              leadingIcon: viewModel.getIcon(mode),
+              onTap: viewModel.showThemeBottomSheet,
+              subtitle: const _ThemeModeSubtitle(),
             ),
             10.verticalSpace,
             ProfileItem(
@@ -94,6 +103,33 @@ class _HealthConditionSubtitle extends ViewModelWidget<ProfileViewModel> {
               : Colors.green.shade300,
         ),
         child: Text(viewModel.conditionName),
+      ),
+    );
+  }
+}
+
+class _ThemeModeSubtitle extends ViewModelWidget<ProfileViewModel> {
+  const _ThemeModeSubtitle();
+
+  @override
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
+    final theme = Theme.of(context);
+    final mode = viewModel.selectedThemeMode(context) ?? ThemeMode.system;
+
+    return Container(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10).r,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(4)).r,
+          color: theme.colorScheme.onBackground,
+        ),
+        child: Text(
+          viewModel.getThemeModeName(mode),
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: theme.colorScheme.background,
+          ),
+        ),
       ),
     );
   }

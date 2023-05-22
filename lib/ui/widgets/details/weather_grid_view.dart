@@ -3,7 +3,6 @@ import 'package:clean_air/models/iaqi.dart';
 import 'package:clean_air/ui/views/details/details_viewmodel.dart';
 import 'package:clean_air/ui/widgets/aqi_section.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:stacked/stacked.dart';
 
 import 'weather_item.dart';

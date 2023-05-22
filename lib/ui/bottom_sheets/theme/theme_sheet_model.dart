@@ -33,11 +33,11 @@ class ThemeSheetModel extends BaseViewModel {
   IconData getIcon(ThemeMode mode) {
     switch (mode) {
       case ThemeMode.dark:
-        return PhosphorIcons.moon;
+        return PhosphorIcons.regular.moon;
       case ThemeMode.light:
-        return PhosphorIcons.sun;
+        return PhosphorIcons.regular.sun;
       default:
-        return PhosphorIcons.nut;
+        return PhosphorIcons.regular.nut;
     }
   }
 }

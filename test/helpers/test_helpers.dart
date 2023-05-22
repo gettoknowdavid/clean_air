@@ -11,6 +11,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import 'package:clean_air/services/location_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -27,6 +28,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<AirQualityService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<FavouritesService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<MediaService>(onMissingStub: OnMissingStub.returnDefault),
+MockSpec<LocationService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -41,6 +43,7 @@ void registerServices() {
   getAndRegisterAqiService();
   getAndRegisterFavouritesService();
   getAndRegisterMediaService();
+getAndRegisterLocationService();
 // @stacked-mock-register
 }
 
@@ -150,6 +153,12 @@ MockMediaService getAndRegisterMediaService() {
   return service;
 }
 
+MockLocationService getAndRegisterLocationService() { 
+_removeRegistrationIfExists<LocationService>(); 
+final service = MockLocationService(); 
+locator.registerSingleton<LocationService>(service); 
+return service; 
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

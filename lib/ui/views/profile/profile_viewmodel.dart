@@ -7,11 +7,10 @@ import 'package:clean_air/models/condition.dart';
 import 'package:clean_air/models/user.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
+import 'package:clean_air/services/location_service.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -21,6 +20,7 @@ class ProfileViewModel extends ReactiveViewModel with ListenableServiceMixin {
   final _aqiService = locator<AirQualityService>();
   final _authService = locator<AuthService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _locationService = locator<LocationService>();
   final _navigationService = locator<NavigationService>();
   final _networkService = locator<NetworkService>();
   final _preferences = locator<SharedPreferencesService>();
@@ -36,8 +36,9 @@ class ProfileViewModel extends ReactiveViewModel with ListenableServiceMixin {
   NetworkStatus get networkStatus => _networkService.status;
   bool get isConnected => _networkService.status == NetworkStatus.connected;
   User? get user => _authService.currentUser;
-  String? get location => _aqiService.appAQI?.city?.name;
+  // String? get location => _aqiService.appAQI?.city?.name;
   CAirQuality get conditionedAQI => _aqiService.conditionedAQI;
+  String? get location => _locationService.location;
 
   Future<void> logout() async {
     setBusy(true);
@@ -62,16 +63,6 @@ class ProfileViewModel extends ReactiveViewModel with ListenableServiceMixin {
 
   Future<void> navigateToConditionView() async {
     await _navigationService.navigateToNestedConditionViewInLayoutViewRouter(1);
-  }
-
-  Future<String> get getCurrentLocation async {
-    final curLoc = await _determinePosition();
-    final placemarks = await placemarkFromCoordinates(
-      curLoc.latitude,
-      curLoc.longitude,
-    );
-
-    return "${placemarks[0].locality}, ${placemarks[0].isoCountryCode}";
   }
 
   Future<void> getLocalProfileAvatar() async {
@@ -104,59 +95,19 @@ class ProfileViewModel extends ReactiveViewModel with ListenableServiceMixin {
   IconData getIcon(ThemeMode mode) {
     switch (mode) {
       case ThemeMode.dark:
-        return PhosphorIcons.moon;
+        return PhosphorIcons.regular.moon;
       case ThemeMode.light:
-        return PhosphorIcons.sun;
+        return PhosphorIcons.regular.sun;
       default:
-        return PhosphorIcons.nut;
+        return PhosphorIcons.regular.nut;
     }
-  }
-
-  /// Determine the current position of the device.
-  ///
-  /// When the location services are not enabled or permissions
-  /// are denied the `Future` will return an error.
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
   }
 
   @override
   List<ListenableServiceMixin> get listenableServices => [
         _authService,
         _aqiService,
+        _locationService,
         _networkService,
       ];
 

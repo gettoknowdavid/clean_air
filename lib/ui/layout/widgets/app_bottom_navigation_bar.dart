@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 
-const items = [
+final items = [
   BottomNavigationBarItem(
     label: 'Home',
-    icon: Icon(PhosphorIcons.house),
-    activeIcon: Icon(PhosphorIcons.houseFill),
+    icon: Icon(PhosphorIcons.regular.house),
+    activeIcon: Icon(PhosphorIcons.fill.house),
   ),
   BottomNavigationBarItem(
     label: 'Search',
-    icon: Icon(PhosphorIcons.magnifyingGlass),
-    activeIcon: Icon(PhosphorIcons.magnifyingGlassFill),
+    icon: Icon(PhosphorIcons.regular.magnifyingGlass),
+    activeIcon: Icon(PhosphorIcons.fill.magnifyingGlass),
   ),
   BottomNavigationBarItem(
     label: 'Favorites',
-    icon: Icon(PhosphorIcons.heart),
-    activeIcon: Icon(PhosphorIcons.heartFill),
+    icon: Icon(PhosphorIcons.regular.heart),
+    activeIcon: Icon(PhosphorIcons.fill.heart),
   ),
   BottomNavigationBarItem(
     label: 'Profile',
-    icon: Icon(PhosphorIcons.user),
-    activeIcon: Icon(PhosphorIcons.userFill),
+    icon: Icon(PhosphorIcons.regular.user),
+    activeIcon: Icon(PhosphorIcons.fill.user),
   ),
 ];
 

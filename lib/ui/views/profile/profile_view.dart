@@ -32,17 +32,17 @@ class ProfileView extends StackedView<ProfileViewModel> {
             const _Name(),
             const _Email(),
             const _Location(),
-            30.verticalSpace,
+            20.verticalSpace,
             ProfileItem(
               'Edit Profile',
               showTrailing: false,
-              leadingIcon: PhosphorIcons.pencil,
+              leadingIcon: PhosphorIcons.regular.pencil,
               onTap: viewModel.showEditProfileBottomSheet,
             ),
             10.verticalSpace,
             ProfileItem(
               'Change Health Condition',
-              leadingIcon: PhosphorIcons.heartbeat,
+              leadingIcon: PhosphorIcons.regular.heartbeat,
               onTap: viewModel.navigateToConditionView,
               subtitle: const _HealthConditionSubtitle(),
             ),
@@ -57,13 +57,13 @@ class ProfileView extends StackedView<ProfileViewModel> {
             10.verticalSpace,
             ProfileItem(
               'Account',
-              leadingIcon: PhosphorIcons.userCircle,
+              leadingIcon: PhosphorIcons.regular.userCircle,
               onTap: viewModel.navigateToAccountView,
             ),
             10.verticalSpace,
             ProfileItem(
               'About CleanAir',
-              leadingIcon: PhosphorIcons.info,
+              leadingIcon: PhosphorIcons.regular.info,
               onTap: viewModel.navigateToAboutView,
             ),
             10.verticalSpace,
@@ -72,9 +72,8 @@ class ProfileView extends StackedView<ProfileViewModel> {
               showTrailing: false,
               onTap: viewModel.logout,
               tileColor: theme.colorScheme.error.withOpacity(0.2),
-              leadingIcon: PhosphorIcons.signOut,
+              leadingIcon: PhosphorIcons.regular.signOut,
             ),
-            30.verticalSpace,
           ],
         ),
       ),
@@ -135,35 +134,24 @@ class _ThemeModeSubtitle extends ViewModelWidget<ProfileViewModel> {
   }
 }
 
-class _Location extends ViewModelWidget<ProfileViewModel> {
+class _Location extends SelectorViewModelWidget<ProfileViewModel, String?> {
   const _Location();
 
   @override
-  Widget build(BuildContext context, ProfileViewModel viewModel) {
+  Widget build(BuildContext context, String? value) {
     final textTheme = Theme.of(context).textTheme;
 
-    return FutureBuilder<String>(
-      future: viewModel.getCurrentLocation,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox();
-        } else {
-          return Center(
-            child: SkeletonLoader(
-              loading: snapshot.connectionState == ConnectionState.waiting,
-              child: Text(
-                snapshot.data!,
-                textAlign: TextAlign.center,
-                style: textTheme.bodyMedium?.copyWith(
-                  color: textTheme.bodyLarge?.color?.withOpacity(0.5),
-                ),
-              ),
-            ),
-          );
-        }
-      },
+    return Text(
+      value ?? '',
+      textAlign: TextAlign.center,
+      style: textTheme.bodyMedium?.copyWith(
+        color: textTheme.bodyLarge?.color?.withOpacity(0.5),
+      ),
     );
   }
+
+  @override
+  String? selector(ProfileViewModel viewModel) => viewModel.location;
 }
 
 class _Email extends SelectorViewModelWidget<ProfileViewModel, String> {

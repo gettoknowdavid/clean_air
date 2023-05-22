@@ -9,15 +9,15 @@ extension WeatherUnit on WeatherType {
 
     switch (enumString) {
       case 'dew':
-        return PhosphorIcons.cloud;
+        return PhosphorIcons.regular.cloud;
       case 'hum':
-        return PhosphorIcons.drop;
+        return PhosphorIcons.regular.drop;
       case 'pres':
-        return PhosphorIcons.umbrella;
+        return PhosphorIcons.regular.umbrella;
       case 'temp':
-        return PhosphorIcons.thermometerSimple;
+        return PhosphorIcons.regular.thermometerSimple;
       default:
-        return PhosphorIcons.wind;
+        return PhosphorIcons.regular.wind;
     }
   }
 

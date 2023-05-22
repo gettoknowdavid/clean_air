@@ -40,6 +40,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
+import 'package:clean_air/services/location_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -84,6 +85,7 @@ import 'package:stacked_themes/stacked_themes.dart';
       classType: SharedPreferencesService,
       presolveUsing: SharedPreferencesService.getInstance,
     ),
+LazySingleton(classType: LocationService),
 // @stacked-service
   ],
   dialogs: [
@@ -127,10 +129,6 @@ class CleanAirApp extends StatelessWidget {
               onGenerateRoute: StackedRouter().onGenerateRoute,
               navigatorKey: StackedService.navigatorKey,
               navigatorObservers: [StackedService.routeObserver],
-              builder: (context, child) => MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: child!,
-              ),
             );
           },
         );

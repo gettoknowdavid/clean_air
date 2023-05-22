@@ -1,6 +1,5 @@
 import 'package:clean_air/core/utils/aqi_helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PollutantItem extends StatelessWidget {

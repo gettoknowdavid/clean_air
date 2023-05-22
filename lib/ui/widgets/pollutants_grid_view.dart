@@ -5,11 +5,7 @@ import 'package:clean_air/models/forecast_data.dart';
 import 'package:clean_air/ui/widgets/aqi_section.dart';
 import 'package:clean_air/ui/widgets/pollutant_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
-
 
 class PollutantsGridView extends StatelessWidget {
   final Daily daily;

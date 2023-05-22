@@ -27,13 +27,6 @@ class AirQualityService with ListenableServiceMixin {
 
   AirQualityService() {
     listenToReactiveValues([_allPollutants, _appAQI, _conditionedAQI]);
-
-    if (_preferences.hasKey(kLastAQIKey) &&
-        _networkService.status == NetworkStatus.disconnected) {
-      // ...
-    }
-
-    // persistResult();
   }
 
   AirQuality? get appAQI => _appAQI.value;
@@ -64,6 +57,7 @@ class AirQualityService with ListenableServiceMixin {
       final valueString = jsonEncode(result.data?.toJson());
       await _preferences.write(key: kLastAQIKey, value: valueString);
       _appAQI.value = result.data;
+      notifyListeners();
       return result.data;
     } on DioError {
       return null;
@@ -81,8 +75,6 @@ class AirQualityService with ListenableServiceMixin {
       } else {
         _searchResult.value = result;
         notifyListeners();
-        // final strgs = result.map((e) => jsonEncode(e!.toJson())).toList();
-        // await _preferences.writeList(key: kSearchResultKey, value: strgs);
 
         return result;
       }
@@ -91,21 +83,12 @@ class AirQualityService with ListenableServiceMixin {
     }
   }
 
-  Future<void> persistResult() async {
-    await _preferences.delete(kSearchResultKey);
-    // if (_preferences.hasKey(kSearchResultKey)) {
-    //   List<String> list = _preferences.readList(kSearchResultKey);
-    //   _searchResult.value =
-    //       list.map((e) => SearchData.fromJson(jsonDecode(e))).toList();
-    //   notifyListeners();
-    // }
-  }
-
   Future<CAirQuality?> getConditionedAQI() async {
     if (_preferences.hasKey(kLastCAQIKey)) {
       final valueString = _preferences.read(kLastCAQIKey);
       final result = CAirQuality.fromJson(jsonDecode(valueString));
       _conditionedAQI.value = result;
+      notifyListeners();
       return result;
     } else {
       return CAirQuality.none();

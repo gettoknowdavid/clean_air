@@ -3,6 +3,7 @@ import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
+import 'package:clean_air/services/location_service.dart';
 import 'package:clean_air/services/shared_preferences_service.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:stacked/stacked.dart';
@@ -12,11 +13,21 @@ class StartupViewModel extends ReactiveViewModel {
   final _authService = locator<AuthService>();
   final _airQualityService = locator<AirQualityService>();
   final _favouriteService = locator<FavouritesService>();
+  final _locationService = locator<LocationService>();
   final _navigationService = locator<NavigationService>();
   final _preferences = locator<SharedPreferencesService>();
 
   bool get isAuthenticated => _authService.isAuthenticated;
   bool? get isEmailVerified => _authService.isEmailVerified;
+
+  Future startUp() {
+    return Future.wait([
+      _locationService.getCurrentLocation(),
+      _airQualityService.getCurrentLocationAQI(),
+      _airQualityService.getConditionedAQI(),
+      _favouriteService.retrieveAllFavourites(),
+    ]);
+  }
 
   // Place anything here that needs to happen before we get into the application
   Future runStartupLogic() async {
@@ -40,10 +51,9 @@ class StartupViewModel extends ReactiveViewModel {
       }
 
       if (isAuthenticated && isEmailVerified == true) {
-        await _airQualityService.getCurrentLocationAQI();
-        await _airQualityService.getConditionedAQI();
-        await _favouriteService.retrieveAllFavourites();
-        _navigationService.clearStackAndShow(Routes.layoutView);
+        startUp().whenComplete(
+          () => _navigationService.clearStackAndShow(Routes.layoutView),
+        );
       }
     }
   }

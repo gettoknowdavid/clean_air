@@ -114,35 +114,30 @@ class StackedRouter extends _i1.RouterBase {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.OnboardingView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i3.StartupView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i4.LoginView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.LoginView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i5.RegisterView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.RegisterView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i6.VerificationView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.VerificationView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i7.ForgotPasswordView: (data) {
@@ -152,14 +147,12 @@ class StackedRouter extends _i1.RouterBase {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => _i7.ForgotPasswordView(key: args.key),
         settings: data,
-        maintainState: false,
       );
     },
     _i8.PasswordResetConfirmationView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.PasswordResetConfirmationView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i9.LayoutView: (data) {
@@ -172,7 +165,6 @@ class StackedRouter extends _i1.RouterBase {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.AboutView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i11.AccountView: (data) {
@@ -182,7 +174,6 @@ class StackedRouter extends _i1.RouterBase {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => _i11.AccountView(key: args.key),
         settings: data,
-        maintainState: false,
       );
     },
   };
@@ -202,6 +193,17 @@ class ForgotPasswordViewArguments {
   String toString() {
     return '{"key": "$key"}';
   }
+
+  @override
+  bool operator ==(covariant ForgotPasswordViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
 }
 
 class AccountViewArguments {
@@ -212,6 +214,17 @@ class AccountViewArguments {
   @override
   String toString() {
     return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant AccountViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
   }
 }
 
@@ -271,7 +284,6 @@ class LayoutViewRouter extends _i1.RouterBase {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.HomeView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i14.DetailsView: (data) {
@@ -280,7 +292,6 @@ class LayoutViewRouter extends _i1.RouterBase {
         builder: (context) =>
             _i14.DetailsView(key: args.key, airQuality: args.airQuality),
         settings: data,
-        maintainState: false,
       );
     },
     _i15.SearchView: (data) {
@@ -290,28 +301,24 @@ class LayoutViewRouter extends _i1.RouterBase {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => _i15.SearchView(key: args.key),
         settings: data,
-        maintainState: false,
       );
     },
     _i16.FavouritesView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.FavouritesView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i17.ProfileView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.ProfileView(),
         settings: data,
-        maintainState: false,
       );
     },
     _i18.ConditionView: (data) {
       return _i12.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.ConditionView(),
         settings: data,
-        maintainState: false,
       );
     },
   };
@@ -336,6 +343,17 @@ class NestedDetailsViewArguments {
   String toString() {
     return '{"key": "$key", "airQuality": "$airQuality"}';
   }
+
+  @override
+  bool operator ==(covariant NestedDetailsViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.airQuality == airQuality;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ airQuality.hashCode;
+  }
 }
 
 class NestedSearchViewArguments {
@@ -346,6 +364,17 @@ class NestedSearchViewArguments {
   @override
   String toString() {
     return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant NestedSearchViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
   }
 }
 

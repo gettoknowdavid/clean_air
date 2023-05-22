@@ -24,7 +24,11 @@ class ProfileAvatar extends ViewModelWidget<ProfileViewModel> {
         foregroundImage: viewModel.user?.avatar != null && viewModel.isConnected
             ? NetworkImage(viewModel.user!.avatar!)
             : viewModel.localProfileAvatar?.image,
-        child: Icon(PhosphorIcons.user, size: iconSize, color: iconColor),
+        child: Icon(
+          PhosphorIcons.regular.user,
+          size: iconSize,
+          color: iconColor,
+        ),
       ),
     );
   }

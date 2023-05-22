@@ -15,7 +15,7 @@ class GoogleButton extends ViewModelWidget<LoginViewModel> {
       onPressed: viewModel.googleSignIn,
       icon: viewModel.isBusy
           ? const SizedBox()
-          : const Icon(PhosphorIcons.googleLogoFill),
+          : Icon(PhosphorIcons.fill.googleLogo),
       label: viewModel.isBusy
           ? _buildLoadingIndicator()
           : const Text('Login with Google'),

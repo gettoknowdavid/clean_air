@@ -46,11 +46,15 @@ class ConditionView extends StackedView<ConditionViewModel> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Health Condition')),
+      appBar: AppBar(
+        title: const Text('Health Condition'),
+        scrolledUnderElevation: 0,
+      ),
       body: SingleChildScrollView(
         padding: kGlobalHorizontalPadding,
         child: Column(
           children: [
+            10.verticalSpace,
             AqiSection(
               title: 'ABOUT HEALTH CONDITION',
               child: Padding(
@@ -58,12 +62,11 @@ class ConditionView extends StackedView<ConditionViewModel> {
                 child: const Text(kAboutHealthCondition),
               ),
             ),
-            20.verticalSpace,
+            10.verticalSpace,
             AqiSection(
               title: 'SET HEALTH CONDITION',
               child: Wrap(children: children),
             ),
-            20.verticalSpace,
           ],
         ),
       ),

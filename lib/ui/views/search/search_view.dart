@@ -23,15 +23,7 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
   @override
   Widget builder(context, viewModel, child) {
     return Scaffold(
-      appBar: LayoutAppBar(
-        title: 'Search',
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(3.r),
-          child: const AppLoadingIndicator<SearchViewModel>(
-            addBottomSpace: false,
-          ),
-        ),
-      ),
+      appBar: _buildAppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,7 +35,7 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
                 hint: 'Search city',
                 controller: keywordController,
                 focusNode: keywordFocusNode,
-                prefixIcon: const Icon(PhosphorIcons.magnifyingGlass),
+                prefixIcon: Icon(PhosphorIcons.regular.magnifyingGlass),
                 textInputAction: TextInputAction.search,
                 onFieldSubmitted: viewModel.search,
               ),
@@ -55,6 +47,21 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
             ] else
               const SearchResultList()
           ],
+        ),
+      ),
+    );
+  }
+
+  PreferredSize _buildAppBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight),
+      child: LayoutAppBar(
+        title: 'Search',
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(3.r),
+          child: const AppLoadingIndicator<SearchViewModel>(
+            addBottomSpace: false,
+          ),
         ),
       ),
     );

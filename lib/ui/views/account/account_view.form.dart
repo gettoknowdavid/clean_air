@@ -25,7 +25,7 @@ final Map<String, String? Function(String?)?> _AccountViewTextValidations = {
   ConfirmPasswordValueKey: Validators.validateLoginPassword,
 };
 
-mixin $AccountView on StatelessWidget {
+mixin $AccountView {
   TextEditingController get emailController =>
       _getFormTextEditingController(EmailValueKey);
   TextEditingController get passwordController =>
@@ -37,11 +37,14 @@ mixin $AccountView on StatelessWidget {
   FocusNode get confirmPasswordFocusNode =>
       _getFormFocusNode(ConfirmPasswordValueKey);
 
-  TextEditingController _getFormTextEditingController(String key,
-      {String? initialValue}) {
+  TextEditingController _getFormTextEditingController(
+    String key, {
+    String? initialValue,
+  }) {
     if (_AccountViewTextEditingControllers.containsKey(key)) {
       return _AccountViewTextEditingControllers[key]!;
     }
+
     _AccountViewTextEditingControllers[key] =
         TextEditingController(text: initialValue);
     return _AccountViewTextEditingControllers[key]!;
@@ -65,15 +68,17 @@ mixin $AccountView on StatelessWidget {
 
   /// Registers a listener on every generated controller that calls [model.setData()]
   /// with the latest textController values
-  @Deprecated('Use syncFormWithViewModel instead.'
-      'This feature was deprecated after 3.1.0.')
+  @Deprecated(
+    'Use syncFormWithViewModel instead.'
+    'This feature was deprecated after 3.1.0.',
+  )
   void listenToFormUpdated(FormViewModel model) {
     emailController.addListener(() => _updateFormData(model));
     passwordController.addListener(() => _updateFormData(model));
     confirmPasswordController.addListener(() => _updateFormData(model));
   }
 
-  final bool _autoTextFieldValidation = true;
+  static const bool _autoTextFieldValidation = true;
   bool validateFormFields(FormViewModel model) {
     _updateFormData(model, forceValidate: true);
     return model.isFormValid;
@@ -89,26 +94,10 @@ mixin $AccountView on StatelessWidget {
           ConfirmPasswordValueKey: confirmPasswordController.text,
         }),
     );
+
     if (_autoTextFieldValidation || forceValidate) {
-      _updateValidationData(model);
+      updateValidationData(model);
     }
-  }
-
-  /// Updates the fieldsValidationMessages on the FormViewModel
-  void _updateValidationData(FormViewModel model) =>
-      model.setValidationMessages({
-        EmailValueKey: _getValidationMessage(EmailValueKey),
-        PasswordValueKey: _getValidationMessage(PasswordValueKey),
-        ConfirmPasswordValueKey: _getValidationMessage(ConfirmPasswordValueKey),
-      });
-
-  /// Returns the validation message for the given key
-  String? _getValidationMessage(String key) {
-    final validatorForKey = _AccountViewTextValidations[key];
-    if (validatorForKey == null) return null;
-    String? validationMessageForKey =
-        validatorForKey(_AccountViewTextEditingControllers[key]!.text);
-    return validationMessageForKey;
   }
 
   /// Calls dispose on all the generated controllers and focus nodes
@@ -200,11 +189,6 @@ extension ValueProperties on FormViewModel {
       this.fieldsValidationMessages[PasswordValueKey];
   String? get confirmPasswordValidationMessage =>
       this.fieldsValidationMessages[ConfirmPasswordValueKey];
-  void clearForm() {
-    emailValue = '';
-    passwordValue = '';
-    confirmPasswordValue = '';
-  }
 }
 
 extension Methods on FormViewModel {
@@ -215,4 +199,39 @@ extension Methods on FormViewModel {
   setConfirmPasswordValidationMessage(String? validationMessage) =>
       this.fieldsValidationMessages[ConfirmPasswordValueKey] =
           validationMessage;
+
+  /// Clears text input fields on the Form
+  void clearForm() {
+    emailValue = '';
+    passwordValue = '';
+    confirmPasswordValue = '';
+  }
+
+  /// Validates text input fields on the Form
+  void validateForm() {
+    this.setValidationMessages({
+      EmailValueKey: getValidationMessage(EmailValueKey),
+      PasswordValueKey: getValidationMessage(PasswordValueKey),
+      ConfirmPasswordValueKey: getValidationMessage(ConfirmPasswordValueKey),
+    });
+  }
 }
+
+/// Returns the validation message for the given key
+String? getValidationMessage(String key) {
+  final validatorForKey = _AccountViewTextValidations[key];
+  if (validatorForKey == null) return null;
+
+  String? validationMessageForKey = validatorForKey(
+    _AccountViewTextEditingControllers[key]!.text,
+  );
+
+  return validationMessageForKey;
+}
+
+/// Updates the fieldsValidationMessages on the FormViewModel
+void updateValidationData(FormViewModel model) => model.setValidationMessages({
+      EmailValueKey: getValidationMessage(EmailValueKey),
+      PasswordValueKey: getValidationMessage(PasswordValueKey),
+      ConfirmPasswordValueKey: getValidationMessage(ConfirmPasswordValueKey),
+    });

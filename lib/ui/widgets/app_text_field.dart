@@ -104,8 +104,8 @@ class _AppTextFieldState extends State<AppTextField> {
       child: IconButton(
         onPressed: () => setState(() => obscure = !obscure),
         icon: obscure
-            ? const Icon(PhosphorIcons.eye)
-            : const Icon(PhosphorIcons.eyeSlash),
+            ? Icon(PhosphorIcons.regular.eye)
+            : Icon(PhosphorIcons.regular.eyeSlash),
       ),
     );
   }

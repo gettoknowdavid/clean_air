@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clean_air/core/utils/date_formatter.dart';
 import 'package:clean_air/models/city.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -44,7 +44,7 @@ class CityNameWidget extends StatelessWidget {
               ),
             ],
           ),
-          Icon(PhosphorIcons.info, size: 12.r),
+          Icon(PhosphorIcons.regular.info, size: 12.r),
         ],
       ),
     );

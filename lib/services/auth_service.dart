@@ -126,9 +126,6 @@ class AuthService with ListenableServiceMixin {
 
       // Sign in to the user's Google account
       final GoogleSignInAccount? gAccount = await _googleSignIn.signIn();
-      print("====================== G - A C C O U N T ======================");
-      print(gAccount?.toString());
-      print("====================== G - A C C O U N T ======================");
 
       // Return an error if no Google account was found
       if (gAccount == null) {
@@ -147,10 +144,6 @@ class AuthService with ListenableServiceMixin {
           .signInWithCredential(credential)
           .then((credentials) => credentials.user);
 
-      print("========================= F - U S E R =========================");
-      print(fUser?.toString());
-      print("========================= F - U S E R =========================");
-
       // Create a user object from the Firebase user
       final user = User(
         uid: fUser!.uid,
@@ -159,10 +152,6 @@ class AuthService with ListenableServiceMixin {
         avatar: fUser.photoURL,
         verified: fUser.emailVerified,
       );
-
-      print("=========================== U S E R ===========================");
-      print(fUser.toString());
-      print("=========================== U S E R ===========================");
 
       _currentUser.value = user;
       _isAuthenticated.value = true;

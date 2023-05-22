@@ -15,12 +15,15 @@ class FavouritesView extends StackedView<FavouritesViewModel> {
   @override
   Widget builder(context, viewModel, child) {
     return Scaffold(
-      appBar: LayoutAppBar(
-        title: 'Favourites',
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(3.r),
-          child: const AppLoadingIndicator<FavouritesViewModel>(
-            addBottomSpace: false,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: LayoutAppBar(
+          title: 'Favourites',
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(3.r),
+            child: const AppLoadingIndicator<FavouritesViewModel>(
+              addBottomSpace: false,
+            ),
           ),
         ),
       ),

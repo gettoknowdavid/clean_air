@@ -24,7 +24,7 @@ class LayoutView extends StackedView<LayoutViewModel> {
             ? FloatingActionButton(
                 onPressed: () => viewModel.handleNavigation(1),
                 tooltip: 'Add City',
-                child: const Icon(PhosphorIcons.plus),
+                child: Icon(PhosphorIcons.regular.plus),
               )
             : null,
         bottomNavigationBar: const AppBottomNavigationBar(),

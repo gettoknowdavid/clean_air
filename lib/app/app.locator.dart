@@ -16,6 +16,7 @@ import '../services/air_quality_service.dart';
 import '../services/auth_service.dart';
 import '../services/favourites_service.dart';
 import '../services/firestore_service.dart';
+import '../services/location_service.dart';
 import '../services/media_service.dart';
 import '../services/network_service.dart';
 import '../services/open_mail_app_service.dart';
@@ -47,4 +48,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => MediaService());
   final sharedPreferencesService = await SharedPreferencesService.getInstance();
   locator.registerSingleton(sharedPreferencesService);
+
+  locator.registerLazySingleton(() => LocationService());
 }

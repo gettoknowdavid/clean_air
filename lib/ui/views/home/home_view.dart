@@ -7,7 +7,7 @@ import 'package:clean_air/ui/widgets/city_name_widget.dart';
 import 'package:clean_air/ui/widgets/home/aqi_value_widget.dart';
 import 'package:clean_air/ui/widgets/layout_app_bar.dart';
 import 'package:clean_air/ui/widgets/pollutants_grid_view.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 
@@ -22,7 +22,7 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   Widget builder(context, viewModel, child) {
     return Scaffold(
-      appBar: LayoutAppBar(),
+      appBar: _buildAppBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
         child: Column(
@@ -45,6 +45,13 @@ class HomeView extends StackedView<HomeViewModel> {
           ],
         ),
       ),
+    );
+  }
+
+  PreferredSize _buildAppBar() {
+    return const PreferredSize(
+      preferredSize: Size.fromHeight(kToolbarHeight),
+      child: LayoutAppBar(),
     );
   }
 

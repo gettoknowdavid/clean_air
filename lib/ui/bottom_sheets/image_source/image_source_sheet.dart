@@ -25,7 +25,7 @@ class ImageSourceSheet extends StackedView<ImageSourceSheetModel> {
         children: [
           6.verticalSpace,
           ListTile(
-            leading: const Icon(PhosphorIcons.image),
+            leading: Icon(PhosphorIcons.regular.image),
             title: const Text('Pick from Gallery'),
             onTap: () async {
               final file = await viewModel.avatarChanged(true);
@@ -34,7 +34,7 @@ class ImageSourceSheet extends StackedView<ImageSourceSheetModel> {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(PhosphorIcons.camera),
+            leading: Icon(PhosphorIcons.regular.camera),
             title: const Text('Use Camera'),
             onTap: () async {
               final file = await viewModel.avatarChanged(false);

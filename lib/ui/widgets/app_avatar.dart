@@ -21,7 +21,7 @@ class AppAvatar extends ViewModelWidget<LayoutViewModel> {
         backgroundColor: theme.colorScheme.primary,
         child: CircleAvatar(
           radius: innerRadius,
-          child: Icon(PhosphorIcons.regular.user),
+          child: PhosphorIcon(PhosphorIcons.regular.user),
           foregroundImage:
               viewModel.user?.avatar != null && viewModel.isConnected
                   ? NetworkImage(viewModel.user!.avatar!)

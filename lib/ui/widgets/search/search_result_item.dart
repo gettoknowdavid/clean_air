@@ -8,8 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:stacked/stacked.dart';
 
-final kLikeIcon = Icon(PhosphorIcons.fill.heart, color: Colors.red);
-final kUnLikeIcon = Icon(PhosphorIcons.regular.heart);
+final kLikeIcon = PhosphorIcon(PhosphorIcons.fill.heart, color: Colors.red);
+final kUnLikeIcon = PhosphorIcon(PhosphorIcons.regular.heart);
 
 class SearchResultItem extends ViewModelWidget<SearchViewModel> {
   final SearchData item;

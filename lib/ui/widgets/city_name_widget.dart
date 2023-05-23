@@ -44,7 +44,7 @@ class CityNameWidget extends StatelessWidget {
               ),
             ],
           ),
-          Icon(PhosphorIcons.regular.info, size: 12.r),
+          PhosphorIcon(PhosphorIcons.regular.info, size: 12.r),
         ],
       ),
     );

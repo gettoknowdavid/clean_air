@@ -48,7 +48,7 @@ class EditProfileSheet extends StackedView<EditProfileSheetModel>
                   const Spacer(),
                   IconButton(
                     onPressed: viewModel.close,
-                    icon: Icon(PhosphorIcons.regular.x),
+                    icon: PhosphorIcon(PhosphorIcons.regular.x),
                   ),
                 ],
               ),
@@ -123,11 +123,11 @@ class _Avatar extends ViewModelWidget<EditProfileSheetModel> {
               backgroundImage:
                   viewModel.file != null ? FileImage(viewModel.file!) : null,
               child: !viewModel.hasImage
-                  ? Icon(PhosphorIcons.regular.user, size: iconSize)
+                  ? PhosphorIcon(PhosphorIcons.regular.user, size: iconSize)
                   : null,
             ),
           ),
-          Icon(PhosphorIcons.regular.pen, size: iconSize),
+          PhosphorIcon(PhosphorIcons.regular.pen, size: iconSize),
         ],
       ),
     );

@@ -42,7 +42,7 @@ class FavouriteItem extends ViewModelWidget<FavouritesViewModel> {
       ),
       trailing: IconButton(
         onPressed: () => viewModel.delete(item),
-        icon: Icon(PhosphorIcons.regular.trash, color: Colors.red),
+        icon: PhosphorIcon(PhosphorIcons.regular.trash, color: Colors.red),
       ),
     );
   }

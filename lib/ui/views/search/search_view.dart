@@ -35,7 +35,7 @@ class SearchView extends StackedView<SearchViewModel> with $SearchView {
                 hint: 'Search city',
                 controller: keywordController,
                 focusNode: keywordFocusNode,
-                prefixIcon: Icon(PhosphorIcons.regular.magnifyingGlass),
+                prefixIcon: PhosphorIcon(PhosphorIcons.regular.magnifyingGlass),
                 textInputAction: TextInputAction.search,
                 onFieldSubmitted: viewModel.search,
               ),

@@ -42,7 +42,7 @@ class ProfileItem extends StatelessWidget {
       subtitle: subtitle,
       trailing: !loading
           ? showTrailing
-              ?  Icon(PhosphorIcons.regular.caretRight)
+              ? PhosphorIcon(PhosphorIcons.regular.caretRight)
               : const SizedBox()
           : SizedBox(
               height: 15.r,

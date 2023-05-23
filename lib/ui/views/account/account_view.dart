@@ -47,7 +47,7 @@ class AccountView extends StackedView<AccountViewModel> with $AccountView {
             10.verticalSpace,
             ExpansionTile(
               title: const Text('Change Email'),
-              leading: Icon(PhosphorIcons.regular.at),
+              leading: PhosphorIcon(PhosphorIcons.regular.at),
               tilePadding: const EdgeInsets.fromLTRB(12, 0, 12, 0).r,
               childrenPadding: const EdgeInsets.fromLTRB(12, 4, 12, 4).r,
               onExpansionChanged: viewModel.onEmailExpansionChanged,
@@ -77,7 +77,7 @@ class AccountView extends StackedView<AccountViewModel> with $AccountView {
             10.verticalSpace,
             ExpansionTile(
               title: const Text('Change Password'),
-              leading: Icon(PhosphorIcons.regular.password),
+              leading: PhosphorIcon(PhosphorIcons.regular.password),
               tilePadding: const EdgeInsets.fromLTRB(12, 0, 12, 0).r,
               childrenPadding: const EdgeInsets.fromLTRB(12, 4, 12, 4).r,
               onExpansionChanged: viewModel.onPasswordExpansionChanged,

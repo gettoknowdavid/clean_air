@@ -6,23 +6,23 @@ import 'package:stacked/stacked.dart';
 final items = [
   BottomNavigationBarItem(
     label: 'Home',
-    icon: Icon(PhosphorIcons.regular.house),
-    activeIcon: Icon(PhosphorIcons.fill.house),
+    icon: PhosphorIcon(PhosphorIcons.regular.house),
+    activeIcon: PhosphorIcon(PhosphorIcons.fill.house),
   ),
   BottomNavigationBarItem(
     label: 'Search',
-    icon: Icon(PhosphorIcons.regular.magnifyingGlass),
-    activeIcon: Icon(PhosphorIcons.fill.magnifyingGlass),
+    icon: PhosphorIcon(PhosphorIcons.regular.magnifyingGlass),
+    activeIcon: PhosphorIcon(PhosphorIcons.fill.magnifyingGlass),
   ),
   BottomNavigationBarItem(
     label: 'Favorites',
-    icon: Icon(PhosphorIcons.regular.heart),
-    activeIcon: Icon(PhosphorIcons.fill.heart),
+    icon: PhosphorIcon(PhosphorIcons.regular.heart),
+    activeIcon: PhosphorIcon(PhosphorIcons.fill.heart),
   ),
   BottomNavigationBarItem(
     label: 'Profile',
-    icon: Icon(PhosphorIcons.regular.user),
-    activeIcon: Icon(PhosphorIcons.fill.user),
+    icon: PhosphorIcon(PhosphorIcons.regular.user),
+    activeIcon: PhosphorIcon(PhosphorIcons.fill.user),
   ),
 ];
 

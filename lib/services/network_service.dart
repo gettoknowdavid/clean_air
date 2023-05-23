@@ -44,6 +44,14 @@ class NetworkService with ListenableServiceMixin {
       }
     });
   }
+
+  void onResume() {
+    listenForChange();
+  }
+
+  void onPause() {
+    listenForChange().cancel();
+  }
 }
 
 enum NetworkStatus { connected, disconnected }

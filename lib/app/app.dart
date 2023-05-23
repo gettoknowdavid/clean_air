@@ -1,8 +1,10 @@
+import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/services/firestore_service.dart';
+import 'package:clean_air/services/location_service.dart';
 import 'package:clean_air/services/media_service.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
@@ -40,7 +42,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
-import 'package:clean_air/services/location_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -85,7 +86,7 @@ import 'package:clean_air/services/location_service.dart';
       classType: SharedPreferencesService,
       presolveUsing: SharedPreferencesService.getInstance,
     ),
-LazySingleton(classType: LocationService),
+    LazySingleton(classType: LocationService),
 // @stacked-service
   ],
   dialogs: [
@@ -105,9 +106,14 @@ LazySingleton(classType: LocationService),
 // @stacked-bottom-sheets
   ],
 )
-class CleanAirApp extends StatelessWidget {
+class CleanAirApp extends StatefulWidget {
   const CleanAirApp({super.key});
 
+  @override
+  State<CleanAirApp> createState() => _CleanAirAppState();
+}
+
+class _CleanAirAppState extends State<CleanAirApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -134,5 +140,37 @@ class CleanAirApp extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    final _networkService = locator<NetworkService>();
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _networkService.onResume();
+        break;
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.paused:
+        _networkService.onPause();
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
   }
 }

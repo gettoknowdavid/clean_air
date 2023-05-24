@@ -6,7 +6,7 @@ import 'package:stacked_services/stacked_services.dart';
 class PasswordResetConfirmationViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
-  void navigateBackToLoginView() {
-    _navigationService.clearStackAndShow(Routes.loginView);
+  Future<void> navigateBackToLoginView() async {
+    await _navigationService.clearStackAndShow(Routes.loginView);
   }
 }

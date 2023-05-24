@@ -1,12 +1,15 @@
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/common/validators.dart';
+import 'package:clean_air/ui/widgets/app_button.dart';
+import 'package:clean_air/ui/widgets/app_text_field.dart';
 import 'package:clean_air/ui/widgets/auth_redirect_button.dart';
+import 'package:clean_air/ui/widgets/register/password_rules_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import 'register_form.dart';
+import 'register_view.form.dart';
 import 'register_viewmodel.dart';
 
 @FormView(fields: [
@@ -14,7 +17,7 @@ import 'register_viewmodel.dart';
   FormTextField(name: 'email', validator: Validators.validateEmail),
   FormTextField(name: 'password', validator: Validators.validatePassword),
 ])
-class RegisterView extends StackedView<RegisterViewModel> {
+class RegisterView extends StackedView<RegisterViewModel> with $RegisterView {
   const RegisterView({super.key});
 
   @override
@@ -39,7 +42,43 @@ class RegisterView extends StackedView<RegisterViewModel> {
               style: textTheme.bodyMedium,
             ),
             30.verticalSpace,
-            RegisterForm(),
+            AppTextField(
+              hint: 'Your Name',
+              label: 'Name',
+              enabled: !viewModel.isBusy,
+              controller: nameController,
+              focusNode: nameFocusNode,
+              validator: Validators.validateName,
+            ),
+            25.verticalSpace,
+            AppTextField(
+              hint: 'Your Email Address',
+              label: 'Email',
+              enabled: !viewModel.isBusy,
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              focusNode: emailFocusNode,
+              validator: Validators.validateEmail,
+            ),
+            25.verticalSpace,
+            AppTextField(
+              hint: 'Your password',
+              label: 'Password',
+              enabled: !viewModel.isBusy,
+              controller: passwordController,
+              isPassword: true,
+              focusNode: passwordFocusNode,
+              validator: Validators.validatePassword,
+            ),
+            10.verticalSpace,
+            PasswordRulesWidget(),
+            30.verticalSpace,
+            AppButton(
+              loading: viewModel.isBusy,
+              title: 'Register',
+              disabled: viewModel.disabled,
+              onPressed: viewModel.register,
+            ),
             10.verticalSpace,
             AuthRedirectButton(
               buttonLabel: 'Back to Login',
@@ -51,6 +90,18 @@ class RegisterView extends StackedView<RegisterViewModel> {
         ),
       ),
     );
+  }
+
+  @override
+  void onDispose(RegisterViewModel viewModel) {
+    super.onDispose(viewModel);
+    disposeForm();
+  }
+
+  @override
+  void onViewModelReady(RegisterViewModel viewModel) {
+    syncFormWithViewModel(viewModel);
+    super.onViewModelReady(viewModel);
   }
 
   @override

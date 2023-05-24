@@ -28,12 +28,15 @@ class LoginViewModel extends FormViewModel with ListenableServiceMixin {
 
   NetworkStatus get networkStatus => _networkService.status;
 
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login() async {
     if (networkStatus == NetworkStatus.disconnected) {
       _dialogService.showCustomDialog(variant: DialogType.networkError);
     } else {
       setBusy(true);
-      final result = await _authService.login(email: email, password: password);
+      final result = await _authService.login(
+        email: emailValue!,
+        password: passwordValue!,
+      );
       return result.fold(
         (failure) {
           setBusy(false);

@@ -55,19 +55,15 @@ class RegisterViewModel extends FormViewModel with ListenableServiceMixin {
   void navigateBackToLoginView() => _navigationService.navigateToLoginView();
   void next() => _navigationService.navigateToVerificationView();
 
-  Future<void> register({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
+  Future<void> register() async {
     if (networkStatus == NetworkStatus.disconnected) {
       _dialogService.showCustomDialog(variant: DialogType.networkError);
     } else {
       setBusy(true);
       final result = await _authService.register(
-        name: name,
-        email: email,
-        password: password,
+        name: nameValue!,
+        email: emailValue!,
+        password: passwordValue!,
       );
 
       result.fold(

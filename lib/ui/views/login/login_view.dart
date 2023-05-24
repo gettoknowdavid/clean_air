@@ -1,19 +1,21 @@
 import 'package:clean_air/ui/common/app_constants.dart';
 import 'package:clean_air/ui/common/validators.dart';
+import 'package:clean_air/ui/views/login/login_viewmodel.dart';
+import 'package:clean_air/ui/widgets/app_button.dart';
+import 'package:clean_air/ui/widgets/app_text_field.dart';
 import 'package:clean_air/ui/widgets/auth_redirect_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import 'login_form.dart';
-import 'login_viewmodel.dart';
+import 'login_view.form.dart';
 
 @FormView(fields: [
   FormTextField(name: 'email', validator: Validators.validateEmail),
   FormTextField(name: 'password', validator: Validators.validateLoginPassword),
 ])
-class LoginView extends StackedView<LoginViewModel> {
+class LoginView extends StackedView<LoginViewModel> with $LoginView {
   const LoginView({super.key});
 
   @override
@@ -36,7 +38,39 @@ class LoginView extends StackedView<LoginViewModel> {
               style: textTheme.bodyMedium,
             ),
             30.verticalSpace,
-            LoginForm(),
+            AppTextField(
+              hint: 'Your Email Address',
+              label: 'Email',
+              enabled: !viewModel.isBusy,
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+              focusNode: emailFocusNode,
+              validator: Validators.validateEmail,
+            ),
+            25.verticalSpace,
+            AppTextField(
+              hint: 'Your password',
+              label: 'Password',
+              enabled: !viewModel.isBusy,
+              controller: passwordController,
+              isPassword: true,
+              focusNode: passwordFocusNode,
+              validator: Validators.validatePassword,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: viewModel.navigateToForgotPasswordView,
+                child: const Text('Forgot Password?'),
+              ),
+            ),
+            25.verticalSpace,
+            AppButton(
+              title: 'Login',
+              loading: viewModel.isBusy,
+              disabled: viewModel.disabled,
+              onPressed:  viewModel.login,
+            ),
             10.verticalSpace,
             AuthRedirectButton(
               buttonLabel: 'Register',
@@ -47,6 +81,18 @@ class LoginView extends StackedView<LoginViewModel> {
         ),
       ),
     );
+  }
+
+  @override
+  void onDispose(LoginViewModel viewModel) {
+    super.onDispose(viewModel);
+    disposeForm();
+  }
+
+  @override
+  void onViewModelReady(LoginViewModel viewModel) {
+    syncFormWithViewModel(viewModel);
+    super.onViewModelReady(viewModel);
   }
 
   @override

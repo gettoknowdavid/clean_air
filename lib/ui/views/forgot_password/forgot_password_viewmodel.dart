@@ -18,7 +18,6 @@ class ForgotPasswordViewModel extends FormViewModel {
 
   Future<void> submit({required String email}) async {
     final result = await _authService.forgotPassword(email);
-
     setBusy(true);
 
     result.fold(
@@ -34,7 +33,9 @@ class ForgotPasswordViewModel extends FormViewModel {
           ),
         );
       },
-      (success) => _navigationService.navigateToPasswordResetConfirmationView(),
+      (success) => _navigationService.clearStackAndShow(
+        Routes.passwordResetConfirmationView,
+      ),
     );
   }
 }

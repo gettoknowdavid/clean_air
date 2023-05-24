@@ -5,7 +5,6 @@ import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/app/app.snackbars.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
-import 'package:clean_air/services/favourites_service.dart';
 import 'package:clean_air/services/location_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
@@ -19,7 +18,6 @@ class VerificationViewModel extends ReactiveViewModel
   final _navigationService = locator<NavigationService>();
   final _openMailAppService = locator<OpenMailAppService>();
   final _airQualityService = locator<AirQualityService>();
-  final _favouriteService = locator<FavouritesService>();
   final _locationService = locator<LocationService>();
 
   VerificationViewModel() {
@@ -58,14 +56,10 @@ class VerificationViewModel extends ReactiveViewModel
     );
   }
 
-  Future startUp() {
-    return Future.wait([
-      _locationService.getCurrentLocation(),
-      _airQualityService.getCurrentLocationAQI(),
-      _airQualityService.getConditionedAQI(),
-      _favouriteService.retrieveAllFavourites(),
-    ]);
-  }
+  Future startUp() => Future.wait([
+        _locationService.getCurrentLocation(),
+        _airQualityService.getCurrentLocationAQI(),
+      ]);
 
   @override
   void dispose() {
@@ -90,14 +84,11 @@ class VerificationViewModel extends ReactiveViewModel
     }
   }
 
-  Future<void> openMailApp() async {
-    await _openMailAppService.openMailApp();
-  }
+  Future<void> openMailApp() => _openMailAppService.openMailApp();
 
   Future<void> sendVerification() async {
     final result = await _authService.sendVerificationEmail();
-
-    result.fold(
+    return result.fold(
       (failure) {
         _snackbarService.showCustomSnackBar(
           duration: const Duration(seconds: 6),

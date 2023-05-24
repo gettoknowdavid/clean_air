@@ -15,7 +15,6 @@ import 'package:stacked_shared/stacked_shared.dart';
 import '../services/air_quality_service.dart';
 import '../services/auth_service.dart';
 import '../services/favourites_service.dart';
-import '../services/firestore_service.dart';
 import '../services/location_service.dart';
 import '../services/media_service.dart';
 import '../services/network_service.dart';
@@ -40,7 +39,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => AuthService());
   locator.registerLazySingleton(() => NetworkService());
-  locator.registerLazySingleton(() => FirestoreService());
   locator.registerLazySingleton(() => SecureStorageService());
   locator.registerLazySingleton(() => OpenMailAppService());
   locator.registerLazySingleton(() => AirQualityService());

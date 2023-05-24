@@ -3,7 +3,6 @@ import 'package:clean_air/app/app.router.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
-import 'package:clean_air/services/firestore_service.dart';
 import 'package:clean_air/services/location_service.dart';
 import 'package:clean_air/services/media_service.dart';
 import 'package:clean_air/services/network_service.dart';
@@ -14,9 +13,7 @@ import 'package:clean_air/ui/bottom_sheets/condition/condition_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/image_source/image_source_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/info/info_sheet.dart';
-import 'package:clean_air/ui/bottom_sheets/password_confirmation/password_confirmation_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/re_auth/re_auth_sheet.dart';
-import 'package:clean_air/ui/bottom_sheets/reset_password/reset_password_sheet.dart';
 import 'package:clean_air/ui/bottom_sheets/theme/theme_sheet.dart';
 import 'package:clean_air/ui/common/app_theme.dart';
 import 'package:clean_air/ui/dialogs/mail_app/mail_app_dialog.dart';
@@ -77,7 +74,6 @@ import 'package:stacked_themes/stacked_themes.dart';
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: NetworkService),
-    LazySingleton(classType: FirestoreService),
     LazySingleton(classType: SecureStorageService),
     LazySingleton(classType: OpenMailAppService),
     LazySingleton(classType: AirQualityService),
@@ -99,8 +95,6 @@ import 'package:stacked_themes/stacked_themes.dart';
   bottomsheets: [
     StackedBottomsheet(classType: ImageSourceSheet),
     StackedBottomsheet(classType: EditProfileSheet),
-    StackedBottomsheet(classType: ResetPasswordSheet),
-    StackedBottomsheet(classType: PasswordConfirmationSheet),
     StackedBottomsheet(classType: ConditionSheet),
     StackedBottomsheet(classType: InfoSheet),
     StackedBottomsheet(classType: ThemeSheet),

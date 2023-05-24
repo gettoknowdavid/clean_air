@@ -2,7 +2,6 @@ import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:clean_air/services/auth_service.dart';
 import 'package:clean_air/services/favourites_service.dart';
-import 'package:clean_air/services/firestore_service.dart';
 import 'package:clean_air/services/media_service.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/open_mail_app_service.dart';
@@ -22,7 +21,6 @@ import 'test_helpers.mocks.dart';
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AuthService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<NetworkService>(onMissingStub: OnMissingStub.returnDefault),
-  MockSpec<FirestoreService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<SecureStorageService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<OpenMailAppService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<AirQualityService>(onMissingStub: OnMissingStub.returnDefault),
@@ -37,7 +35,6 @@ void registerServices() {
   getAndRegisterDialogService();
   getAndRegisterAuthService();
   getAndRegisterNetworkService();
-  getAndRegisterFirestoreService();
   getAndRegisterSecureStorageService();
   getAndRegisterOpenMailAppService();
   getAndRegisterAqiService();
@@ -111,12 +108,6 @@ MockNetworkService getAndRegisterNetworkService() {
   return service;
 }
 
-MockFirestoreService getAndRegisterFirestoreService() {
-  _removeRegistrationIfExists<FirestoreService>();
-  final service = MockFirestoreService();
-  locator.registerSingleton<FirestoreService>(service);
-  return service;
-}
 
 MockSecureStorageService getAndRegisterSecureStorageService() {
   _removeRegistrationIfExists<SecureStorageService>();

@@ -6,19 +6,22 @@ import 'package:clean_air/models/user.dart';
 import 'package:clean_air/services/network_service.dart';
 import 'package:clean_air/services/secure_storage_service.dart';
 import 'package:clean_air/ui/common/app_strings.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stacked/stacked.dart';
 
 class AuthService with ListenableServiceMixin {
   final fb.FirebaseAuth _firebaseAuth = fb.FirebaseAuth.instance;
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final _networkService = locator<NetworkService>();
   final _secureStorageService = locator<SecureStorageService>();
   final _isAuthenticated = ReactiveValue<bool>(false);
-  final _isEmailVerified = ReactiveValue<bool?>(null);
+  final _isEmailVerified = ReactiveValue<bool>(false);
   final _currentUser = ReactiveValue<User?>(null);
 
   AuthService() {
@@ -27,48 +30,39 @@ class AuthService with ListenableServiceMixin {
 
   User? get currentUser => _currentUser.value;
   bool get isAuthenticated => _isAuthenticated.value;
-  bool? get isEmailVerified => _isEmailVerified.value;
+  bool get isEmailVerified => _isEmailVerified.value;
 
   Future<void> checkAuthenticated() async {
     final firebaseUser = _firebaseAuth.currentUser;
 
     final localUserString = await _secureStorageService.read(kAuthUser);
 
-    if (firebaseUser == null && localUserString == null) {
-      _isAuthenticated.value = false;
-    }
-
-    if (firebaseUser != null || localUserString != null) {
+    if (firebaseUser != null) {
       final localUserStringDynamic = localUserString as dynamic;
       final localUser = User.fromJson(jsonDecode(localUserStringDynamic));
       _isAuthenticated.value = true;
       _currentUser.value = User(
-        uid: firebaseUser!.uid,
+        uid: firebaseUser.uid,
         name: firebaseUser.displayName!,
         email: firebaseUser.email!,
         verified: firebaseUser.emailVerified,
         avatar: localUser.avatar,
       );
+      notifyListeners();
+    } else {
+      await _secureStorageService.deleteAll();
+      _isAuthenticated.value = false;
+      _currentUser.value = null;
+      notifyListeners();
     }
   }
 
   Future<Option<Either<AuthError, bool>>> checkEmailVerified() async {
-    if (_networkService.status == NetworkStatus.disconnected) {
-      final localUserString = await _secureStorageService.read(kAuthUser);
-
-      if (localUserString == null) {
-        return optionOf(null);
-      }
-
-      final localUser = User.fromJson(jsonDecode(localUserString));
-
-      _isEmailVerified.value = localUser.verified;
-      return optionOf(right(localUser.verified));
-    }
-
     final firebaseUser = _firebaseAuth.currentUser;
 
     if (firebaseUser == null) {
+      _isEmailVerified.value == false;
+      notifyListeners();
       return optionOf(null);
     }
 
@@ -76,24 +70,57 @@ class AuthService with ListenableServiceMixin {
 
     if (firebaseUser.emailVerified) {
       _isEmailVerified.value = true;
-
+      notifyListeners();
       return optionOf(right(true));
     } else {
+      _isEmailVerified.value = false;
+      notifyListeners();
       return optionOf(left(const AuthError.notVerified()));
     }
   }
 
   Future<Either<AuthError, Unit>> deleteAccount() async {
-    final curUser = _firebaseAuth.currentUser!;
+    final firebaseUser = _firebaseAuth.currentUser!;
+    try {
+      await deleteProfileImage();
+      await deleteAccountFavourites();
+      await userRef.doc(firebaseUser.uid).delete();
+      await _secureStorageService.deleteAll();
+      return await firebaseUser.delete().then((value) => right(unit));
+    } on fb.FirebaseAuthException {
+      return left(const AuthError.serverError());
+    }
+  }
+
+  Future<Either<AuthError, Unit>> deleteAccountFavourites() async {
+    final fBase = FirebaseFirestore.instance;
+    final batch = fBase.batch();
+
+    final uid = _firebaseAuth.currentUser!.uid;
+    final ref = fBase.collection('users').doc(uid).collection('favourites');
 
     try {
-      await curUser.delete().then((value) async {
-        await userRef.doc(curUser.uid).delete();
-        await _secureStorageService.deleteAll();
-      });
+      final query = await ref.get();
+      final list = query.docs.map((e) => Favourite.fromJson(e.data())).toList();
+      for (var item in list) {
+        batch.delete(ref.doc('${item.uid}'));
+      }
+      batch.commit();
       return right(unit);
     } on fb.FirebaseAuthException {
       return left(const AuthError.serverError());
+    }
+  }
+
+  Future<Either<AuthError, Unit>> deleteProfileImage() async {
+    final uid = _firebaseAuth.currentUser?.uid;
+    final imageRef = _firebaseStorage.ref().child('images/avatar/$uid');
+
+    try {
+      await imageRef.delete();
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(AuthError.error(e.message));
     }
   }
 
@@ -223,6 +250,28 @@ class AuthService with ListenableServiceMixin {
     } catch (e) {
       // Log any errors that occur during the logout process
       // print('Error logging out: $e');
+    }
+  }
+
+  Future<Either<AuthError, Unit>> reauthenticate(String password) async {
+    try {
+      await _firebaseAuth.currentUser?.reauthenticateWithCredential(
+        fb.EmailAuthProvider.credential(
+          email: _firebaseAuth.currentUser!.email!,
+          password: password,
+        ),
+      );
+
+      return right(unit);
+    } on fb.FirebaseAuthException catch (e) {
+      // Handle specific Firebase authentication exceptions.
+      switch (e.code) {
+        case 'wrong-password':
+        case 'user-not-found':
+          return left(const AuthError.error('Invalid credentials provided.'));
+        default:
+          return left(AuthError.error(e.message));
+      }
     }
   }
 

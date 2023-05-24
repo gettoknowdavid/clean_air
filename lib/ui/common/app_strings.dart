@@ -29,7 +29,7 @@ const String kNoMailAppDescription = 'No mail apps found.';
 const String kNoGoogleAccount = 'No Google account found.';
 
 const String kVerificationEmailSentSuccess = 'Verification email sent';
-const String kVerificationViewTitle = 'Verify\n"+ your "email';
+const String kVerificationViewTitle = 'Verify your email';
 const String kVerificationViewDesc =
     'You can open your mail application to check for the verification mail we just sent to you.';
 const String kConfirmationTitle = 'Email Verified';

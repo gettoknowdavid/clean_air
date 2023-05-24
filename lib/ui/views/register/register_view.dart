@@ -24,29 +24,30 @@ class RegisterView extends StackedView<RegisterViewModel> {
 
     return Scaffold(
       appBar: AppBar(elevation: 0, scrolledUnderElevation: 0),
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
-        child: Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              10.verticalSpace,
-              Text('Register', style: textTheme.headlineLarge),
-              5.verticalSpace,
-              Text(
-                "You can create your account with your \nemail and password",
-                style: textTheme.bodyMedium,
-              ),
-              30.verticalSpace,
-              RegisterForm(),
-              10.verticalSpace,
-              AuthRedirectButton(
-                buttonLabel: 'Back to Login',
-                text: 'Already have an account?',
-                onTap: viewModel.navigateBackToLoginView,
-              ),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            10.verticalSpace,
+            Text('Register', style: textTheme.headlineLarge),
+            5.verticalSpace,
+            Text(
+              "You can create your account with your \nemail and password",
+              style: textTheme.bodyMedium,
+            ),
+            30.verticalSpace,
+            RegisterForm(),
+            10.verticalSpace,
+            AuthRedirectButton(
+              buttonLabel: 'Back to Login',
+              text: 'Already have an account?',
+              onTap: viewModel.navigateBackToLoginView,
+            ),
+            20.verticalSpace,
+          ],
         ),
       ),
     );

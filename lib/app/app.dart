@@ -42,6 +42,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
+import 'package:clean_air/ui/bottom_sheets/re_auth/re_auth_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -103,6 +104,7 @@ import 'package:stacked_themes/stacked_themes.dart';
     StackedBottomsheet(classType: ConditionSheet),
     StackedBottomsheet(classType: InfoSheet),
     StackedBottomsheet(classType: ThemeSheet),
+StackedBottomsheet(classType: ReAuthSheet),
 // @stacked-bottom-sheets
   ],
 )
@@ -151,7 +153,6 @@ class _CleanAirAppState extends State<CleanAirApp> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-
     super.dispose();
   }
 

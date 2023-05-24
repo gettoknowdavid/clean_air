@@ -42,8 +42,8 @@ import 'package:stacked_services/stacked_services.dart' as _i7;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeOption_0<A> extends _i1.SmartFake implements _i2.Option<A> {
-  _FakeOption_0(
+class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
+  _FakeEither_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,8 +52,8 @@ class _FakeOption_0<A> extends _i1.SmartFake implements _i2.Option<A> {
         );
 }
 
-class _FakeEither_1<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
-  _FakeEither_1(
+class _FakeOption_1<A> extends _i1.SmartFake implements _i2.Option<A> {
+  _FakeOption_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -719,6 +719,12 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         returnValueForMissingStub: false,
       ) as bool);
   @override
+  bool get isEmailVerified => (super.noSuchMethod(
+        Invocation.getter(#isEmailVerified),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+  @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
         returnValue: 0,
@@ -734,6 +740,31 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         returnValueForMissingStub: _i3.Future<void>.value(),
       ) as _i3.Future<void>);
   @override
+  _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>> deleteProfileImage() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteProfileImage,
+          [],
+        ),
+        returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteProfileImage,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteProfileImage,
+            [],
+          ),
+        )),
+      ) as _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>);
+  @override
   _i3.Future<_i2.Option<_i2.Either<_i11.AuthError, bool>>>
       checkEmailVerified() => (super.noSuchMethod(
             Invocation.method(
@@ -742,7 +773,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
             ),
             returnValue:
                 _i3.Future<_i2.Option<_i2.Either<_i11.AuthError, bool>>>.value(
-                    _FakeOption_0<_i2.Either<_i11.AuthError, bool>>(
+                    _FakeOption_1<_i2.Either<_i11.AuthError, bool>>(
               this,
               Invocation.method(
                 #checkEmailVerified,
@@ -751,7 +782,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
             )),
             returnValueForMissingStub:
                 _i3.Future<_i2.Option<_i2.Either<_i11.AuthError, bool>>>.value(
-                    _FakeOption_0<_i2.Either<_i11.AuthError, bool>>(
+                    _FakeOption_1<_i2.Either<_i11.AuthError, bool>>(
               this,
               Invocation.method(
                 #checkEmailVerified,
@@ -760,6 +791,31 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
             )),
           ) as _i3.Future<_i2.Option<_i2.Either<_i11.AuthError, bool>>>);
   @override
+  _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>> deleteAccountFavourites() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteAccountFavourites,
+          [],
+        ),
+        returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteAccountFavourites,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #deleteAccountFavourites,
+            [],
+          ),
+        )),
+      ) as _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>);
+  @override
   _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>> deleteAccount() =>
       (super.noSuchMethod(
         Invocation.method(
@@ -767,7 +823,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #deleteAccount,
@@ -776,7 +832,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #deleteAccount,
@@ -793,7 +849,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [email],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #forgotPassword,
@@ -802,7 +858,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #forgotPassword,
@@ -818,7 +874,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #googleLogin,
@@ -827,7 +883,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #googleLogin,
@@ -850,7 +906,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           },
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #login,
@@ -863,7 +919,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #login,
@@ -872,6 +928,32 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
               #email: email,
               #password: password,
             },
+          ),
+        )),
+      ) as _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>);
+  @override
+  _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>> reauthenticate(
+          String? password) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #reauthenticate,
+          [password],
+        ),
+        returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #reauthenticate,
+            [password],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
+          this,
+          Invocation.method(
+            #reauthenticate,
+            [password],
           ),
         )),
       ) as _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>);
@@ -901,7 +983,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           },
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #register,
@@ -915,7 +997,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #register,
@@ -936,7 +1018,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #sendPasswordResetEmail,
@@ -945,7 +1027,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #sendPasswordResetEmail,
@@ -961,7 +1043,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #sendVerificationEmail,
@@ -970,7 +1052,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #sendVerificationEmail,
@@ -987,7 +1069,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [newEmail],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #updateEmailAddress,
@@ -996,7 +1078,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #updateEmailAddress,
@@ -1013,7 +1095,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [newPassword],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #updatePassword,
@@ -1022,7 +1104,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #updatePassword,
@@ -1038,7 +1120,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
           [u],
         ),
         returnValue: _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-            _FakeEither_1<_i11.AuthError, _i2.Unit>(
+            _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #updateProfile,
@@ -1047,7 +1129,7 @@ class MockAuthService extends _i1.Mock implements _i10.AuthService {
         )),
         returnValueForMissingStub:
             _i3.Future<_i2.Either<_i11.AuthError, _i2.Unit>>.value(
-                _FakeEither_1<_i11.AuthError, _i2.Unit>(
+                _FakeEither_0<_i11.AuthError, _i2.Unit>(
           this,
           Invocation.method(
             #updateProfile,
@@ -1129,6 +1211,22 @@ class MockNetworkService extends _i1.Mock implements _i12.NetworkService {
           ),
         ),
       ) as _i3.StreamSubscription<_i13.InternetConnectionStatus>);
+  @override
+  void onResume() => super.noSuchMethod(
+        Invocation.method(
+          #onResume,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void onPause() => super.noSuchMethod(
+        Invocation.method(
+          #onPause,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
   @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>
       super.noSuchMethod(
@@ -1326,15 +1424,6 @@ class MockAirQualityService extends _i1.Mock implements _i17.AirQualityService {
         returnValueForMissingStub:
             _i3.Future<List<_i19.SearchData?>>.value(<_i19.SearchData?>[]),
       ) as _i3.Future<List<_i19.SearchData?>>);
-  @override
-  _i3.Future<void> persistResult() => (super.noSuchMethod(
-        Invocation.method(
-          #persistResult,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
   @override
   _i3.Future<_i4.CAirQuality?> getConditionedAQI() => (super.noSuchMethod(
         Invocation.method(
@@ -1623,4 +1712,53 @@ class MockMediaService extends _i1.Mock implements _i23.MediaService {
 /// A class which mocks [LocationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocationService extends _i1.Mock implements _i25.LocationService {}
+class MockLocationService extends _i1.Mock implements _i25.LocationService {
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+  @override
+  _i3.Future<void> getCurrentLocation() => (super.noSuchMethod(
+        Invocation.method(
+          #getCurrentLocation,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}

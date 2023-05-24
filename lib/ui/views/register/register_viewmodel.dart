@@ -85,7 +85,7 @@ class RegisterViewModel extends FormViewModel with ListenableServiceMixin {
         },
         (_) async {
           await _authService.sendVerificationEmail();
-          _navigationService.clearStackAndShow(Routes.verificationView);
+          await _navigationService.clearStackAndShow(Routes.verificationView);
         },
       );
     }

@@ -16,6 +16,7 @@ class RegisterForm extends StackedView<RegisterViewModel> with $RegisterView {
   Widget builder(context, viewModel, child) {
     return Form(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextField(

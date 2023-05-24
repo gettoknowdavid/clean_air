@@ -25,31 +25,25 @@ class LoginView extends StackedView<LoginViewModel> {
       appBar: AppBar(leading: const SizedBox()),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
-        child: Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              10.verticalSpace,
-              Text("You're back!", style: textTheme.headlineLarge),
-              5.verticalSpace,
-              Text(
-                "You've been missed. You can login with your email and password.",
-                style: textTheme.bodyMedium,
-              ),
-              30.verticalSpace,
-              LoginForm(),
-              // 10.verticalSpace,
-              // const OrDivider(),
-              // 10.verticalSpace,
-              // const GoogleButton(),
-              10.verticalSpace,
-              AuthRedirectButton(
-                buttonLabel: 'Register',
-                text: 'Don\'t have an account?',
-                onTap: viewModel.navigateToRegisterView,
-              ),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            10.verticalSpace,
+            Text("You're back!", style: textTheme.headlineLarge),
+            5.verticalSpace,
+            Text(
+              "You've been missed. You can login with your email and password.",
+              style: textTheme.bodyMedium,
+            ),
+            30.verticalSpace,
+            LoginForm(),
+            10.verticalSpace,
+            AuthRedirectButton(
+              buttonLabel: 'Register',
+              text: 'Don\'t have an account?',
+              onTap: viewModel.navigateToRegisterView,
+            ),
+          ],
         ),
       ),
     );

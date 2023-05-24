@@ -68,9 +68,14 @@ class AccountViewModel extends FormViewModel with ListenableServiceMixin {
       return await HapticFeedback.vibrate();
     }
 
-    setBusy(true);
+    final confirmationResponse = await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.reAuth,
+      isScrollControlled: true,
+      enableDrag: false,
+    );
 
-    if (hasEmail && isFormValid) {
+    if (hasEmail && isFormValid && confirmationResponse?.confirmed == true) {
+      setBusy(true);
       final result = await _authService.updateEmailAddress(emailValue!);
       return result.fold(
         (failure) {
@@ -102,7 +107,7 @@ class AccountViewModel extends FormViewModel with ListenableServiceMixin {
     }
 
     final confirmationResponse = await _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.passwordConfirmation,
+      variant: BottomSheetType.reAuth,
       isScrollControlled: true,
       enableDrag: false,
     );
@@ -139,13 +144,6 @@ class AccountViewModel extends FormViewModel with ListenableServiceMixin {
               .whenComplete(logout);
         },
       );
-    } else {
-      setBusy(false);
-      _snackbarService.showCustomSnackBar(
-        duration: const Duration(seconds: 6),
-        variant: SnackbarType.error,
-        message: 'Invalid password. Cannot change password.',
-      );
     }
   }
 
@@ -154,34 +152,42 @@ class AccountViewModel extends FormViewModel with ListenableServiceMixin {
       _dialogService.showCustomDialog(variant: DialogType.networkError);
     }
 
-    final confirmationResponse = await _dialogService.showDialog(
-      title: 'Delete Account',
-      barrierDismissible: true,
-      buttonTitleColor: Colors.red,
-      cancelTitleColor: Colors.grey,
-      description:
-          "You are about to delete your account. \nThis cannot be undone.",
-      buttonTitle: 'Delete',
-      cancelTitle: 'Cancel',
+    final reAuthResponse = await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.reAuth,
+      enableDrag: true,
+      isScrollControlled: true,
     );
 
-    if (confirmationResponse?.confirmed == true) {
-      setBusy(true);
-      final response = await _authService.deleteAccount();
-      return response.fold(
-        (failure) {
-          setBusy(false);
-          _snackbarService.showCustomSnackBar(
-            duration: const Duration(seconds: 6),
-            variant: SnackbarType.error,
-            message: failure.maybeMap(
-              orElse: () => '',
-              serverError: (_) => kServerErrorMessage,
-            ),
-          );
-        },
-        (success) => _navigationService.clearStackAndShow(Routes.loginView),
+    if (reAuthResponse?.confirmed == true) {
+      final confirmationResponse = await _dialogService.showDialog(
+        title: 'Delete Account',
+        barrierDismissible: true,
+        buttonTitleColor: Colors.red,
+        cancelTitleColor: Colors.grey,
+        description:
+            "You are about to delete your account. \nThis cannot be undone.",
+        buttonTitle: 'Delete',
+        cancelTitle: 'Cancel',
       );
+
+      if (confirmationResponse?.confirmed == true) {
+        setBusy(true);
+        final response = await _authService.deleteAccount();
+        return response.fold(
+          (failure) {
+            setBusy(false);
+            _snackbarService.showCustomSnackBar(
+              duration: const Duration(seconds: 6),
+              variant: SnackbarType.error,
+              message: failure.maybeMap(
+                orElse: () => '',
+                serverError: (_) => kServerErrorMessage,
+              ),
+            );
+          },
+          (success) => _navigationService.clearStackAndShow(Routes.loginView),
+        );
+      }
     }
   }
 

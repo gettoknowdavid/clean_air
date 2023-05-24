@@ -16,6 +16,7 @@ class VerificationView extends StackedView<VerificationViewModel> {
     final textTheme = theme.textTheme;
 
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: kGlobalPadding).r,
@@ -23,35 +24,36 @@ class VerificationView extends StackedView<VerificationViewModel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                viewModel.isEmailVerified == true
-                    ? kConfirmationTitle
-                    : kVerificationViewTitle,
-                style: textTheme.headlineLarge,
-              ),
-              10.verticalSpace,
-              Text(
-                viewModel.isEmailVerified == true
-                    ? kConfirmationMessage
-                    : kVerificationViewDesc,
-                style: textTheme.bodyMedium,
-              ),
-              25.verticalSpace,
-              if (viewModel.isEmailVerified == true) ...[
-                AppButton(title: 'Go Home', onPressed: viewModel.goHome),
+              if (viewModel.showVerified == true) ...[
+                Text(kConfirmationTitle, style: textTheme.headlineLarge),
+                10.verticalSpace,
+                Text(kConfirmationMessage, style: textTheme.bodyMedium),
+                25.verticalSpace,
+                AppButton(
+                  title: 'Go Home',
+                  onPressed: viewModel.goHome,
+                  loading: viewModel.isBusy,
+                ),
                 120.verticalSpace,
               ] else ...[
-                AppButton(
-                  title: 'Open mail app',
-                  onPressed: viewModel.openMailApp,
-                ),
+                Text(kVerificationViewTitle, style: textTheme.headlineLarge),
+                10.verticalSpace,
+                Text(kVerificationViewDesc, style: textTheme.bodyMedium),
+                25.verticalSpace,
+                AppButton(title: 'Open Mail', onPressed: viewModel.openMailApp),
                 25.verticalSpace,
                 OutlinedButton(
-                  onPressed: viewModel.checkEmailVerified,
-                  style: OutlinedButton.styleFrom(
-                    fixedSize: Size(1.sw, 50.h),
-                  ),
-                  child: const Text('Verify'),
+                  onPressed:
+                      viewModel.isBusy ? null : viewModel.checkEmailVerified,
+                  style: OutlinedButton.styleFrom(fixedSize: Size(1.sw, 50.h)),
+                  child: viewModel.isBusy
+                      ? Center(
+                          child: SizedBox(
+                          height: 20.r,
+                          width: 20.r,
+                          child: const CircularProgressIndicator(),
+                        ))
+                      : const Text('Verify'),
                 ),
                 25.verticalSpace,
                 Row(

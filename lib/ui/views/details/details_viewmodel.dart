@@ -34,6 +34,13 @@ class DetailsViewModel extends ReactiveViewModel with ListenableServiceMixin {
     );
   }
 
+  Future<void> showHealthConditionInfo() async {
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.condition,
+      isScrollControlled: true,
+    );
+  }
+
   @override
   List<ListenableServiceMixin> get listenableServices => [_airQualityService];
 }

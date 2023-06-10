@@ -10,21 +10,22 @@ import 'package:clean_air/core/errors/auth_error.dart' as _i11;
 import 'package:clean_air/models/air_quality.dart' as _i19;
 import 'package:clean_air/models/c_air_quality.dart' as _i4;
 import 'package:clean_air/models/condition.dart' as _i20;
+import 'package:clean_air/models/daily.dart' as _i21;
 import 'package:clean_air/models/pollutant.dart' as _i17;
 import 'package:clean_air/models/search_data.dart' as _i18;
 import 'package:clean_air/models/user.dart' as _i5;
 import 'package:clean_air/services/air_quality_service.dart' as _i16;
 import 'package:clean_air/services/auth_service.dart' as _i10;
-import 'package:clean_air/services/favourites_service.dart' as _i21;
-import 'package:clean_air/services/location_service.dart' as _i24;
-import 'package:clean_air/services/media_service.dart' as _i22;
+import 'package:clean_air/services/favourites_service.dart' as _i22;
+import 'package:clean_air/services/location_service.dart' as _i25;
+import 'package:clean_air/services/media_service.dart' as _i23;
 import 'package:clean_air/services/network_service.dart' as _i12;
 import 'package:clean_air/services/open_mail_app_service.dart' as _i15;
 import 'package:clean_air/services/secure_storage_service.dart' as _i14;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:firebase_storage/firebase_storage.dart' as _i6;
 import 'package:flutter/material.dart' as _i8;
-import 'package:image_picker/image_picker.dart' as _i23;
+import 'package:image_picker/image_picker.dart' as _i24;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i13;
 import 'package:mockito/mockito.dart' as _i1;
@@ -1411,6 +1412,7 @@ class MockAirQualityService extends _i1.Mock implements _i16.AirQualityService {
   @override
   _i3.Future<void> updateConditionedAQI(
     _i20.Condition? con, [
+    _i21.Daily? daily,
     String? domPol,
   ]) =>
       (super.noSuchMethod(
@@ -1418,6 +1420,7 @@ class MockAirQualityService extends _i1.Mock implements _i16.AirQualityService {
           #updateConditionedAQI,
           [
             con,
+            daily,
             domPol,
           ],
         ),
@@ -1462,7 +1465,7 @@ class MockAirQualityService extends _i1.Mock implements _i16.AirQualityService {
 /// A class which mocks [FavouritesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFavouritesService extends _i1.Mock implements _i21.FavouritesService {
+class MockFavouritesService extends _i1.Mock implements _i22.FavouritesService {
   @override
   _i12.NetworkStatus get networkStatus => (super.noSuchMethod(
         Invocation.getter(#networkStatus),
@@ -1594,7 +1597,7 @@ class MockFavouritesService extends _i1.Mock implements _i21.FavouritesService {
 /// A class which mocks [MediaService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMediaService extends _i1.Mock implements _i22.MediaService {
+class MockMediaService extends _i1.Mock implements _i23.MediaService {
   @override
   _i6.Reference get storageRef => (super.noSuchMethod(
         Invocation.getter(#storageRef),
@@ -1622,16 +1625,16 @@ class MockMediaService extends _i1.Mock implements _i22.MediaService {
         returnValueForMissingStub: null,
       );
   @override
-  _i3.Future<_i23.XFile?> getImage({required bool? fromGallery}) =>
+  _i3.Future<_i24.XFile?> getImage({required bool? fromGallery}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getImage,
           [],
           {#fromGallery: fromGallery},
         ),
-        returnValue: _i3.Future<_i23.XFile?>.value(),
-        returnValueForMissingStub: _i3.Future<_i23.XFile?>.value(),
-      ) as _i3.Future<_i23.XFile?>);
+        returnValue: _i3.Future<_i24.XFile?>.value(),
+        returnValueForMissingStub: _i3.Future<_i24.XFile?>.value(),
+      ) as _i3.Future<_i24.XFile?>);
   @override
   dynamic uploadFileToCloud(
     String? path,
@@ -1687,7 +1690,7 @@ class MockMediaService extends _i1.Mock implements _i22.MediaService {
 /// A class which mocks [LocationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocationService extends _i1.Mock implements _i24.LocationService {
+class MockLocationService extends _i1.Mock implements _i25.LocationService {
   @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),

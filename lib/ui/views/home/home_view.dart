@@ -35,7 +35,7 @@ class HomeView extends StackedView<HomeViewModel> {
             AqiValueWidget(onTap: viewModel.navigateToDetails),
             10.verticalSpace,
             const _PollutionLevel(),
-            10.verticalSpace,
+            5.verticalSpace,
             const _HealthImplication(),
             20.verticalSpace,
             const _HealthConditionWidget(),
@@ -75,6 +75,17 @@ class _HealthConditionWidget extends ViewModelWidget<HomeViewModel> {
             style: textTheme.bodyMedium?.copyWith(letterSpacing: 0),
           ),
           6.verticalSpace,
+          InkWell(
+            onTap: viewModel.showHealthConditionInfo,
+            child: Text(
+              'Learn more',
+              style: textTheme.labelLarge?.copyWith(
+                color: textTheme.labelLarge?.color?.withOpacity(0.8),
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+          10.verticalSpace,
           FilledButton(
             onPressed: viewModel.setHealthCondition,
             style: FilledButton.styleFrom(
@@ -102,7 +113,7 @@ class _HealthImplication
       child: AutoSizeText(
         value,
         textAlign: TextAlign.center,
-        maxLines: 3,
+        maxLines: 4,
         maxFontSize: 16,
       ),
     );

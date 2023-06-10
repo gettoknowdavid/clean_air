@@ -18,6 +18,7 @@ class AuthService with ListenableServiceMixin {
   final fb.FirebaseAuth _firebaseAuth = fb.FirebaseAuth.instance;
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  
   final _networkService = locator<NetworkService>();
   final _secureStorageService = locator<SecureStorageService>();
   final _isAuthenticated = ReactiveValue<bool>(false);
@@ -223,6 +224,7 @@ class AuthService with ListenableServiceMixin {
 
       _currentUser.value = user;
       _isAuthenticated.value = true;
+      notifyListeners();
 
       return right(unit);
     } on fb.FirebaseAuthException catch (e) {

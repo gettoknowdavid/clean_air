@@ -19,20 +19,22 @@ class PollutantsGridView extends StatelessWidget {
     List<Widget> _pollutants = [];
 
     for (var i = 0; i < forecastData.length; i++) {
-      final name = forecastData[i].key;
-      final values = forecastData[i].value as List<dynamic>;
-      final v = values
-          .map((e) => ForecastData.fromJson(jsonDecode(jsonEncode(e))))
-          .toList();
-      final currentPoll = v.firstWhere((e) =>
-          e.day!.day ==
-          (pollutionDay == null ? DateTime.now().day : pollutionDay!.day));
-      _pollutants.add(
-        PollutantItem(
-          value: '${currentPoll.avg}',
-          name: name,
-        ),
-      );
+      if (forecastData[i].value != null) {
+        final name = forecastData[i].key;
+        final values = forecastData[i].value as List<dynamic>;
+        final v = values
+            .map((e) => ForecastData.fromJson(jsonDecode(jsonEncode(e))))
+            .toList();
+        final currentPoll = v.firstWhere((e) =>
+            e.day!.day ==
+            (pollutionDay == null ? DateTime.now().day : pollutionDay!.day));
+        _pollutants.add(
+          PollutantItem(
+            value: '${currentPoll.avg}',
+            name: name,
+          ),
+        );
+      }
     }
 
     return AqiSection(

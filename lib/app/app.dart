@@ -40,6 +40,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_themes/stacked_themes.dart';
+import 'package:clean_air/ui/bottom_sheets/condition_info/condition_info_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -99,6 +100,7 @@ import 'package:stacked_themes/stacked_themes.dart';
     StackedBottomsheet(classType: InfoSheet),
     StackedBottomsheet(classType: ThemeSheet),
     StackedBottomsheet(classType: ReAuthSheet),
+StackedBottomsheet(classType: ConditionInfoSheet),
 // @stacked-bottom-sheets
   ],
 )

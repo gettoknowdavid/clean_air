@@ -8,12 +8,12 @@ part 'iaqi.g.dart';
 @JsonSerializable(createFactory: false, explicitToJson: true)
 class IAqi with _$IAqi {
   factory IAqi({
-    Pollutant? dew,
-    Pollutant? h,
-    Pollutant? p,
-    Pollutant? pm25,
-    Pollutant? t,
-    Pollutant? w,
+    Pollutant? dew, // Dew
+    Pollutant? h, // Humidity
+    Pollutant? p, // Pressure
+    Pollutant? pm25, // PM2.5
+    Pollutant? t, // Temperature
+    Pollutant? w, // Wind
   }) = _IAqi;
 
   factory IAqi.fromJson(Map<String, dynamic> json) => _$IAqiFromJson(json);

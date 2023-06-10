@@ -71,13 +71,3 @@ const _$$_FavouriteFieldMap = <String, String>{
   'geo': 'geo',
   'time': 'time',
 };
-
-
-// class FirestoreDateTimeConverter extends JsonConverter<DateTime, Timestamp> {
-//   const FirestoreDateTimeConverter();
-//   @override
-//   DateTime fromJson(Timestamp json) => json.toDate();
-
-//   @override
-//   Timestamp toJson(DateTime object) => Timestamp.fromDate(object);
-// }

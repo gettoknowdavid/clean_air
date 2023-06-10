@@ -9,9 +9,22 @@ enum PollutionLevel {
 
 extension PollutionLevelExtension on PollutionLevel {
   String toName() {
-    String enumString = toString().split('.').last;
-    return enumString[0].toUpperCase() +
-        enumString.substring(1).replaceAll(RegExp(r'(?<=[a-z])[A-Z]'), ' \$&');
+    switch (this) {
+      case PollutionLevel.good:
+        return 'Good';
+      case PollutionLevel.moderate:
+        return 'Moderate';
+      case PollutionLevel.unhealthy:
+        return 'Unhealthy';
+      case PollutionLevel.hazardous:
+        return 'Hazardous';
+      case PollutionLevel.veryUnhealthy:
+        return 'Very Unhealthy';
+      case PollutionLevel.unhealthyForSensitiveGroups:
+        return 'Unhealthy for Sensitive Groups';
+      default:
+        return '';
+    }
   }
 
   String toSentence() {

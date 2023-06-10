@@ -1,5 +1,6 @@
 import 'package:clean_air/core/utils/aqi_helpers.dart';
 import 'package:clean_air/models/condition.dart';
+import 'package:clean_air/models/daily.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'c_air_quality.freezed.dart';
@@ -26,7 +27,7 @@ class CAirQuality with _$CAirQuality {
     return CAirQuality(
       condition: Condition.none,
       dominantPollutant: null,
-      message: tailoredMessage(null, Condition.none),
+      message: tailoredHealthMessage(Condition.none, Daily.none()),
     );
   }
 }

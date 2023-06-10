@@ -1,4 +1,6 @@
 import 'package:clean_air/models/condition.dart';
+import 'package:clean_air/models/daily.dart';
+import 'package:clean_air/models/forecast_data.dart';
 import 'package:clean_air/models/pollution_level.dart';
 import 'package:clean_air/models/weather_type.dart';
 import 'package:clean_air/ui/common/app_colors.dart';
@@ -114,30 +116,92 @@ WeatherType getWeatherType(String name) {
   }
 }
 
-Map<Condition, Map<String?, String>> _getTailoredMessages = {
-  Condition.none: {null: _kTMNone},
-  Condition.asthma: {'o3': _kTMAsthma, 'pm25': _kTMAsthma, 'pm10': _kTMAsthma},
-  Condition.hbp: {'o3': _kTMHBP, 'pm25': _kTMHBP, 'pm10': _kTMHBP},
-  Condition.emphysema: {
-    'o3': _kTMEmphysema,
-    'no2': _kTMEmphysema,
-    'pm25': _kTMEmphysema,
-    'pm10': _kTMEmphysema,
-  },
-  Condition.bronchitis: {
-    'no2': _kTMBronchitis,
-    'pm25': _kTMBronchitis,
-    'pm10': _kTMBronchitis,
-  },
-  Condition.lungCancer: {
-    'so2': _kTMLungCancer,
-    'o3': _kTMLungCancer,
-    'no2': _kTMLungCancer,
-    'pm25': _kTMLungCancer,
-    'pm10': _kTMLungCancer,
-  },
-};
+// Map<Condition, Map<String?, String>> _getTailoredMessages = {
+//   Condition.none: {null: _kTMNone},
+//   Condition.asthma: {'o3': _kTMAsthma, 'pm25': _kTMAsthma, 'pm10': _kTMAsthma},
+//   Condition.hbp: {'o3': _kTMHBP, 'pm25': _kTMHBP, 'pm10': _kTMHBP},
+//   Condition.emphysema: {
+//     'o3': _kTMEmphysema,
+//     'no2': _kTMEmphysema,
+//     'pm25': _kTMEmphysema,
+//     'pm10': _kTMEmphysema,
+//   },
+//   Condition.bronchitis: {
+//     'no2': _kTMBronchitis,
+//     'pm25': _kTMBronchitis,
+//     'pm10': _kTMBronchitis,
+//   },
+//   Condition.lungCancer: {
+//     'so2': _kTMLungCancer,
+//     'o3': _kTMLungCancer,
+//     'no2': _kTMLungCancer,
+//     'pm25': _kTMLungCancer,
+//     'pm10': _kTMLungCancer,
+//   },
+// };
 
-String? tailoredMessage(String? dominantPol, Condition condition) {
-  return _getTailoredMessages[condition]?[dominantPol];
+// String? tailoredMessage(String? dominantPol, Condition condition) {
+//   return _getTailoredMessages[condition]?[dominantPol];
+// }
+
+double _calculateAverageO3(List<ForecastData>? data) {
+  if (data == null || data.isEmpty) return 0;
+
+  double sum = 0;
+  int count = 0;
+
+  for (final datum in data) {
+    if (datum.avg != null) {
+      sum += datum.avg!;
+      count++;
+    }
+  }
+
+  return count > 0 ? sum / count : 0;
+}
+
+String tailoredHealthMessage(Condition condition, [Daily? daily]) {
+  if (condition == Condition.none || daily == null) {
+    return "No specific health condition selected.";
+  }
+
+  final o3Average = _calculateAverageO3(daily.o3);
+  final pm25Average = _calculateAverageO3(daily.pm25);
+  final pm10Average = _calculateAverageO3(daily.pm10);
+  final no2Average = _calculateAverageO3(daily.no2);
+  final so2Average = _calculateAverageO3(daily.so2);
+  final coAverage = _calculateAverageO3(daily.co);
+
+  // Check pollutant levels for each health condition
+  switch (condition) {
+    case Condition.asthma:
+      if (o3Average > 0.05 || pm25Average > 35.4) {
+        return "Air quality may trigger asthma symptoms. Take necessary precautions.  \nMajor Pollutants: Ozone(O3): $o3Average, Particulate Matter(PM25): $pm25Average";
+      }
+      break;
+    case Condition.hbp:
+      if (pm25Average > 55.4 || pm10Average > 150.4 || no2Average > 53.4) {
+        return "Air quality may affect individuals with high blood pressure. Stay indoors if possible. \nMajor Pollutants: Particulate Matter(PM25): $pm25Average, Particulate Matter(PM10): $pm10Average, Nitrogen Dioxide(NO2): $no2Average";
+      }
+      break;
+    case Condition.bronchitis:
+      if (pm10Average > 154.4 || so2Average > 185.9) {
+        return "Air quality may worsen bronchitis symptoms. Limit outdoor activities. \nMajor Pollutants: Particulate Matter(PM10): $pm10Average, Sulfur dioxide(SO2): $so2Average";
+      }
+      break;
+    case Condition.lungCancer:
+      if (pm25Average > 35.4 || coAverage > 4.4) {
+        return "Air quality may be harmful to individuals with lung cancer. Minimize exposure to outdoor air. \nMajor Pollutants: Particulate Matter(PM25): $pm25Average, Carbon monoxide(CO): $coAverage";
+      }
+      break;
+    case Condition.emphysema:
+      if (o3Average > 0.07 || so2Average > 35.4) {
+        return "Air quality may worsen emphysema symptoms. Avoid prolonged outdoor activities. \nMajor Pollutants: Ozone(O3): $o3Average, Sulfur dioxide(SO2): $so2Average";
+      }
+      break;
+    default:
+      return "Invalid health condition selected.";
+  }
+
+  return "Air quality is generally safe for the selected health condition.";
 }

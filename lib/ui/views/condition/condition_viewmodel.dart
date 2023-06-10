@@ -1,6 +1,7 @@
 import 'package:clean_air/app/app.locator.dart';
 import 'package:clean_air/models/air_quality.dart';
 import 'package:clean_air/models/condition.dart';
+import 'package:clean_air/models/daily.dart';
 import 'package:clean_air/services/air_quality_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -23,10 +24,11 @@ class ConditionViewModel extends ReactiveViewModel with ListenableServiceMixin {
     _condition.value = con;
     notifyListeners();
     if (con == Condition.none) {
-      await _aqiService.updateConditionedAQI(_condition.value);
+      await _aqiService.updateConditionedAQI(_condition.value, Daily.none());
     } else {
       await _aqiService.updateConditionedAQI(
         _condition.value,
+        airQuality?.forecast?.daily,
         airQuality?.dominentpol,
       );
     }

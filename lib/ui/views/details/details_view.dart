@@ -70,6 +70,17 @@ class _HealthConditionWidget extends ViewModelWidget<DetailsViewModel> {
               style: textTheme.bodyMedium?.copyWith(letterSpacing: 0),
             ),
             6.verticalSpace,
+            InkWell(
+              onTap: viewModel.showHealthConditionInfo,
+              child: Text(
+                'Learn more',
+                style: textTheme.labelLarge?.copyWith(
+                  color: textTheme.labelLarge?.color?.withOpacity(0.8),
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+            10.verticalSpace,
           ],
           FilledButton(
             onPressed: viewModel.setHealthCondition,

@@ -8,6 +8,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
 import '../ui/bottom_sheets/condition/condition_sheet.dart';
+import '../ui/bottom_sheets/condition_info/condition_info_sheet.dart';
 import '../ui/bottom_sheets/edit_profile/edit_profile_sheet.dart';
 import '../ui/bottom_sheets/image_source/image_source_sheet.dart';
 import '../ui/bottom_sheets/info/info_sheet.dart';
@@ -21,6 +22,7 @@ enum BottomSheetType {
   info,
   theme,
   reAuth,
+  conditionInfo,
 }
 
 void setupBottomSheetUi() {
@@ -39,6 +41,8 @@ void setupBottomSheetUi() {
         ThemeSheet(request: request, completer: completer),
     BottomSheetType.reAuth: (context, request, completer) =>
         ReAuthSheet(request: request, completer: completer),
+    BottomSheetType.conditionInfo: (context, request, completer) =>
+        ConditionInfoSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

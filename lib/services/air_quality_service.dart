@@ -8,6 +8,7 @@ import 'package:clean_air/core/utils/aqi_helpers.dart';
 import 'package:clean_air/models/air_quality.dart';
 import 'package:clean_air/models/c_air_quality.dart';
 import 'package:clean_air/models/condition.dart';
+import 'package:clean_air/models/daily.dart';
 import 'package:clean_air/models/pollutant.dart';
 import 'package:clean_air/models/search_data.dart';
 import 'package:clean_air/services/network_service.dart';
@@ -95,8 +96,12 @@ class AirQualityService with ListenableServiceMixin {
     }
   }
 
-  Future<void> updateConditionedAQI(Condition con, [String? domPol]) async {
-    final message = tailoredMessage(domPol, con);
+  Future<void> updateConditionedAQI(
+    Condition con,
+     [Daily? daily,
+    String? domPol,
+  ]) async {
+    final message = tailoredHealthMessage(con, daily);
     _conditionedAQI.value = CAirQuality(
       condition: con,
       dominantPollutant: domPol,

@@ -67,5 +67,12 @@ class HomeViewModel extends ReactiveViewModel
     );
   }
 
+  Future<void> showHealthConditionInfo() async {
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.conditionInfo,
+      isScrollControlled: true,
+    );
+  }
+
   Color pollutantColor(int index) => getColorLegend(index);
 }
